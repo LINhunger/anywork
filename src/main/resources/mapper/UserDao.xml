@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.UserDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+
+    <!--插入User对象-->
+    <insert id="insertUser">
+        INSERT  into user(userName,email,password,phone,
+        school,isWeChat,openid)
+        VALUES (#{user.userName},#{user.email},#{user.password},#{user.phone},
+        #{user.school},#{user.isWeChat},#{user.openid})
+    </insert>
+
+    <!--更新User对象-->
+    <update id="updateUser">
+        UPDATE
+        user
+        <set>
+             <if test="user.userName != null and user.userName != ''">
+                 userName = #{user.userName},
+             </if>
+            <if test="user.password != null and user.password != ''">
+                password = #{user.password},
+            </if>
+            <if test="user.phone != null and user.phone != ''">
+                phone = #{user.phone},
+            </if>
+            <if test="user.school != null and user.school != ''">
+                school = #{user.school},
+            </if>
+            <if test="user.isWeChat != null and user.isWeChat != 0">
+                isWeChat = #{user.isWeChat},
+            </if>
+            <if test="user.openid != null and user.openid != ''">
+                openid = #{user.openid},
+            </if>
+        </set>
+        WHERE userId = #{user.userId}
+    </update>
+
+
+    <!--根据id查找用户对象-->
+    <select id="selectOneById" resultType="User">
+         SELECT * FROM user WHERE  userId = #{userId}
+    </select>
+
+
+    <!--根据email查找用户对象-->
+    <select id="selectOneByEmail"  resultType="User">
+          SELECT * FROM user WHERE  email = #{email}
+    </select>
+
+
+
+    <!--更新User对象的微信凭证-->
+    <update id="updateOpenidById">
+                <![CDATA[ {CALL updateOpenid (#{openid}, #{userId})} ]]>
+    </update>
+
+</mapper>

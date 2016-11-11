@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.InformDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+    <!--插入公告对象-->
+    <insert id="insertInform">
+        INSERT into inform(authorId,informTitle,mark,organId)
+        VALUES(#{inform.author.userId},#{inform.informTitle},#{inform.mark},
+        #{inform.organId})
+    </insert>
+
+    <!--更新公告对象-->
+    <update id="updateInform">
+        UPDATE
+        inform
+        <set>
+            <if test="inform.informTitle != null and inform.informTitle != ''">
+                informTitle = #{inform.informTitle},
+            </if>
+            <if test="inform.mark != null and inform.mark != ''">
+                mark = #{inform.mark},
+            </if>
+        </set>
+        WHERE informId = #{inform.informId}
+    </update>
+
+    <!--根据公告id查找公告对象-->
+    <select id="selectOneById" resultMap="Inform">
+        SELECT i.*,u.* FROM inform i,user u
+        WHERE
+        i.informId = #{informId} AND i.authorId = u.userId
+    </select>
+
+    <!--根据组织id查找公告对象集合-->
+    <select id="selectAllByOrganId" resultMap="Inform">
+        SELECT i.*,u.* FROM inform i,user u
+        WHERE
+        i.organId = #{organId} AND i.authorId = u.userId
+        AND i.createTime > #{time} AND DATE_ADD(#{time},INTERVAL 3 DAY )>i.createTime
+    </select>
+
+    <!--根据公告id删除公告对象-->
+    <delete id="deleteInformById">
+        DELETE  FROM inform WHERE informId = #{informId}
+    </delete>
+
+
+
+    <!--映射实体对象-->
+    <resultMap id="Inform" type="com.test.model.Inform">
+        <id property="informId" column="informId" />
+        <result property="organId" column="organId" />
+        <result property="informTitle" column="informTitle" />
+        <result property="mark" column="mark" />
+        <result property="createTime" column="createTime" />
+
+        <association property="author" javaType="com.test.model.User">
+            <id property="userId" column="userId" />
+            <result property="email" column="email" />
+            <result property="userName" column="userName" />
+            <result property="school" column="school" />
+        </association>
+    </resultMap>
+</mapper>
