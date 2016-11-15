@@ -4,6 +4,8 @@ import com.test.model.Organization;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by hunger on 2016/11/5.
  */
@@ -29,7 +31,6 @@ public interface OrganDao {
      * @param organName  组织名
      * @return 组织对象
      */
-    Organization selectOneByName(@Param("organName")String organName);
-
+    List<Organization> selectOneByName(@Param("organName") String organName);
 
 }

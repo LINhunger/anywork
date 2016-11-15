@@ -23,9 +23,9 @@ public class UserDaoTest {
     public void insertUser() throws Exception {
 
         User user = new User();
-        user.setUserName("泽胜");
+        user.setUserName("方锐");
         user.setPassword("123456");
-        user.setEmail("123456789@qq.com");
+        user.setEmail("987654321@qq.com");
         user.setIsWeChat(1);
         System.out.println(userDao.insertUser(user));
     }
@@ -33,11 +33,12 @@ public class UserDaoTest {
     @Test
     public void updateUser() throws Exception {
         User user = new User();
-        user.setUserId(1);
-        user.setUserName("vi2");
+        user.setUserId(6);
+/*        user.setUserName("vi2");
         user.setPassword("");
         user.setEmail("466400960@qq.com");
-        user.setIsWeChat(3);
+        user.setIsWeChat(3);*/
+        user.setPicture(user.getUserId()+".jpg");
         System.out.println(userDao.updateUser(user));
 
     }

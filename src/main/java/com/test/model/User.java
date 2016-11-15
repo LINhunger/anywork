@@ -17,6 +17,7 @@ public class User {
     private String openid;//微信凭证
     private Date createTime;//创建时间
     private Set<Organization> organs;//组织列表
+    private String picture;//头像
 
     public int getUserId() {
         return userId;
@@ -98,6 +99,14 @@ public class User {
         this.organs = organs;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -111,6 +120,7 @@ public class User {
                 ", openid='" + openid + '\'' +
                 ", createTime=" + createTime +
                 ", organs=" + organs +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 }

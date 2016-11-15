@@ -36,7 +36,10 @@
     <mvc:interceptors>
         <!-- 权限认证拦截器 -->
         <mvc:interceptor>
-            <mvc:mapping path="/*" />
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/src/**"/>
+            <mvc:exclude-mapping path="/picture/**"/>
+            <mvc:exclude-mapping path="/errorpage/**"/>
             <bean class="com.test.aop.AuthorityAnnotationInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>

@@ -60,3 +60,5 @@ InformDao类
      * @return 公告对象的集合
      */
     List<Inform> selectAllByOrganId(@Param("organId")int organId,@Param("time")Date time);
+19.数据库user表增加制字段picture（varchar,20,默认值为default.jpg）
+20.model层user类新增属性picture（String）

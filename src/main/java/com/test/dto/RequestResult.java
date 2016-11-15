@@ -42,4 +42,13 @@ public class RequestResult<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "RequestResult{" +
+                "state=" + state +
+                ", \nstateInfo='" + stateInfo + '\'' +
+                ",\n data=" + data +
+                '}';
+    }
 }

@@ -12,7 +12,7 @@ public class Homework {
     private int organId;//组织id
     private String homeworkTitle;//标题
     private  String mark;//内容
-    private User author;//发布者对象;
+    private User author;//发布者对象
     private Date createTime;//发布时间
     private Date endingTime;//结束时间
     private int submitCount;//作业提交人数

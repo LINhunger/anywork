@@ -1,11 +1,13 @@
 package com.test.service;
 
 import com.test.dao.OrganDao;
+import com.test.dao.RelationDao;
 import com.test.dao.UserDao;
 import com.test.dto.RequestResult;
 import com.test.enums.StatEnum;
 import com.test.exception.user.*;
 import com.test.model.Organization;
+import com.test.model.Relation;
 import com.test.model.User;
 import com.test.util.Encryption;
 import com.test.util.SendCommonPostMail;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,6 +30,8 @@ public class UserService {
     @Autowired
     private UserDao userDao;
     @Autowired
+    private RelationDao relationDao;
+    @Autowired
     private OrganDao organDao;
 
     /**
@@ -34,14 +39,14 @@ public class UserService {
      * @param email
      * @return  包装了返回信息的dto对象
      */
-    public RequestResult<String> exportUrl(String email,int type) {
+    public RequestResult<String> exportUrl(String email,int type,String userName) {
 
         if(email == null || !email.matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}")){
             //抛出异常，邮箱格式错误
             throw new SendFormatterException("邮箱格式错误");
 
         } else {
-            int result = SendCommonPostMail.Send(email,type);
+            int result = SendCommonPostMail.Send(email,type,userName);
             if (result != 200) {
                 throw new UserException("邮件发送失败");
             }else {
@@ -105,25 +110,31 @@ public class UserService {
      * @param user 用户名和密码的集合
      * @return 成功dto,失败抛出异常
      */
-    public RequestResult<User> login(User user) {
-        if (user == null) {
+    /**
+     * 用户登录
+     * @param email 用户邮箱
+     * @param password 密码
+     * @return
+     */
+    public RequestResult<User> login(String email , String password) {
+        if (email == null|| password==null) {
             throw new LoginMatchException("空用户对象");
         }
-        User dbUser = userDao.selectOneByEmail(user.getEmail());
+        User dbUser = userDao.selectOneByEmail(email);
         if (dbUser == null) {
             //不存在的用户
             throw new LoginNotExitUserException("不存在的用户");
         }else if (!dbUser.getPassword().equals(
-                Encryption.getMD5(user.getPassword())
+                Encryption.getMD5(password)
         )){
             //用户名或密码错误
             throw new LoginMatchException("错误的用户名或密码");
         }else {
             //登录成功
             //检索用户的所有组织
-            //TODO
-            Set<Organization> organs = new HashSet<Organization>();
-            dbUser.setOrgans(organs);
+//TODO            List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
+//            Set<Organization> organs = new HashSet<Organization>(relations);
+//            dbUser.setOrgans(organs);
             return new RequestResult<User>(StatEnum.LOGIN_SUCCESS,dbUser);
         }
     }
@@ -140,8 +151,7 @@ public class UserService {
         }
         else if(
                 !user.getEmail().matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}") ||
-                        !user.getUserName().matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}") ||
-                        !user.getPassword().matches("\\w{6,15}")//TODO
+                        !user.getUserName().matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}") //TODO
                 ) {
             throw new InformationFormatterFault("修改信息格式错误");
         }else {
@@ -151,10 +161,20 @@ public class UserService {
             //查找更新后的对象
             User dbUser = userDao.selectOneById(user.getUserId());
             //检索用户的所有组织
-            //TODO
-            Set<Organization> organs = new HashSet<Organization>();
-            dbUser.setOrgans(organs);
+// TODO           List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
+//            Set<Organization> organs = new HashSet<Organization>(relations);
+//            dbUser.setOrgans(organs);
             return new RequestResult<User>(StatEnum.INFORMATION_CHANGE_SUCCESS,dbUser);
         }
+    }
+
+    /**
+     * 上传头像
+     * @param user
+     * @return
+     */
+    public RequestResult<?> updateSelfPortait(User user) {
+        userDao.updateUser(user);
+        return new RequestResult<Object>(StatEnum.PORTAIT_UPLOAD_SUCCESS);
     }
 }

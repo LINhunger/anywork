@@ -2,8 +2,8 @@ package com.test.aop;
 
 /**
  * 利用AOP验证用户登录状态
- *
- * Created by zggdczfr on 2016/10/2.
+ * 判断登录，验证是否有权限浏览
+ * Created by zggdczfr on 2016/11/6.
  */
 public enum AuthorityType {
 
@@ -13,6 +13,6 @@ public enum AuthorityType {
     // 不验证
     NoValidate,
 
-    // 不验证权限
+    // 只判断登录，不验证权限
     NoAuthority;
 }

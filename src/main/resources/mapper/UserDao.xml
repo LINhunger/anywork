@@ -37,6 +37,9 @@
             <if test="user.openid != null and user.openid != ''">
                 openid = #{user.openid},
             </if>
+            <if test="user.picture != null and user.picture != ''">
+                picture = #{user.picture},
+            </if>
         </set>
         WHERE userId = #{user.userId}
     </update>

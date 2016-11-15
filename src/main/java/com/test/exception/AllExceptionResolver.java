@@ -28,14 +28,5 @@ public class AllExceptionResolver implements HandlerExceptionResolver{
         view.addObject("myerror", "错误提示信息:"+e.getMessage());
         return view;
 
-        //返回json格式的错误信息
-//        try {
-//            PrintWriter writer = response.getWriter();
-//            BaseResult<String, String> result = new BaseResult(false, e.getMessage());
-//            writer.write(JSON.toJSONString(result));
-//            writer.flush();
-//        } catch (Exception ex) {
-//            LOGGER.log(Level.ERROR,"Exception: {0}",e);
-//        }
     }
 }

@@ -8,6 +8,7 @@ public enum StatEnum {
      */
     VALCODE_WRONG(0,"验证码错误"),
     DEFAULT_WRONG(-1,"其他错误"),
+    CAUSE_TROUBLE(-2,"你不要搞事"),
     /**
      * 邮箱验证板块
      * */
@@ -59,6 +60,10 @@ public enum StatEnum {
     INFO_SHOW_SUCCESS(161,"查看信息成功"),
 
     /**
+     * 用户登出板块
+     */
+    USER_SIGN_OUT_SUCCESS(171,"登出成功"),
+    /**
      * 时间轴板块
      */
     TIMELINE_GET_SUCCESS(201,"获取时间轴成功"),
@@ -79,17 +84,50 @@ public enum StatEnum {
     QUESTION_GET_SUCCESS(231,"获取请求成功"),
 
     /**
-     * 提交作业
+     * 提交作业的答案
      */
-    SUBMIT_HOMEWORK_SUCCESS(241,"提交作业成功"),
-    SUBMIT_TIME_OUT(242,"提交作业超时"),
+    SUBMIT_HANSWER_SUCCESS(241,"提交答案成功"),
+    SUBMIT_TIME_OUT(242,"提交答案超时"),
     SUBMIT_FORMATTER_WRONG(243,"提交格式错误"),
 
     /**
-     * 提交请求
+     * 提交请求的回答
      */
-    SUBMIT_QUESTION_SUCCESS(251,"提交请求成功"),
-    BEST_ANSWER_EXIST(252,"已存在最佳答案");
+    SUBMIT_QANSWER_SUCCESS(251,"提交回答成功"),
+    BEST_ANSWER_EXIST(252,"已存在最佳回答"),
+    QANSWER_FORMATTER_WRONG(253,"回答格式错误"),
+
+    /**
+     * 设置最佳答案
+     */
+    BEST_ANSWER_SET_SUCCESS(261,"设置最佳答案成功"),
+
+    /**
+     * 评分
+     */
+    SCORE_SUCCESS(271,"评分成功"),
+
+    /**
+     * 发布作业
+     */
+    RELEASE_HOMEWORK_SUCCESS(281,"发布作业成功"),
+
+    /**
+     * 发布公告
+     */
+    RELEASE_INFORM_SUCCESS(291,"发布公告成功"),
+
+    /**
+     * 发布请求
+     */
+    RELEASE_QUESTION_SUCCESS(301,"发布请求成功"),
+
+    /**
+     * markdown格式预览
+     */
+    PREVIEW_SUCCESS(311,"预览成功");
+
+
 
     private  int state;
     private  String stateInfo;

@@ -24,5 +24,5 @@ public interface GradeDao {
      * @param userId 用户id
      * @return 评分对象
      */
-    Grade selectOneById(@Param("answerId")int answerId,@Param("userId")int userId);
+    Grade selectOneById(@Param("answerId") int answerId, @Param("userId") int userId);
 }

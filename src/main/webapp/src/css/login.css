@@ -1,0 +1,250 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+ul{
+	list-style-type: none;
+}
+li{
+	text-align: center;
+}
+a{
+	text-decoration: none;
+}
+body{
+	font-family: "SimHei","MicroYahei",sans-serif;
+	background: url(../images/login-background.jpg) no-repeat;
+    background-size: cover;
+	background-attachment:fixed;
+}
+#form .email-logo{
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 29px;
+    height: 18px;
+    background: url(../images/email.png) no-repeat center center;
+    background-size: contain;
+}
+#form .user-logo{
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 29px;
+    height: 18px;
+    background: url(../images/user.png) no-repeat center center;
+    background-size: contain;
+}
+#form .barcode-logo{
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    width: 29px;
+    height: 18px;
+    background: url(../images/barcode.png) no-repeat center center;
+    background-size: contain;
+}
+#form .left-angle{
+    width: 200px;
+    height: 306px;
+    position: absolute;
+    top: -25px;
+    left: -34px;
+    background: url(../images/left-angle.png) no-repeat center center;
+    background-size: contain;
+}
+#form .right-angle{
+    width: 200px;
+    height: 306px;
+    position: absolute;
+    bottom: -22px;
+    right: -32px;
+    background: url(../images/right-angle.png) no-repeat center center;
+    background-size: contain;
+}
+#form .little-left-angle {
+    width: 99px;
+    height: 85px;
+    position: absolute;
+    top: -25px;
+    left: -30px;
+    background: url(../images/little-left-angle.png) no-repeat center center;
+    background-size: contain;
+}
+#form .little-right-angle {
+    width: 99px;
+    height: 85px;
+    position: absolute;
+    bottom: -25px;
+    right: -30px;
+    background: url(../images/little-right-angle.png) no-repeat center center;
+    background-size: contain;
+}
+#form .lock-logo{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 29px;
+    height: 22px;
+    background: url(../images/lock.png) no-repeat center center;
+    background-size: contain;
+}
+#form .lock2-logo{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    width: 29px;
+    height: 22px;
+    background: url(../images/lock2.png) no-repeat center center;
+    background-size: contain;
+}
+#form .relative{
+    position: relative;
+}
+#options{
+    position: absolute;
+    right: 30px;
+    top: 5%;
+}
+.option{
+    margin-right: 30px;
+    font-size: 23px;
+    font-weight: bold;
+    color: #c4cdd4;
+    cursor: pointer;
+}
+.select{
+    font-size: 30px;
+}
+#form input[type="text"]:focus, #form input[type="password"]:focus{
+    border: 2px solid #5f5fe8;
+}
+#form .button{
+    width: 78px;
+    height: 36px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #e74600;
+}
+#form{
+    width: 578px;
+    margin: auto;
+    margin-top: 14%;
+}
+#form input{
+    width: 210px;
+	height: 27px;
+    font-size: 21px;
+    font-weight: bolder;
+    color: #404040;
+}
+#form .margin-top{
+    position: relative;
+	margin: 60px 0 25px;
+}
+#form .margin-bottom{
+	position: relative;
+	margin: 25px 0 55px;
+}
+#form .input-one{
+    margin-left: 29px;
+    padding: 0px 0 0 8px;
+    width: 210px;
+    font-size: 19px;
+    border: 2px solid white;
+    outline: medium;
+}
+#form .input-two{
+	padding: 0px 0 0 6px;
+    margin-left: 9px;
+    width: 100px;
+    font-size: 19px;
+    border: 2px solid white;
+    outline: medium;
+}
+.logo-i{
+    font-size: 21px;
+    font-weight: bolder;
+    color: white;
+}
+#login{
+    position: relative;
+    padding: 0.1px 0.1px 0.1px 38px;
+    background-color: rgba(169, 178, 183, 0.57);
+}
+#form .barkcode-img{
+    display: inline-block;
+    position: relative;
+    top: 8px;
+    margin: -8px 0 -9px 0;
+    width: 101px;
+    height: 29px;
+    cursor: pointer;
+    border: 1px solid white;
+}
+.whiteness{
+	position: relative;
+    margin-left: -38px;
+    height: 68px;
+}
+#form .whiteness input{
+    position: absolute;
+    bottom: 14px;
+    right: 28px;
+    outline: medium;
+    border: 1px;
+    cursor: pointer;
+}
+#form .whiteness input:hover{
+    background-color: #FF5722;
+}
+.forget-password{
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ffffff;
+}
+.forget-password:hover{
+    text-decoration: underline;
+}
+.error-info{
+    font-family: "MicroYahei";
+    padding: 9px;
+    font-size: 11px;
+    background-color: white;
+}
+
+#register{
+    position: relative;
+    padding: 0.1px 0.1px 0.1px 38px;
+    background-color: rgba(169, 178, 183, 0.57);
+}
+
+#register-info{
+    position: relative;
+    padding: 0.1px 0.1px 0.1px 38px;
+    background-color: rgba(169, 178, 183, 0.57);
+}
+#register-info .margin-first{
+    margin-top: 30px;
+}
+
+#register-info .margin{
+    margin-top: 25px;
+}
+
+#register-info .input-three{
+    margin-left: 42px;
+    font-size: 19px;
+    padding: 0px 0 0 8px;
+    border: 2px solid white;
+    outline: medium;
+}
+
+#register-info .input-four{
+    font-size: 19px;
+    padding: 0px 0 0 8px;
+    border: 2px solid white;
+    outline: medium;
+}
