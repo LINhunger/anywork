@@ -2,7 +2,7 @@ package com.test.message;
 
 /**
  * 服务端状态码
- * Created by zggdczfr on 2016/10/29.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class Code {
 

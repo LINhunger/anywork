@@ -1,7 +1,7 @@
 package com.test.message.sendModel;
 
 /**
- * Created by zggdczfr on 2016/11/1.
+ * Created by zggdczfr on 2016/11/8.
  */
 public class Content {
     private String content;

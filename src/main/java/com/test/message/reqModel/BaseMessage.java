@@ -2,7 +2,7 @@ package com.test.message.reqModel;
 
 /**
  * 微信请求消息基本类
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class BaseMessage {
 

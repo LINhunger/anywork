@@ -13,7 +13,7 @@ import java.util.Map;
  * 微信两小时定时任务体
  * 获取Token值
  * 获取jsticket值
- * Created by zggdczfr on 2016/10/25.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class WetChatTest {
 

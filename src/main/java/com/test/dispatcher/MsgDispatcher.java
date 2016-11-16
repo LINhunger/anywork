@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * 消息业务处理分发器
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class MsgDispatcher {
 
@@ -37,23 +37,7 @@ public class MsgDispatcher {
 
         //图片消息
         if (map.get("MsgType").equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)){
-            //图文消息
-            NewsMessage newsMsg = new NewsMessage();
-            newsMsg.setToUserName(openid);
-            newsMsg.setFromUserName(mpid);
-            newsMsg.setCreateTime(new Date().getTime());
-            newsMsg.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
-            //图文消息的处理
-            Article article = new Article();
-            article.setDescription("这是图文消息！");//图文消息的描述
-            article.setPicUrl("http://123.207.127.222/QGzone/image/zhang.jpg");//图文消息图片地址
-            article.setTitle("图文消息标题");  //图文消息标题
-            article.setUrl("http://www.fangrui.com");
-            List<Article> list = new ArrayList<Article>();
-            list.add(article);
-            newsMsg.setArticleCount(list.size());
-            newsMsg.setArticles(list);
-            return MessageUtil.newsMessageToXml(newsMsg);
+            System.out.println("====图片消息====");
         }
 
         //链接消息

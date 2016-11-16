@@ -3,7 +3,7 @@ package com.test.message.reqModel;
 /**
  * 普通消息pojo实体
  * 连接消息
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class LinkMessage extends BaseMessage {
     //消息标题

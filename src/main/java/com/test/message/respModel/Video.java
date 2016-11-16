@@ -2,7 +2,7 @@ package com.test.message.respModel;
 
 /**
  * 视频消息体
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class Video {
     //多媒体链接

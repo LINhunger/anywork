@@ -33,6 +33,16 @@ public class ImageUtil {
         try {
             //读取图片
             fileInPut = new FileInputStream(imagePath);
+            //获取图片的长宽等信息
+            BufferedImage buff = ImageIO.read(new File(imagePath));
+            int realWidth = buff.getWidth();
+            int realHeight = buff.getHeight();
+            //转换高度
+            x = (int) (x * (realWidth * 1.0 / 600));
+            y = (int) (y * (realHeight * 1.0 / 600));
+            width = (int) (width * (realWidth * 1.0 / 600));
+            height = (int) (height * (realHeight * 1.0 / 600));
+
             Iterator<ImageReader> iterator = ImageIO.getImageReadersByFormatName("jpg");
             ImageReader reader = iterator.next();
             //获取图片流
@@ -44,7 +54,7 @@ public class ImageUtil {
             //描述如何对流进行解码的类
             ImageReadParam param = reader.getDefaultReadParam();
             //图片裁剪
-            Rectangle rectangle = new Rectangle(x, y, width, height);
+            Rectangle rectangle = new Rectangle(x, y, width, width);
             //提供一个 BufferedImage，将其用作解码像素数据的目标
             param.setSourceRegion(rectangle);
 
@@ -61,14 +71,14 @@ public class ImageUtil {
             }
         }
     }
-
-    public static void main(String[] args) {
-        try {
-            cutImage("C:\\Users\\hunger\\Desktop\\1\\1.jpg","C:\\Users\\hunger\\Desktop\\1\\2.jpg", 20, 10 , 50, 100);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//
+//    public static void main(String[] args) {
+//        try {
+//            cutImage("E:/zhang.jpg", "F:/zhang.jpg", 200, 100 , 500, 1000);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
 
     /**

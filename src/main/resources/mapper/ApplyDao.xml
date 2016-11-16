@@ -41,5 +41,9 @@
         WHERE a.senderId = u.userId AND a.status = 0 AND a.organId = #{organId}
     </select>
 
+    <delete id="deleteByApplyId">
+        DELETE FROM apply WHERE applyId=#{applyId}
+    </delete>
+
 
 </mapper>

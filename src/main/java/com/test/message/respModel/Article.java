@@ -2,7 +2,7 @@ package com.test.message.respModel;
 
 /**
  * 图文消息体
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class Article {
 

@@ -1,5 +1,6 @@
 package com.test.model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,19 @@ public class Comment {
     private int type;//0代表作业的评论回复，1代表请求的评论回复
     private String content;//内容
     private List<Recomment> recomments;//对该评论的回复集合
+
+    /**
+     * 增加
+     */
+    private Date createTime;//创建时间
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public int getCommentId() {
         return commentId;
@@ -71,6 +85,7 @@ public class Comment {
                 ", type=" + type +
                 ", content='" + content + '\'' +
                 ", recomments=" + recomments +
+                ", createTime=" + createTime +
                 '}';
     }
 }

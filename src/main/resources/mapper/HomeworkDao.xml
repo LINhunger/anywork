@@ -46,7 +46,7 @@
         SELECT h.*,u.* FROM homework h,user u
         WHERE
         h.organId = #{organId} AND h.authorId = u.userId
-        AND h.createTime > #{time} AND DATE_ADD(#{time},INTERVAL 3 DAY )>h.createTime
+        AND  DATE_ADD(#{time},INTERVAL 1 DAY )>h.createTime  AND h.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
     </select>
 
     <!--根据作业id删除作业对象-->

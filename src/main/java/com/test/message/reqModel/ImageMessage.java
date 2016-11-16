@@ -3,7 +3,7 @@ package com.test.message.reqModel;
 /**
  * 普通消息pojo实体
  * 图片消息
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class ImageMessage extends BaseMessage {
     //图片链接

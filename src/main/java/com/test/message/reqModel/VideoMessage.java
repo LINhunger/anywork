@@ -3,7 +3,7 @@ package com.test.message.reqModel;
 /**
  * 普通消息pojo实体
  * 视频消息
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class VideoMessage extends BaseMessage {
     //视频消息媒体id，可以调用多媒体文件下载接口拉取数据

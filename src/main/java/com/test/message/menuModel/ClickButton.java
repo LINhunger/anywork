@@ -2,7 +2,7 @@ package com.test.message.menuModel;
 
 /**
  * 点击型菜单事件
- * Created by zggdczfr on 2016/10/27.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class ClickButton {
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 多图文消息
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class NewsMessage extends BaseMessage {
 

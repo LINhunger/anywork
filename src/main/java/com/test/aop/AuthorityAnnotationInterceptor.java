@@ -56,7 +56,7 @@ public class AuthorityAnnotationInterceptor extends HandlerInterceptorAdapter {
                             }
                             return true;
                         } else {
-                            System.out.println("===执行验证！！！===");
+/*                            System.out.println("===执行验证！！！===");
                             // 验证登录及权限
                             HttpSession session = request.getSession();
                             if (null == session.getAttribute("user")){
@@ -69,10 +69,11 @@ public class AuthorityAnnotationInterceptor extends HandlerInterceptorAdapter {
                             int role = relationDao.selectRoleByRelation(user.getUserId(), organId);
                             if (role != 1 || role != 2 || role != 3){
                                 throw new UserException("用户还未关注该组织！");
-                            }
+                            }*/
                             return true;
                         }
                     }
+                    return true;
                 }
             } catch (UserException userException){
                 throw userException;

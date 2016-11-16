@@ -2,7 +2,7 @@ package com.test.message.respModel;
 
 /**
  * 客服消息接口
- * Created by zggdczfr on 2016/10/27.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class CustomerMessage {
     //接收者账号(OpenID)

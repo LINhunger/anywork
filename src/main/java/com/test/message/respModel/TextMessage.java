@@ -3,7 +3,7 @@ package com.test.message.respModel;
 /**
  * 普通消息回复实体
  * 文本信息消息体
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class TextMessage extends BaseMessage {
 

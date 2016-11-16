@@ -5,7 +5,8 @@ import com.test.enums.Level;
 import com.test.util.Logger;
 
 /**
- * Created by zggdczfr on 2016/10/25.
+ * 定时器
+ * Created by zggdczfr on 2016/11/6.
  */
 public class QuartzJob {
 

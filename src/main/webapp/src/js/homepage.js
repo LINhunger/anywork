@@ -1,19 +1,34 @@
-function getUserInfo(){
-	var user;
-	$.ajax({
-		url: "/anywork/user/info",
-		type: "GET",
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		success: function(data){
-			user =  data.data;
-		},
-		dataType: "json",
-	});
-	return user;
-}
 
 var user = getUserInfo();
+
+/**
+ * 圆盘的逻辑
+ */
+	$(function(){
+		var list = [1, 5, 9, 4, 8, 3, 7, 2, 6];
+		var organs = getAllOrganById(user.userId);
+		for(var i=0; i<organs.length; i++){
+			if(i>9) black;
+			var headImg = "url(/anywork/photo/"+ organs[i].organId + ".jpg)";
+			$("#"+list[i]).attr("info",organs[i].organId).css("background-image", headImg).show();
+		}
+
+		$('#rotate').click(function(e){
+			var e = $(e.target);
+			if( !e.hasClass("star") || e.attr("info")==undefined) return;
+			e.show();
+			var organId = e.attr("info");
+			window.location.href="organization.html?organId="+organId;
+		})
+		
+		$(".star").mouseenter(function(){
+			$(this).parent('div').css('animation-play-state','paused');
+			$(this).parent('div').find('.star').css('animation-play-state','paused');
+		}).mouseout(function(){
+			$(this).parent('div').css('animation-play-state','running');
+			$(this).parent('div').find('.star').css('animation-play-state','running');
+		});
+	})
 
 var my_nav = {
 	template: `
@@ -28,7 +43,7 @@ var my_nav = {
 	data: function(){
 		return {
 			userName: user.userName,
-			headImg: user.picture,
+			headImg: '/anywork/picture/'+user.picture,
 		}
 	},
 	methods: {
@@ -76,7 +91,7 @@ var my_info = {
 	</div>`,
 
 	data: function(){
-		var email = getUrlInformation().email,
+		var email = user.email,
 			isLink = true,
 			username = '',
 			phone = '',
@@ -124,26 +139,29 @@ var my_info = {
 				phone: this.phone,
 			}
 
-			// $.ajax({
-			// 	type: "POST",
-			// 	url: '/anywork/user/update',
-			// 	contentType: "application/json; charset=utf-8",
-			// 	dataType: "json",
-			// 	data: JSON.stringify(info),
-			// 	success: function(data){
-			// 		var state = data.state,
-			// 			stateInfo = data.stateInfo;
-			// 		my_alert(stateInfo);
-			// 		if(state!='141'){
-			// 			this.isLink=user.isWechat;
-			// 			this.username=user.userName;
-			// 			this.phone=user.phone;
-			// 			this.email=user.email;
-			// 			this.headImg='/anywork/picture/'+user.picture;
-			// 			return;
-			// 		}
-			// 	},
-			//})
+			$.ajax({
+				type: "POST",
+				url: '/anywork/user/update',
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				data: JSON.stringify(info),
+				success: function(data){
+					var state = data.state,
+						stateInfo = data.stateInfo;
+					my_alert(stateInfo);
+					if(state===141){
+						user = getUserInfo();
+						user.picture = user.picture +"?"+ new Date().valueOf();
+					}else{
+						this.isLink=user.isWechat;
+						this.username=user.userName;
+						this.phone=user.phone;
+						this.email=user.email;
+						this.headImg='/anywork/picture/'+user.picture;
+						return;
+					}
+				},
+			})
 
 			/**
 			 * 头像文件上传：
@@ -161,13 +179,6 @@ var my_info = {
 				formData.append("y",jcropInfo.y);
 				formData.append("width",jcropInfo.w);
 				formData.append("height",jcropInfo.h);
-				// var info = {
-				// 	file: formData,
-				// 	x: jcropInfo.x,
-				// 	y: jcropInfo.y,
-				// 	width: jcropInfo.w,
-				// 	height: jcropInfo.h,
-				// }
 				$.ajax({
 					url:"/anywork/user/portait",
 					type:"POST",
@@ -231,15 +242,17 @@ var create_team = {
 				organName: this.teamname,
 				description: this.describe,
 			};
+			var organId;
 			$.ajax({
 				type: "POST",
 				url: "/anywork/organ/create",
+				async: false,
 				data: JSON.stringify(info),
 				contentType: "application/json; charset=utf-8",
 				success: function(data){
 					var state = data.state,
 						stateInfo = data.stateInfo;
-					my_alert(stateInfo);
+						organId = data.data;
 				},
 				dataType: "json",
 			});
@@ -257,15 +270,10 @@ var create_team = {
                 formData.append("y",jcropInfo.y);
                 formData.append("width",jcropInfo.w);
                 formData.append("height",jcropInfo.h);
-				var info = {
-					file: formData,
-					x: jcropInfo.x,
-					y: jcropInfo.y,
-					width: jcropInfo.width,
-					height: jcropInfo.height,
-				}
+                formData.append("organId",organId);
+
 				$.ajax({
-	                url:"/anywork/update",
+	                url:"/anywork/organ/update",
 					type:"POST",
 					data: formData,
 					cache: false,
@@ -276,6 +284,7 @@ var create_team = {
 								    stateInfo = data.stateInfo;
 								if(state=="151"){
 									this.isFile = false;
+									my_alert('文件上传成功!');
 								}else{
 									my_alert(stateInfo);
 								}
@@ -322,14 +331,15 @@ var search = {
 		isCheck: function(e){
 			$(e.target).parent().addClass("on").siblings().removeClass("on");
 			var id = $(e.target).attr('id');
-			if(id==="isID") this.isID = true;
-			else this.ID = false;
+			if(id==="atID") this.isID = true;
+			else this.isID = false;
 		},
 		search: function(){
+			this.organs = [];
 			if(this.isID){
-				this.organs = getOrganById(this.searchInfo);
+				this.organs.push(getOrganById(this.searchInfo));
 			}else{
-				this.organs = getOrgansByName(this.searchInfo);
+				this.organs.push( getOrgansByName(this.searchInfo));
 			}
 		},
 		stopP: stopP,
@@ -385,27 +395,43 @@ var nav = new Vue({
 })
 
 function getOrganById( id ){
-	$.get("/anywork/organ/searchId",{organId:id},function(data){
-		var state = data.state,
-			stateInfo = data.stateInfo,
-			oragn = data.data;
-		if(state=='183'){
-			return oragn;
-		}	
-		else my_alert(stateInfo);
-	},'json')
+	var organ;
+	$.ajax({
+		type: "GET",
+		url: "/anywork/organ/searchId",
+		async: false,
+		data: {organId:id},
+		success: function(data){
+			var state = data.state,
+				stateInfo = data.stateInfo;
+			if(state=='183'){
+				organ = data.data;
+			}	
+			else my_alert(stateInfo);
+		},
+		dataType: 'json',
+	})
+	return organ;
 }
 
 function getOrgansByName( name ){
-	$.get("/anywork/organ/searchName",{organName:name},function(data){
-		var state = data.state,
-			stateInfo = data.stateInfo,
-			oragns = data.data;
-		if(state=='184'){
-			return oragns;
-		}	
-		else my_alert(stateInfo);
-	},'json')
+	var organs;
+	$.ajax({
+		type: "GET",
+		url: "/anywork/organ/searchName",
+		async: false,
+		data: {organName:name},
+		success: function(data){
+			var state = data.state,
+				stateInfo = data.stateInfo;
+			if(state=='184'){
+				oragns = data.data;
+			}	
+			else my_alert(stateInfo);
+		},
+		dataType: 'json',
+	})
+	return organs;
 }
 
 function applyJoin (id){
@@ -526,7 +552,9 @@ function applyJoin (id){
 		e.stopPropagation();
 	}
 
-
+/**
+ *  转盘停止                                                                                                                                                                                                                                                                                                                                                              [description]
+ */
 	$(function(){
 		$(".star").mouseenter(function(){
 			$(this).parent('div').css('animation-play-state','paused');

@@ -5,14 +5,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 /**
- * SignUtil
+ * SignUtil 参考微信公众号平台开发者 demo
  * 验证 signature 工具类
- * Created by zggdczfr on 2016/11/5.
+ * Created by zggdczfr on 2016/11/6.
  */
 public class SignUtil {
 
     //与接口配置信息中的ToKen一致
-    private static String token = "iamfangrui";
+    private static String token = "anywork";
 
     public static boolean checkSignature(String signature, String timestamp,String nonce){
         // 1. 将token、timestamp、nonce三个参数进行字典序排序

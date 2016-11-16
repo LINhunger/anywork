@@ -3,7 +3,7 @@ package com.test.message.sendModel;
 import java.util.List;
 
 /**
- * Created by zggdczfr on 2016/11/1.
+ * Created by zggdczfr on 2016/11/8.
  */
 public class TextSendMessage {
 

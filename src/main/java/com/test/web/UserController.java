@@ -63,6 +63,9 @@ public class UserController {
         } catch (SendFormatterException e) {
             logger.warn("wrong email fomatter.\t"+email);
             return  new RequestResult<String>(StatEnum.SEND_FORMATTER_FAULT,email);
+        }catch (LoginNotExitUserException e) {
+            logger.warn("not exit user.\t"+email);
+            return  new RequestResult<String>(StatEnum.LOGIN_NOT_EXIT_USER,email);
         }catch (Exception e) {
             logger.warn("default exception.\t"+email);
             return  new RequestResult<String>(StatEnum.DEFAULT_WRONG,email);
@@ -169,7 +172,7 @@ public class UserController {
      */
     @RequestMapping(value = "/{ciphertext}/change",method = RequestMethod.POST)
     @ResponseBody
-    public RequestResult<String> passwordChange (HttpServletRequest request,User user,
+    public RequestResult<String> passwordChange (HttpServletRequest request,@RequestBody User user,
                                                  @PathVariable("ciphertext") String ciphertext) {
         //验证请求密文是否匹配
         String text = Encryption.getMD5(user.getEmail());
@@ -204,13 +207,15 @@ public class UserController {
      */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ResponseBody
-    public RequestResult<User> updateUser(HttpServletRequest request,@RequestBody  User user){
+    public RequestResult<User> updateUser(HttpServletRequest request,HttpServletResponse response,
+                                                        @RequestBody  User user){
         try {
             //虽然感觉没什么用
             user.setUserId(((User)request.getSession().getAttribute("user")).getUserId());
             RequestResult<User> result = userService.updateUser(user);
             //更新session中的数据
             request.getSession().setAttribute("user",result.getData());
+            setCookie(response,result.getData());
             return  result;
         }catch (InformationEmptyUser e){
             logger.warn("empty user.\t"+user.getEmail());

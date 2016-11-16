@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 
 /**
- * Created by zggdczfr on 2016/10/28.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class GetUserInfo {
 

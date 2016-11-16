@@ -3,7 +3,7 @@ package com.test.message.reqModel;
 /**
  * 普通消息pojo实体
  * 地理位置消息
- * Created by zggdczfr on 2016/10/21.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class LocationMessage extends BaseMessage {
     //地理位置纬度

@@ -331,6 +331,8 @@ body{
         cursor: pointer;
     }
     #nav .head_img{
+        position: relative;
+        bottom: 9px;
         border: 2px solid #6c9aa8; 
         border-radius: 50%;
         margin: 10px 10px 7px 16px;
@@ -338,7 +340,7 @@ body{
     #nav .username{
         position: relative;
         bottom: 11px;
-        font-size: 47px;
+        font-size: 26px;
         color: #6c9aa8;
     }
     
@@ -373,9 +375,9 @@ body{
  * 选择圆盘
  */
     #rotate{
-        position: relative;
-        margin: auto;
-        margin-top: 5%;
+        position: absolute;
+        top: 10%;
+        left: 33%;
         width: 550px;
         height: 550px;
     }
@@ -415,31 +417,30 @@ body{
         border-radius: 50%;     
     }
     .star{
+        display: none;
         cursor: pointer;
-         width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
     }
     .run-1-a{
         position: relative;
-        top: 145px;
+        top: 168px;
         float: left;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
+        
     }
     .run-1-b{
         position: relative;
-        top: 153px;
-        right: -9px;
+        top: 173px;
+        right: 9px;
         float: right;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
     .run-1-c{
         position: absolute;
         bottom: -22px;
         left: 231px;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
 
 
@@ -448,47 +449,36 @@ body{
         top: 360px;
         left: -19px;
         float: left;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
     .run-2-b{
         position: relative;
-        top: -26px;
+        top: -29px;
         right: 223px;
         float: right;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
+     
     }
     .run-2-c{
         position: absolute;
         bottom: 95px;
-        right: 11px;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
+        right: 33px;
     }
 
     .run-3-a{
         position: relative;
-        top: 280px;
-        left: 41px;
+        top: 360px;
+        left: 33px;
         float: left;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
     .run-3-b{
         position: relative;
-        top: 12px;
-        left: -250px;
+        top: -8px;
+        left: -300px;
         float: right;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
     .run-3-c{
         position: absolute;
         bottom: 155px;
         right: -20px;
-        background: url(../images/day.png) no-repeat center center;
-        background-size: contain;
     }
     
     .run-1{
@@ -515,8 +505,8 @@ body{
         animation: run 40s linear infinite reverse;
         animation-play-state: running;
     }
-     @keyframes run{
-        0% {transform: rotate(0deg)},
-        50% {transform: rotate(180deg);}
-        100% {transform: rotate(360deg);}
-    } 
+    @keyframes run{
+            0% {transform: rotate(0deg)},
+            50% {transform: rotate(180deg);}
+            100% {transform: rotate(360deg);}
+    }

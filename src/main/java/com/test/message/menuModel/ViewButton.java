@@ -1,7 +1,7 @@
 package com.test.message.menuModel;
 
 /**
- * Created by zggdczfr on 2016/10/27.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class ViewButton {
 

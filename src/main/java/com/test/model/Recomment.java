@@ -1,23 +1,38 @@
 package com.test.model;
 
+import java.util.Date;
+
 /**
  * Created by hunger on 2016/11/5.
  */
 public class Recomment {
-    private int recommentId;//回复id
-    private int commentId;//评论id
+    private int commentId;//回复id
+    private int aCommentId;//评论id
     private User sender;//发送者对象
     private User receiver;//接收者对象
     private String content;//内容
     private int targetId;//作业或请求的id
     private int type;//2代表作业的回复，3代表请求的回复
 
-    public int getRecommentId() {
-        return recommentId;
+    /**
+     * 增加
+     */
+    private Date createTime;//创建时间
+
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setRecommentId(int recommentId) {
-        this.recommentId = recommentId;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getaCommentId() {
+        return aCommentId;
+    }
+
+    public void setaCcommentId(int aCcommentId) {
+        this.aCommentId = aCcommentId;
     }
 
     public int getCommentId() {
@@ -71,13 +86,14 @@ public class Recomment {
     @Override
     public String toString() {
         return "Recomment{" +
-                "recommentId=" + recommentId +
-                ", commentId=" + commentId +
+                "recommentId=" + commentId +
+                ", commentId=" + aCommentId +
                 ", sender=" + sender +
                 ", receiver=" + receiver +
                 ", content='" + content + '\'' +
                 ", targetId=" + targetId +
                 ", type=" + type +
+                ", createTime=" + createTime +
                 '}';
     }
 }

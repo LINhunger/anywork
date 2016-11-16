@@ -41,14 +41,14 @@ public class TimelineController {
     @RequestMapping(value = "/{time}/timeline/{organId}",method = RequestMethod.GET)
     @ResponseBody
     public RequestResult<Map> showTimeline(HttpServletRequest request,
-                                           @PathVariable("time") Date time,
+                                           @PathVariable("time") long time,
                                            @PathVariable("organId") int organId
     ){
         try {
             //将当前组织id写进session
             request.getSession().setAttribute("organId",organId);
 
-            RequestResult<Map> result = timelineService.showTimeline(organId,time,organId);
+            RequestResult<Map> result = timelineService.showTimeline(organId,new Date(time),organId);
             return result;
         }catch (Exception e) {
             logger.warn("default exception.\t");

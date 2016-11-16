@@ -34,6 +34,8 @@ public class TimelineService {
     private QAnswerDao qAnswerDao;
     @Autowired
     private GradeDao gradeDao;
+    @Autowired
+    private CommentDao commentDao;
 
 
 
@@ -68,20 +70,20 @@ public class TimelineService {
             for (int i = 0; i < sets.length; i++) {
                 sets[i] = new HashSet();
                     for (Homework homework:homeworks) {
-                        if(homework.getCreateTime().before(new Date(time.getTime()+86400000*(i+1)))&&
-                                homework.getCreateTime().after(new Date(time.getTime()+86400000*i)) ){
+                        if(homework.getCreateTime().after(new Date(time.getTime()-86400000*i))&&
+                                homework.getCreateTime().before(new Date(time.getTime()-86400000*(i-1))) ){
                             sets[i].add(homework);
                         }
                     }
                     for (Inform inform:informs) {
-                        if (inform.getCreateTime().before(new Date(time.getTime()+86400000*(i+1)))&&
-                                inform.getCreateTime().after(new Date(time.getTime()+86400000*i))){
+                        if (inform.getCreateTime().after(new Date(time.getTime()-86400000*(i)))&&
+                                inform.getCreateTime().before(new Date(time.getTime()-86400000*(i-1)))){
                                 sets[i].add(inform);
                         }
                     }
                     for (Question question : questions) {
-                        if (question.getCreateTime().before(new Date(time.getTime()+86400000*(i+1)))&&
-                                question.getCreateTime().after(new Date(time.getTime()+86400000*i))) {
+                        if (question.getCreateTime().after(new Date(time.getTime()-86400000*(i)))&&
+                                question.getCreateTime().before(new Date(time.getTime()-86400000*(i-1)))) {
                             sets[i].add(question);
                         }
                     }
@@ -92,12 +94,12 @@ public class TimelineService {
         Map day01 = new HashMap();
         Map day02 = new HashMap();
         Map day03 = new HashMap();
-        day01.put("time",time);
-        day01.put("message",sets[0]);
-        day02.put("time",new Date(time.getTime()+86400000));
+        day03.put("time",new Date(time.getTime()+86400000));
+        day03.put("message",sets[0]);
+        day02.put("time",new Date(time.getTime()));
         day02.put("message",sets[1]);
-        day03.put("time",new Date(time.getTime()+86400000*2));
-        day03.put("message",sets[2]);
+        day01.put("time",new Date(time.getTime()-86400000));
+        day01.put("message",sets[2]);
         content.put("day01",day01);
         content.put("day02",day02);
         content.put("day03",day03);
@@ -127,10 +129,13 @@ public class TimelineService {
                 myAnswer=answer;
             }
         }
+        //获取前端评论集合
+        List<Comment> comments = commentDao.selectCommentByAll(0,homeworkId);
         Map content = new HashMap();
         content.put("homework",homework);
         content.put("myAnswer",myAnswer);
         content.put("allAnswers",allAnswers);
+        content.put("comments",comments);//记得提醒前端
         return new RequestResult<Map>(StatEnum.HOMEWORK_GET_SUCCESS,content);
     }
 
@@ -157,10 +162,13 @@ public class TimelineService {
         QAnswer myAnswer = qAnswerDao.selectOneById(questId,userId);
         //获取全部请求的回答
         List<QAnswer> allAnswers = qAnswerDao.selectAllByQuestId(questId);
+        //获取评论集合
+        List<Comment> comments = commentDao.selectCommentByAll(1,questId);
         Map content = new HashMap();
         content.put("question",question);
         content.put("myAnswer",myAnswer);
         content.put("allAnswers",allAnswers);
+        content.put("comments",comments);//记得提醒前端
         return new RequestResult<Map>(StatEnum.QUESTION_GET_SUCCESS,content);
     }
 

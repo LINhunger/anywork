@@ -4,7 +4,7 @@ package com.test.message.respModel;
  * 回消息体-基本消息
  * 一种为不需要上传资源到微信服务器的这里成为【普通消息回复】
  * 一种需要上传资源到微信服务器的这里称为【多媒体消息回复】
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class BaseMessage {
 

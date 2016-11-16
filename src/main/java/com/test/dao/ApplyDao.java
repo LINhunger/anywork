@@ -32,4 +32,11 @@ public interface ApplyDao {
      * @return 申请集合
      */
     List<Apply> selectAllByOrganId(int organId);
+
+    /**
+     * 根据申请applyId来删除申请
+     * @param applyId
+     * @return
+     */
+    int deleteByApplyId(int applyId);
 }

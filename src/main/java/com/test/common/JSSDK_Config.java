@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * 用户微信前端页面的jssdk配置使用
- * Created by zggdczfr on 2016/10/29.
+ * Created by zggdczfr on 2016/11/9.
  */
 public class JSSDK_Config {
 

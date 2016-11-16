@@ -137,7 +137,7 @@ var login = {
 						var state = data.state,
 							stateInfo = data.stateInfo;
 						if(state=='121'){
-							window.location.href='homepage.html?email='+data.data.email;
+							window.location.href='homepage.html?email';
 						}else{
 							my_alert(stateInfo);
 							return;

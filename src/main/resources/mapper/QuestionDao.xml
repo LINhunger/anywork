@@ -87,7 +87,7 @@
         LEFT JOIN (qanswer a LEFT JOIN user u2 ON a.authorId = u2.userId)
         ON a.qAnswerId=q.bestAId
         WHERE  q.organId = #{organId}
-        AND q.createTime > #{time} AND DATE_ADD(#{time},INTERVAL 3 DAY )>q.createTime
+        AND  DATE_ADD(#{time},INTERVAL 1 DAY )>q.createTime  AND q.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
     </select>
 
     <!--根据请求id删除请求-->

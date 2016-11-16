@@ -125,7 +125,69 @@ public enum StatEnum {
     /**
      * markdown格式预览
      */
-    PREVIEW_SUCCESS(311,"预览成功");
+    PREVIEW_SUCCESS(311,"预览成功"),
+
+
+
+    /**
+     *
+     * zggdczfr
+     *
+     */
+
+    /**
+     * 权限通用模块
+     * 微信模块
+     */
+    WITHOUT_POWER(191, "用户没有相应的处理权限"),
+    ERROR_DELETE(192, "不能删除负责人或管理员"),
+    WEIXIN_ORGANIZATION(193, "微信用户获取组织列表成功"),
+    WEIXIN_INFORM(194, "微信客户端获取公告"),
+    WETXIN_QUESTION(195, "微信客户端获取作业"),
+    WEIXIN_REQUEST_ERROR(196, "微信客户端获取信息失败"),
+    WEIXIN_BIND_SUCCESS(197, "微信绑定成功"),
+    WEIXIN_BIND_FAIL(198, "微信绑定失败"),
+
+    /**
+     * 组织申请模块
+     */
+    APPLY_SEND_SUCCESS(151, "组织申请发送成功"),
+    APPLY_SEND_FAIL(152, "组织申请发送失败"),
+    APPLY_HANDLE_SUCCESS(154, "处理申请成功"),
+    APPLY_HANDLE_FAIL(155, "处理申请失败"),
+    APPLY_NOHANDLR_ALL(156, "获得所有未处理的组织申请"),
+    APPLY_SEND_REPEAT(157, "您已经是该组织用户了"),
+    APPLY_DELETE_SUCCESS(158, "删除申请成功"),
+    APPLY_DELETE_FAIL(159, "删除申请失败"),
+
+    /**
+     * 评论和回复模块
+     */
+    COMMENT_ALL(161, "获取所有的评论和回复"),
+    COMMENT_ANNOUNCE_SUCCESS(162, "发表评论成功"),
+    RECOMMENT_ANNOUNCE_SUCCESS(163, "回复评论成功"),
+    COMMENT_ANNOUNCE_FAIL(164, "发表失败"),
+
+    /**
+     * 组织关系处理模块
+     */
+    RELATION_DELETE_SUCCESS(171, "删除用户成功"),
+    RELATION_DELETE_FAIL(172, "删除用户失败"),
+    RELATION_ALL(173, "获取所有未处理申请"),
+    RELATION_UPDATE_SUCCESS(174, "设置权限成功"),
+    RELATION_UPDATE_FAIL(175, "设置权限失败"),
+    RELATION_ALL_ORGAN(176, "获取用户组织列表"),
+
+    /**
+     * 组织模块
+     */
+    ORGAN_CREATE_SUCCESS(181, "创建组织成功"),
+    ORGAN_CREATE_FAIL(182, "创建组织失败"),
+    ORGAN_SEARCH_ID(183, "通过组织id来查找组织"),
+    ORGAN_SEARCH_NAME(184, "通过组织名来查找组织"),
+    ORGAN_ID_ERROR(185, "组织id格式错误"),
+
+    ALL(999,"test");
 
 
 

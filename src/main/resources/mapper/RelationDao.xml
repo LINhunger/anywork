@@ -56,7 +56,7 @@
     <!--根据组织id查找组织关系-->
     <select id="selectAllByOrganId" resultMap="RelationResultMap">
         SELECT r.*, u.createTime usertime, u.* FROM relation r, user u
-        WHERE r.organId = #{organId}
+        WHERE r.organId = #{organId} AND r.userId= u.userId
     </select>
 
     <!--根据组织关系来查微信凭证-->

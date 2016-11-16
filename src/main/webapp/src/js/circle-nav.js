@@ -80,7 +80,12 @@ window.onload=function(){
     };
     document.onclick = function () {
         closeMenu();
-        $('#frame').hide();
+        $('#frame').fadeOut();
+        $('#rotate').animate({
+            width: "550px",
+            height: "550px",
+            left: "33%"
+        },2000);
     };
 
     function closeMenu(){
@@ -105,7 +110,12 @@ window.onload=function(){
     }
 
     $('#itemsContainer').click(function(e){
-        $('#frame').show();
+        $('#frame').fadeIn();
+        $('#rotate').animate({
+            width: "200px",
+            height: "200px",
+            left: "50px"
+        },2000);
         var tg = e.target;
         if(tg.nodeName.toUpperCase()!='A'){
             tg = $(tg).parent();

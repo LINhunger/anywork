@@ -3,12 +3,14 @@ package com.test.dao;
 import com.test.model.Comment;
 import com.test.model.Recomment;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by hunger on 2016/11/5.
  */
+@Repository
 public interface CommentDao {
 
     /**

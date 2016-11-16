@@ -38,7 +38,7 @@
         SELECT i.*,u.* FROM inform i,user u
         WHERE
         i.organId = #{organId} AND i.authorId = u.userId
-        AND i.createTime > #{time} AND DATE_ADD(#{time},INTERVAL 3 DAY )>i.createTime
+         AND  DATE_ADD(#{time},INTERVAL 1 DAY )>i.createTime  AND i.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
     </select>
 
     <!--根据公告id删除公告对象-->

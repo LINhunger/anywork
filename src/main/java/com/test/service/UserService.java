@@ -31,8 +31,6 @@ public class UserService {
     private UserDao userDao;
     @Autowired
     private RelationDao relationDao;
-    @Autowired
-    private OrganDao organDao;
 
     /**
      *  根据email地址发送邮件
@@ -46,6 +44,9 @@ public class UserService {
             throw new SendFormatterException("邮箱格式错误");
 
         } else {
+            if (type == 2 &&userDao.selectOneByEmail(email)==null) {
+                throw new LoginNotExitUserException("不存在的用户");
+            }
             int result = SendCommonPostMail.Send(email,type,userName);
             if (result != 200) {
                 throw new UserException("邮件发送失败");
@@ -97,10 +98,11 @@ public class UserService {
             throw new PasswordFormatterFaultException("修改密码格式错误");
         }
         else{
+            User dbUser = userDao.selectOneByEmail(user.getEmail());
             //加密密码项
-            user.setPassword(Encryption.getMD5(user.getPassword()));
-            userDao.updateUser(user);
-            return new RequestResult<String>(StatEnum.PASSWORD_CHANGE_SUCCESS,user.getEmail());
+            dbUser.setPassword(Encryption.getMD5(user.getPassword()));
+            userDao.updateUser(dbUser);
+            return new RequestResult<String>(StatEnum.PASSWORD_CHANGE_SUCCESS,dbUser.getEmail());
         }
     }
 
@@ -132,9 +134,9 @@ public class UserService {
         }else {
             //登录成功
             //检索用户的所有组织
-//TODO            List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
-//            Set<Organization> organs = new HashSet<Organization>(relations);
-//            dbUser.setOrgans(organs);
+           List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
+            Set<Organization> organs = new HashSet<Organization>(relations);
+            dbUser.setOrgans(organs);
             return new RequestResult<User>(StatEnum.LOGIN_SUCCESS,dbUser);
         }
     }
@@ -161,9 +163,9 @@ public class UserService {
             //查找更新后的对象
             User dbUser = userDao.selectOneById(user.getUserId());
             //检索用户的所有组织
-// TODO           List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
-//            Set<Organization> organs = new HashSet<Organization>(relations);
-//            dbUser.setOrgans(organs);
+            List<Organization> relations = relationDao.selectOrganByUserId(dbUser.getUserId());
+            Set<Organization> organs = new HashSet<Organization>(relations);
+            dbUser.setOrgans(organs);
             return new RequestResult<User>(StatEnum.INFORMATION_CHANGE_SUCCESS,dbUser);
         }
     }

@@ -7,6 +7,7 @@ import com.test.message.respModel.NewsMessage;
 import com.test.message.respModel.TextMessage;
 import com.test.util.Logger;
 import com.test.util.MessageUtil;
+import com.test.web.util.GlobalConstants;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,7 +15,7 @@ import java.util.*;
 
 /**
  * 事件消息业务分发器
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class EventDispatcher {
 
@@ -36,13 +37,13 @@ public class EventDispatcher {
 
         //关注事件
         if (map.get("Event").equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)){
-            System.out.println("====这是关注事件！====");
+            LOGGER.log(Level.DEBUG, openid + " 关注公众号");
             try {
                 HashMap<String, String> userInfo = GetUserInfo.getUserInfoByOpenID(openid);
                 Article article = new Article();
                 //图文消息的描述
-                article.setDescription("欢迎来到圆锐的微信公众号测试接口~");
-                article.setPicUrl(userInfo.get("headimgurl")); //图文消息图片地址
+                article.setDescription("欢迎来到 anywork 微信公众号~");
+                article.setPicUrl(userInfo.get("headimgurl")); //图文消息图片地址,获取用户头像
                 article.setTitle("尊敬的："+userInfo.get("nickname")+",你好！");  //图文消息标题
                 article.setUrl("http://www.baidu.com");  //图文url链接
                 List<Article> list=new ArrayList<Article>();
@@ -79,10 +80,12 @@ public class EventDispatcher {
         if (map.get("Event").equals(MessageUtil.EVENT_TYPE_CLICK)){
             System.out.println("====这是自定义菜单事件！====");
             String eventKey = map.get("EventKey");
+            Article article = new Article();
+
             if ("myInformation".equals(eventKey)){
-                Article article = new Article();
+                //获取修改个人信息图文
                 article.setDescription("点击打开页面设置个人信息！");
-                article.setPicUrl("http://rdveq.free.natapp.cc/WetChat/image/zhang.jpg");
+                article.setPicUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")+"image/user.jpg");
                 article.setTitle("设置个人信息~");
                 article.setUrl("https://www.baidu.com");
                 List<Article> list=new ArrayList<Article>();
@@ -90,7 +93,20 @@ public class EventDispatcher {
                 newmsg.setArticleCount(list.size());
                 newmsg.setArticles(list);
                 return MessageUtil.newsMessageToXml(newmsg);
-            } else {
+
+            } else if ("myOrgan".equals(eventKey)){
+                //获取我的组织图文
+                article.setDescription("点击查看我已经加入的组织~");
+                article.setPicUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")+"image/user.jpg");
+                article.setTitle("查看我的组织");
+                article.setUrl("https://www.baidu.com");
+                List<Article> list=new ArrayList<Article>();
+                list.add(article);     //这里发送的是单图文
+                newmsg.setArticleCount(list.size());
+                newmsg.setArticles(list);
+                return MessageUtil.newsMessageToXml(newmsg);
+
+            }  else {
                 //处理其他信息，返回text文本
                 TextMessage textmsg = new TextMessage();
                 textmsg.setToUserName(openid);

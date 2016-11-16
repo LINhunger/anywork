@@ -7,7 +7,7 @@ import com.test.web.util.GlobalConstants;
 
 /**
  * 获得微信推送的图文的media_id
- * Created by zggdczfr on 2016/11/3.
+ * Created by zggdczfr on 2016/11/7.
  */
 public class GetNews {
 

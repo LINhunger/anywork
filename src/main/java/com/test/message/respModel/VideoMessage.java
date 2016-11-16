@@ -2,7 +2,7 @@ package com.test.message.respModel;
 
 /**
  * 视频消息
- * Created by zggdczfr on 2016/10/22.
+ * Created by zggdczfr on 2016/11/5.
  */
 public class VideoMessage extends BaseMessage {
 
