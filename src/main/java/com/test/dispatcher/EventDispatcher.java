@@ -87,7 +87,8 @@ public class EventDispatcher {
                 article.setDescription("点击打开页面设置个人信息！");
                 article.setPicUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")+"image/user.jpg");
                 article.setTitle("设置个人信息~");
-                article.setUrl("https://www.baidu.com");
+                article.setUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")
+                        +"src/html/wechat/bind.html?openid="+openid);
                 List<Article> list=new ArrayList<Article>();
                 list.add(article);     //这里发送的是单图文
                 newmsg.setArticleCount(list.size());
@@ -97,9 +98,10 @@ public class EventDispatcher {
             } else if ("myOrgan".equals(eventKey)){
                 //获取我的组织图文
                 article.setDescription("点击查看我已经加入的组织~");
-                article.setPicUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")+"image/user.jpg");
+                article.setPicUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")+"image/organ.jpg");
                 article.setTitle("查看我的组织");
-                article.setUrl("https://www.baidu.com");
+                article.setUrl(GlobalConstants.interfaceUrlProperties.get("servlet_url")
+                        +"src/html/wechat/search.html?openid="+openid);
                 List<Article> list=new ArrayList<Article>();
                 list.add(article);     //这里发送的是单图文
                 newmsg.setArticleCount(list.size());

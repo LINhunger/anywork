@@ -14,5 +14,8 @@ public enum AuthorityType {
     NoValidate,
 
     // 只判断登录，不验证权限
-    NoAuthority;
+    NoAuthority,
+
+    //判断是否管理员
+    Admin
 }

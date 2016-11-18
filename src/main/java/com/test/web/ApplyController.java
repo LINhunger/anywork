@@ -48,11 +48,22 @@ public class ApplyController {
 
     @RequestMapping("/send")
     @ResponseBody
-    public RequestResult<String> sendApply(Apply apply, HttpServletRequest request){
+    public RequestResult<String> sendApply(@RequestBody  Apply apply, HttpServletRequest request){
         HttpSession session = request.getSession();
         apply.setStatus(0);
         apply.setSender((User)session.getAttribute("user"));
 
+        //hunger修改部分
+        List<Apply>applies = applyService.selectAllByOrganId(apply.getOrganId());
+        for(Apply a:applies) {
+            if (a.getSender().getUserId()==((User) session.getAttribute("user")).getUserId()
+                    &&a.getStatus()==0) {
+                return new RequestResult<String>(StatEnum.APPLY_ALREADY_EXIST);
+            }
+        }
+        if (null!=relationService.selectRoleByRelatio(((User) session.getAttribute("user")).getUserId(),apply.getOrganId())){
+            return new RequestResult<String>(StatEnum.APPLY_IS_PASS);
+        }
         if (1 != applyService.insertApply(apply)){
             //发送申请不成功
             return new RequestResult<String>(StatEnum.APPLY_SEND_FAIL);
@@ -72,8 +83,8 @@ public class ApplyController {
     public RequestResult<String> updateApply(@RequestBody Map map,
                                              HttpServletRequest request){
         Apply apply = new Apply();
-        apply.setStatus((Integer) map.get("status"));
-        apply.setApplyId((Integer) map.get("organId"));
+            apply.setStatus((Integer) map.get("status"));
+            apply.setApplyId((Integer) map.get("organId"));
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         int organId = (Integer)session.getAttribute("organId");

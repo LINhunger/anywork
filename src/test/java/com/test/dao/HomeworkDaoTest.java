@@ -34,7 +34,10 @@ public class HomeworkDaoTest {
         homework.setOrganId(1);
         homework.setSubmitCount(1);
         homework.setStatus("466400960@qq.com&");
+
         System.out.println(homeworkDao.insertHomework(homework));
+        System.out.println(homework.getHomeworkId());
+
     }
 
     @Test

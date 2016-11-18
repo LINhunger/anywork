@@ -127,6 +127,13 @@ public enum StatEnum {
      */
     PREVIEW_SUCCESS(311,"预览成功"),
 
+    /**
+     * 补充
+     */
+    APPLY_ALREADY_EXIST(153,"申请已经发送，请等待管理员验证"),
+    APPLY_IS_PASS(153,"您已是组织成员"),
+    NO_PERMISSION(153,"只有管理员和群主才具有该权限"),
+
 
 
     /**
@@ -188,8 +195,6 @@ public enum StatEnum {
     ORGAN_ID_ERROR(185, "组织id格式错误"),
 
     ALL(999,"test");
-
-
 
     private  int state;
     private  String stateInfo;

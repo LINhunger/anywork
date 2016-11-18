@@ -5,17 +5,23 @@ import com.test.aop.AuthorityType;
 import com.test.dto.RequestResult;
 import com.test.enums.StatEnum;
 import com.test.model.*;
+import com.test.service.RelationService;
 import com.test.service.TimelineService;
 import com.test.service.UserService;
 import com.test.util.Markdown;
+import com.test.util.MassTextUtil;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,6 +29,7 @@ import java.util.Set;
  * Created by hunger on 2016/11/9.
  */
 @Controller
+@Authority(AuthorityType.NoAuthority)
 @RequestMapping("/timeline")
 public class TimelineController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,6 +37,8 @@ public class TimelineController {
     private UserService userService;
     @Autowired
     private TimelineService timelineService;
+    @Autowired
+    private  RelationService relationService;
 
     /**
      * 显示时间轴
@@ -37,7 +46,6 @@ public class TimelineController {
      * @param organId 组织id
      * @return dto对象
      */
-    @Authority(AuthorityType.NoAuthority)
     @RequestMapping(value = "/{time}/timeline/{organId}",method = RequestMethod.GET)
     @ResponseBody
     public RequestResult<Map> showTimeline(HttpServletRequest request,
@@ -61,16 +69,18 @@ public class TimelineController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/homework/{homeworkId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/homework/{homeworkId}/{authorId}",method = RequestMethod.GET)
     @ResponseBody
     public RequestResult<Map> showHomework(HttpServletRequest request,
-                                         @PathVariable("homeworkId")int homeworkId) {
+                                         @PathVariable("homeworkId")Integer homeworkId,
+                                           @PathVariable("authorId")Integer authorId) {
         try {
             User user = (User) request.getSession().getAttribute("user");
-            RequestResult<Map> result = timelineService.showHomework(homeworkId,user.getUserId());
+            RequestResult<Map> result = timelineService.showHomework(homeworkId,user.getUserId(),authorId);
             return  result;
         }catch (Exception e) {
             logger.warn("default exception.\t");
+            e.printStackTrace();
             return  new RequestResult<Map>(StatEnum.DEFAULT_WRONG);
         }
     }
@@ -211,11 +221,22 @@ public class TimelineController {
                                            @RequestBody Homework homework) {
         try {
             User user = (User) request.getSession().getAttribute("user");
+            Integer organId = (Integer) request.getSession().getAttribute("organId");
             homework.setAuthor(user);
+            homework.setStatus("");
+            Integer role = relationService.selectRoleByRelatio(user.getUserId(), organId);
+            //权限TODO
+            if (role!=null&& role != 1 && role !=2){
+                return new RequestResult<String>(StatEnum.NO_PERMISSION);
+            }
             RequestResult<?> result = timelineService.releaseHomework(homework);
+            //获取openid集合
+            List<String> openidList = relationService.selectOpenidByOrganId(organId);
+            MassTextUtil.wetchatSend(openidList,1,(Integer) result.getData(),user.getUserName());
             return  result;
         } catch (Exception e) {
             logger.warn("default exception.\t");
+            e.printStackTrace();
             return new RequestResult<Object>(StatEnum.DEFAULT_WRONG);
         }
     }
@@ -232,8 +253,17 @@ public class TimelineController {
                                          @RequestBody Inform inform) {
         try {
             User user = (User) request.getSession().getAttribute("user");
+            Integer organId = (Integer) request.getSession().getAttribute("organId");
             inform.setAuthor(user);
+            Integer role = relationService.selectRoleByRelatio(user.getUserId(), organId);
+            //权限TODO
+            if (role!=null&& role != 1 && role !=2){
+                return new RequestResult<String>(StatEnum.NO_PERMISSION);
+            }
             RequestResult<?> result = timelineService.releaseInform(inform);
+            //获取openid集合
+            List<String> openidList = relationService.selectOpenidByOrganId(organId);
+            MassTextUtil.wetchatSend(openidList,0,(Integer) result.getData(),user.getUserName());
             return  result;
         } catch (Exception e) {
             logger.warn("default exception.\t");
@@ -267,8 +297,7 @@ public class TimelineController {
      * @param map markdown格式文本
      * @return
      */
-    @RequestMapping(value = "/priview",method = RequestMethod.POST
-    )
+    @RequestMapping(value = "/priview",method = RequestMethod.POST)
     @ResponseBody
     public RequestResult<String> priview(@RequestBody Map map) {
         String text = (String) map.get("text");
@@ -281,6 +310,42 @@ public class TimelineController {
             return new RequestResult<String>(StatEnum.DEFAULT_WRONG);
         }
     }
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @ResponseBody
+    public RequestResult<?> updateSelfPortait(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
+        try {
+            if (!file.isEmpty()) {
+                logger.info("Process file:{}", file.getOriginalFilename());
+                FileUtils.copyInputStreamToFile(file.getInputStream(),
+                        new File(request.getServletContext().getRealPath("/upload")
+                                ,   file.getOriginalFilename()));
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new RequestResult<Object>(StatEnum.PORTAIT_UPLOAD_SUCCESS);
+    }
 
+    /**
+     * 多文件上传
+     * @param files
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/resource",method = RequestMethod.POST)
+    @ResponseBody
+    public RequestResult<?> updateResources(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+
+        //判断file数组不能为空并且长度大于0
+        if(files!=null&&files.length>0){
+            //循环获取file数组中得文件
+            for(int i = 0;i<files.length;i++){
+                MultipartFile file = files[i];
+                //保存文件
+//                saveFile(file);
+            }
+        }
+        return null;
+    }
 }

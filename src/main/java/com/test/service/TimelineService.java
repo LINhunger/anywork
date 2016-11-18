@@ -35,7 +35,7 @@ public class TimelineService {
     @Autowired
     private GradeDao gradeDao;
     @Autowired
-    private CommentDao commentDao;
+    private CommentService commentService;
 
 
 
@@ -112,7 +112,7 @@ public class TimelineService {
      * @param userId     用户id
      * @return dto对象
      */
-    public RequestResult<Map> showHomework(int homeworkId, int userId) {
+    public RequestResult<Map> showHomework(int homeworkId, int userId,int authorId) {
         //获取作业对象
         Homework homework = homeworkDao.selectOneById(homeworkId);
         //获取我的答案
@@ -122,15 +122,15 @@ public class TimelineService {
         for(HAnswer answer:allAnswers) {
             //如果已经评分，则显分数
             if(gradeDao.selectOneById(answer.gethAnswerId(),userId)!=null){
-                answer.setStatus(1);
+                answer.setStatus(gradeDao.selectOneById(answer.gethAnswerId(),userId).getGrade());
             }
             //查找自己的答案
-            if(userId==answer.getAuthor().getUserId()){
+            if(authorId==answer.getAuthor().getUserId()){
                 myAnswer=answer;
             }
         }
         //获取前端评论集合
-        List<Comment> comments = commentDao.selectCommentByAll(0,homeworkId);
+        List<Comment> comments = commentService.getAllComment(1,homeworkId);
         Map content = new HashMap();
         content.put("homework",homework);
         content.put("myAnswer",myAnswer);
@@ -163,7 +163,7 @@ public class TimelineService {
         //获取全部请求的回答
         List<QAnswer> allAnswers = qAnswerDao.selectAllByQuestId(questId);
         //获取评论集合
-        List<Comment> comments = commentDao.selectCommentByAll(1,questId);
+        List<Comment> comments = commentService.getAllComment(1,questId);
         Map content = new HashMap();
         content.put("question",question);
         content.put("myAnswer",myAnswer);
@@ -276,7 +276,8 @@ public class TimelineService {
     public RequestResult<?> releaseHomework(Homework homework) {
 
         homeworkDao.insertHomework(homework);
-        return new RequestResult<Object>(StatEnum.RELEASE_HOMEWORK_SUCCESS);
+        Integer homeworkId  =homework.getHomeworkId();
+        return new RequestResult<Object>(StatEnum.RELEASE_HOMEWORK_SUCCESS,homeworkId);
     }
 
     /**
@@ -286,7 +287,8 @@ public class TimelineService {
      */
     public RequestResult<?> releaseInform(Inform inform) {
         informDao.insertInform(inform);
-        return new RequestResult<Object>(StatEnum.RELEASE_INFORM_SUCCESS);
+        Integer informId = inform.getInformId();
+        return new RequestResult<Object>(StatEnum.RELEASE_INFORM_SUCCESS,informId);
     }
 
     /**

@@ -39,7 +39,9 @@
             <mvc:mapping path="/**" />
             <mvc:exclude-mapping path="/src/**"/>
             <mvc:exclude-mapping path="/photo/**"/>
+            <mvc:exclude-mapping path="/image/**"/>
             <mvc:exclude-mapping path="/picture/**"/>
+            <mvc:exclude-mapping path="/upload/**"/>
             <mvc:exclude-mapping path="/errorpage/**"/>
             <bean class="com.test.aop.AuthorityAnnotationInterceptor" />
         </mvc:interceptor>

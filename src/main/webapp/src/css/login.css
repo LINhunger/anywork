@@ -173,7 +173,7 @@ body{
 #form .barkcode-img{
     display: inline-block;
     position: relative;
-    top: 8px;
+    top: 1px;
     margin: -8px 0 -9px 0;
     width: 101px;
     height: 29px;

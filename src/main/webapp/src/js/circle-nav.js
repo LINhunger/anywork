@@ -2,10 +2,10 @@ window.onload=function(){
 
     var svg = document.getElementById('menu'),
         menu_wrapper = document.getElementById('menu-wrapper'),
-        items = svg.querySelectorAll('.item'), 
-        trigger = document.getElementById('trigger'), 
-        label = trigger.querySelectorAll('#label')[0], 
-        open = true, 
+        items = svg.querySelectorAll('.item'),
+        trigger = document.getElementById('trigger'),
+        label = trigger.querySelectorAll('#label')[0],
+        open = true,
         angle = 47;
 
     (function(){
@@ -30,7 +30,7 @@ window.onload=function(){
     })();
 
     trigger.addEventListener('click', toggleMenu, false);
-     
+
     function toggleMenu(event) {
         $(items).show()
         if (!event)
@@ -85,7 +85,7 @@ window.onload=function(){
             width: "550px",
             height: "550px",
             left: "33%"
-        },2000);
+        },1500);
     };
 
     function closeMenu(){
@@ -115,7 +115,7 @@ window.onload=function(){
             width: "200px",
             height: "200px",
             left: "50px"
-        },2000);
+        },1500);
         var tg = e.target;
         if(tg.nodeName.toUpperCase()!='A'){
             tg = $(tg).parent();
@@ -129,7 +129,7 @@ window.onload=function(){
             return false;
         }
         if(tg.attr('id')==='item-3'){
-           frame.$data.frame = 'search';
+            frame.$data.frame = 'search';
             return false;
         }
         if(tg.attr('id')==='item-4'){

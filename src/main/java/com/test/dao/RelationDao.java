@@ -68,7 +68,7 @@ public interface RelationDao {
      * @param organId 组织id
      * @return 负责人为1，管理员为2，普通成员为3，失败为0
      */
-    int selectRoleByRelation(@Param("userId") int userId, @Param("organId") int organId);
+    Integer selectRoleByRelation(@Param("userId") int userId, @Param("organId") int organId);
 
     /**
      * 根据openid来查找组织对象列表

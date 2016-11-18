@@ -1,5 +1,7 @@
 package com.test.web;
 
+import com.test.aop.Authority;
+import com.test.aop.AuthorityType;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,11 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 /**
- * Created by zggdczfr on 2016/10/21.
+ * 与微信端服务器对接
+ * Created by zggdczfr on 2016/11/8.
  */
 @Controller
+@Authority(AuthorityType.NoValidate)
 @RequestMapping(value = "/wechat")
 public class SecurityController {
 
@@ -31,9 +35,19 @@ public class SecurityController {
     @RequestMapping("test")
     public String test(){
         System.out.println("test");
-        return "/index.jsp";
+        return "/index";
     }
 
+    /**
+     * 与微信服务器进行身份对接验证
+     * @param request
+     * @param response
+     * @param signature
+     * @param timestamp
+     * @param nonce
+     * @param echostr
+     * @throws IOException
+     */
     @RequestMapping(value = "security", method = RequestMethod.GET)
     public void WetChat(HttpServletRequest request,
                         HttpServletResponse response,
@@ -42,25 +56,30 @@ public class SecurityController {
                         @RequestParam(value = "nonce", required = true) String nonce,
                         @RequestParam(value = "echostr", required = true) String echostr) throws IOException {
         try {
+            System.out.println("微信链接");
             // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
             if (SignUtil.checkSignature(signature, timestamp, nonce)) {
                 PrintWriter out = response.getWriter();
                 out.print(echostr);
+                System.out.println(echostr);
                 out.close();
             }
         } catch (Exception e){
-            LOGGER.log(Level.ERROR, "连接微信公众号平台测试失败！");
+            LOGGER.log(Level.DEBUG, "连接微信公众号平台测试失败！");
+            LOGGER.log(Level.ERROR, "错误提示：{0}", e.getMessage());
         }
-        System.out.println("连接微信公众号平台测试成功！");
+        LOGGER.log(Level.DEBUG, "连接微信公众号平台测试成功！");
     }
 
+    /**
+     * 与微信端服务器进行信息交互
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "security", method = RequestMethod.POST)
     public void getMessage(HttpServletRequest request, HttpServletResponse response){
         try {
             Map<String, String> map = MessageUtil.parseXml(request);
-
-            System.out.println(map);
-
 
             String msgType = map.get("MsgType");
             String respXml;
@@ -76,9 +95,9 @@ public class SecurityController {
             out.print(respXml);
             out.close();
         } catch (DocumentException e) {
-            LOGGER.log(Level.ERROR, "错误提示：{0}", e.getMessage());
+            LOGGER.log(Level.ERROR, "微信服务器交互，错误提示：{0}", e.getMessage());
         } catch (IOException e) {
-            LOGGER.log(Level.ERROR, "错误提示：{0}", e.getMessage());
+            LOGGER.log(Level.ERROR, "微信服务器交互，错误提示：{0}", e.getMessage());
         }
     }
 }

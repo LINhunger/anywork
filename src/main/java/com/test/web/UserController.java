@@ -23,6 +23,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -45,6 +46,7 @@ public class UserController {
      * @param request 请求对象
      * @return dto对象
      */
+
     @RequestMapping(value = "/verification",method = RequestMethod.POST)
     @ResponseBody
     public RequestResult<String> send(@RequestBody Map map,HttpServletRequest request) {
@@ -201,30 +203,65 @@ public class UserController {
 
     /**
      * 修改用户信息
+     * @param file 图片
+     * @param x 图像截取
+     * @param y 图像截取
+     * @param width 图像截取
+     * @param height 图像截取
+     * @param userName 昵称
+     * @param phone 电话
      * @param request 请求对象
-     * @param user 用户对象
-     * @return dto对象
+     * @param response 回复对象
+     * @return
      */
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @Authority(AuthorityType.NoAuthority)
+    @RequestMapping(value = "/update")
     @ResponseBody
-    public RequestResult<User> updateUser(HttpServletRequest request,HttpServletResponse response,
-                                                        @RequestBody  User user){
+    public RequestResult<User> updateUser(@RequestParam(value = "file", required = false) MultipartFile file,
+                                          @RequestParam(value = "x", required = false) String x,
+                                          @RequestParam(value = "y", required = false) String y,
+                                          @RequestParam(value = "width", required = false) String width,
+                                          @RequestParam(value = "height", required = false) String height,
+                                          @RequestParam(value = "userName", required = false) String userName,
+                                          @RequestParam(value = "phone", required = false) String phone,
+                                            HttpServletRequest request,HttpServletResponse response
+                                                        ){
         try {
-            //虽然感觉没什么用
-            user.setUserId(((User)request.getSession().getAttribute("user")).getUserId());
+            User user = (User)request.getSession().getAttribute("user");
+            user.setUserName(userName);
+            user.setPhone(phone);
             RequestResult<User> result = userService.updateUser(user);
             //更新session中的数据
             request.getSession().setAttribute("user",result.getData());
             setCookie(response,result.getData());
-            return  result;
+            //TODO
+
+            //更改图片名，保证唯一
+            String photoName = user.getUserId() + ".jpg";
+            String photoPath = request.getServletContext().getRealPath("/picture/temp")+"/"+photoName;
+            String newPath =  request.getServletContext().getRealPath("/picture")+"/"+photoName;
+            if (file!=null&&!file.isEmpty()) {
+                //获取四个焦点坐标
+                Integer t_x = Integer.parseInt(x);
+                Integer t_y = Integer.parseInt(y);
+                Integer t_width = Integer.parseInt(width);
+                Integer t_height = Integer.parseInt(height);
+                FileUtils.copyInputStreamToFile(file.getInputStream(),
+                        new File(request.getServletContext().getRealPath("/picture/temp")
+                                ,  photoName));
+                ImageUtil.cutImage(photoPath,newPath,t_x,t_y,t_width,t_height);
+                return result;
+            }else {
+                return result;
+            }
         }catch (InformationEmptyUser e){
-            logger.warn("empty user.\t"+user.getEmail());
+            logger.warn("empty user.\t");
             return  new RequestResult<User>(StatEnum.INFORMATION_EMPTY_USER,null);
         }catch (InformationFormatterFault e){
-            logger.warn("wrong formatter.\t"+user.getEmail());
+            logger.warn("wrong formatter.\t");
             return  new RequestResult<User>(StatEnum.INFORMATION_FORMMATTER_FAULT,null);
         }catch (Exception e) {
-            logger.warn("default exception.\t"+user.getEmail());
+            logger.warn("default exception.\t");
             return  new RequestResult<User>(StatEnum.DEFAULT_WRONG,null);
         }
     }
@@ -234,6 +271,7 @@ public class UserController {
      * @param request 请求对象
      * @return dto对象
      */
+    @Authority(AuthorityType.NoAuthority)
     @RequestMapping(value = "/info",method = RequestMethod.GET)
     @ResponseBody
     public RequestResult<User> showUserInfo(HttpServletRequest request) {
@@ -254,6 +292,7 @@ public class UserController {
      * @param request 请求对象
      * @return dto对象
      */
+    @Authority(AuthorityType.NoAuthority)
     @RequestMapping(value = "/portait",method = RequestMethod.POST)
     @ResponseBody
     public RequestResult<?> updateSelfPortait(
@@ -298,6 +337,7 @@ public class UserController {
      * @param request
      * @return
      */
+    @Authority(AuthorityType.NoAuthority)
     @RequestMapping(value = "/signout",method = RequestMethod.GET)
     @ResponseBody
     public RequestResult<?> signOut(HttpServletRequest request,HttpServletResponse response) {

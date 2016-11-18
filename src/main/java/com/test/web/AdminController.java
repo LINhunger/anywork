@@ -1,5 +1,7 @@
 package com.test.web;
 
+import com.test.aop.Authority;
+import com.test.aop.AuthorityType;
 import com.test.model.Apply;
 import com.test.model.Relation;
 import com.test.model.User;
@@ -24,6 +26,7 @@ import java.util.List;
  * Created by hunger on 2016/11/15.
  */
 @Controller
+@Authority(AuthorityType.Admin)
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -40,13 +43,13 @@ public class AdminController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/{organId}/list",method = RequestMethod.GET)
-    public String applyList(@PathVariable("organId") Integer organId, Model model, HttpServletRequest request){
-        request.getSession().setAttribute("organId",organId);
-        List<Apply> applys = applyService.selectAllByOrganId(organId);
-        model.addAttribute("applys",applys);
-        logger.info("list  invoke:");
-        return  "list";
+        @RequestMapping(value = "/{organId}/list",method = RequestMethod.GET)
+        public String applyList(@PathVariable("organId") Integer organId, Model model, HttpServletRequest request){
+            request.getSession().setAttribute("organId",organId);
+            List<Apply> applys = applyService.selectAllByOrganId(organId);
+            model.addAttribute("applys",applys);
+            logger.info("list  invoke:");
+            return  "list";
     }
 
 

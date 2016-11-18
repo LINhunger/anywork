@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>news</title>
+<style>
+	p{
+		margin: 0;
+	}
+		#info{
+			position: relative;
+		    font-size: 44px;
+    		width: 96%;
+    		margin: auto;
+		}
+		#info .type{
+		    text-align: center;
+		    font-size: 100px;
+		    font-weight: bold;
+        	margin: 200px 0 213px;
+    		border: 1px solid black;
+		}
+		#info .title{
+		    font-size: 70px;
+		    font-weight: bold;
+		    padding-left: 9%;
+		    margin-bottom: -112px;
+		}
+		#info .author,#info .time{
+		    font-size: 37px;
+		    width: 34%;
+		    position: relative;
+		    left: 66%;
+		    margin: 7px;
+		}
+		#info .mark{
+		    font-size: 47px;
+		    text-indent: 62px;
+		    width: 98%;
+		    margin: auto;
+		    margin-top: 61px;
+		}
+	</style>
+</head>
+<body>
+	<div id="info">
+	<!--	<component :is="type" :item="info"></component>-->
+		<div class="inform">
+			<p class="type">公告</p>
+			<p class="title">分地方郭德纲</p>
+			<p class="author">作者:大概</p>
+			<p class="time">发布时间:89</p>
+			<p class="mark">大方公开的结果看了发几个</p>
+		</div>
+	</div>
+</body>
+<script src="../../js/util.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery-3.1.0.js"></script>
+<script>
+/*
+	var URL_INFO = getUrlInformation();
+	var INFO = wetCharClick(URL_INFO.markId,URL_INFO.type);
+/!*var INFO ={
+	mark: '<h1><a href="#作业" name="作业">作业</a></h1> <p><strong>测试</strong></p>',
+	homeworkTitle: '作业',
+	name:'homework',
+	createTime:1479459642905
+}*!/
+	var inform = {
+		template: 
+			`<div class="inform">
+				<p class="type">公告</p>
+				<p class="title">{{item.informTitle}}</p>
+				<p class="author">作者:{{item.author.userName}}</p>
+				<p class="time">发布时间:{{createTime}}</p>
+				<p class="mark">{{item.mark}}</p>
+			</div>`,
+		props: ['item'],
+		computed: {
+			createTime: function(){
+				return formatTime(this.item.createTime,"md")
+			}
+		}
+	}
+
+	var homework = {
+		template: 
+			`<div class="homework">
+				<p class="type">作业</p>
+				<p class="title">{{item.homeworkTitle}}</p>
+				<p class="time">发布时间:{{createTime}}</p>
+				<p class="time">截止时间:{{endingTime}}</p>
+				<p class="mark"  v-html="item.mark"></p>
+			</div>`,
+		props: ['item'],
+		computed: {
+			createTime: function(){
+				return formatTime(this.item.createTime,"md")
+			},
+			endingTime: function(){
+				return formatTime(this.item.endingTime,"md")
+			},
+		}
+	}
+
+	var info = new Vue({
+		el: "#info",
+		data: {
+			info : INFO,
+		},
+		components: {
+			inform: inform,
+			homework: homework,
+		},
+		computed:{
+			type: function(){
+				return INFO.name;
+			}
+		}
+	})*/
+</script>
+</html>

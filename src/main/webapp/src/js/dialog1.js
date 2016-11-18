@@ -1,10 +1,10 @@
 	Vue.component('myDialog',
 		{
-			template: `<div id="dialog" @click="stopP" v-bind:style="selfStyle">
+			template: `<div id="dialog" @click="stopP" v-bind:style="theStyle">
 							<div id="dialog-title" 
 							@mousedown="mousedown" 
 							>
-								<i @click="close">X</i>
+								<i @click="close">X</i>{{style}}
 							</div>
 							<div id="dialog-content">
 								<slot></slot>
@@ -14,7 +14,7 @@
 			props:['style'],
 			data: function(){
 				return {
-					selfStyle: this.style,
+					theStyle : this.style,
 					dialogInstace: {
 						couldMove: false,
 						dragElement: null,
@@ -38,7 +38,7 @@
 					this.dialogInstace.moveElement = document.querySelector('#dialog');
 					this.dialogInstace.mouseOffsetLeft = e.pageX - this.dialogInstace.moveElement.offsetLeft 
 					+ document.documentElement.clientWidth / 2 ;  //为了适应动画
-					this.dialogInstace.mouseOffsetTop  = e.pageY - this.dialogInstace.moveElement.offsetTop ;
+					this.dialogInstace.mouseOffsetTop  = e.pageY - this.dialogInstace.moveElement.offsetTop;
 				},
 				mouseup: function(e){
 					this.dialogInstace.couldMove = false;
@@ -66,23 +66,36 @@
 		data: {
 			show: false,
 			info: '',
-			style: {   //默认样式
-				width: '500px',
-				height: '250px',
-			},
+			top: 0,
 		},
 		methods:{
 			close: function(){
 				this.show = false;
 			}
-		} 
+		},
+		computed: {
+			style: function(){
+				var scrollHeight = $(window).scrollTop();
+				var o = {   //默认样式
+					width: '500px',
+					height: '250px',
+					top: (this.top+200)+"px",
+				}
+				return o;
+			}
+		}
 	})
-	
+	$(window).scroll(function(){
+		var scrollHeight = $(window).scrollTop();
+		_al.top = scrollHeight;
+	})
+
+
 	function my_alert(str){
 		_al.show = true,
 		_al.info=str;
-		if(arguments[1]) _al.$data.style.width =  arguments[1]+"px";
-		if(arguments[2]) _al.$data.style.height = arguments[2]+"px";
+		if(arguments[1]) _al.style.width =  arguments[1]+"px";
+		if(arguments[2]) _al.style.height = arguments[2]+"px";
 		
 	}
 	/**
@@ -91,4 +104,6 @@
 	 * 	width: int [可选]
 	 * 	heigth: int [可选]
 	 */
-	//my_alert('ddd',300,200) 
+
+
+

@@ -56,6 +56,6 @@ public class CommentServiceImpl implements CommentService{
             commentList.get(i).setRecomments(realReCom);
         }
 
-        return null;
+        return commentList;
     }
 }

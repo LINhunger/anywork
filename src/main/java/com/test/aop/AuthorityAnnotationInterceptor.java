@@ -4,6 +4,7 @@ import com.test.dao.RelationDao;
 import com.test.exception.user.UserException;
 import com.test.model.Relation;
 import com.test.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.SourceExtractor;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,6 +23,7 @@ public class AuthorityAnnotationInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOGGER = Logger.getLogger(AuthorityAnnotationInterceptor.class);
 
+    @Autowired
     private RelationDao relationDao;
 
     @Override
@@ -55,6 +57,20 @@ public class AuthorityAnnotationInterceptor extends HandlerInterceptorAdapter {
                                 throw new UserException("用户还未登录");
                             }
                             return true;
+                        } else if (AuthorityType.Admin == authority.value()){
+                            // 验证是否是管理员
+                            User user = (User) request.getSession().getAttribute("user");
+                            if (null == user){
+                                throw new UserException("用户还未登录");
+                            }
+                            Integer organId = (Integer) request.getSession().getAttribute("organId");
+                            Integer role = relationDao.selectRoleByRelation(user.getUserId(), organId);
+                            if(role==1||role==2){
+                                request.getSession().setAttribute("role",role);
+                                return true;
+                            }else {
+                                throw new UserException("没有权限！");
+                            }
                         } else {
 /*                            System.out.println("===执行验证！！！===");
                             // 验证登录及权限

@@ -66,8 +66,8 @@
     </insert>
 
     <select id="selectCommentByAll" resultMap="CommentResultMap">
-        SELECT *, u.createTime userTime FROM comment c, user u
-        WHERE c.targetId = #{targetId} AND c.type = #{type}
+       SELECT *, u.createTime userTime FROM comment c, user u
+        WHERE c.targetId = #{targetId} AND c.type = #{type} AND u.userId=c.senderId ORDER BY c.createTime DESC
     </select>
 
     <select id="selectRecommentBy" resultMap="RecommentResultMap">
@@ -90,7 +90,8 @@
         b.createTime AS r_createTime
         FROM comment c, user a, user b
         WHERE c.targetId = #{targetId} AND c.type = #{type}
-        AND a.userId=c.senderId AND b.userId=c.receiverId;
+        AND a.userId=c.senderId AND b.userId=c.receiverId
+        ORDER  BY c.createTime
     </select>
 
 

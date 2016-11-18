@@ -27,6 +27,6 @@ public class OrganServiceImpl implements OrganService {
     }
 
     public List<Organization> selectOneByName(@Param("organName") String organName) {
-        return organDao.selectOneByName(organName);
+        return organDao.selectOneByName("%"+organName+"%");
     }
 }

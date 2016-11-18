@@ -6,7 +6,8 @@
     <!--目的：为Dao接口方法提供SQL语句-->
 
     <!--插入作业对象-->
-    <insert id="insertHomework">
+    <insert id="insertHomework" useGeneratedKeys="true"
+            keyProperty="homework.homeworkId">
       INSERT  into homework(organId,homeworkTitle,mark,authorId,
       endingTime,status)
     VALUES (#{homework.organId},#{homework.homeworkTitle},

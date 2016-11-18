@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <meta content="3;url=/index.jsp" http-equiv="refresh">
+    <meta content="3;url=/anywork/src/html/login.html" http-equiv="refresh">
     <title>不存在的页面</title>
 
   

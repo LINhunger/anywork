@@ -6,6 +6,7 @@ import com.test.service.impl.RelationServiceImpl;
 import com.test.web.util.GlobalConstants;
 import net.sf.json.JSONArray;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,34 +23,36 @@ public class MassTextUtil {
      * err(20013), //涉嫌版权 err(22000), //涉嫌互推(互相宣传) err(21000), //涉嫌其他
      */
 
+
     /**
      * 微信图文群发工具
-     * @param organId 组织id
+     * @param openidList openidid集合
      * @param type 图文类型，公告为0，作业为1
      * @param objectId 对应markId
      * @param author 发布者
      * @return
      * @throws Exception
      */
-    public static String wetchatSend(int organId, int type, int objectId, String author) throws Exception{
-        RelationService relationService = new  RelationServiceImpl();
+    public static String wetchatSend(List<String> openidList, int type, int objectId, String author) throws Exception{
 
         //群发URL
         String url = GlobalConstants.getInterfaceUrl("SendByOpenidUrl")
                 + GlobalConstants.interfaceUrlProperties.get("access_token");
         //上传图文信息URL
         String newsUrl = GlobalConstants.getInterfaceUrl("newsUrl")
-                + GlobalConstants.interfaceUrlProperties.get("access_token");
+                + GlobalConstants.interfaceUrlProperties.get("access_token")+"&type=news";
 
 
-        String sendUrl = GlobalConstants.getInterfaceUrl("")+type+"/"+objectId;     //图文跳转链接
+        String sendUrl = GlobalConstants.getInterfaceUrl("servlet_url")
+                + "src/html/wechat/news.html?type=" +
+                +type+"&markId="+objectId;     //图文跳转链接
         String picture = null;      //图文封面
         String content = null;      //图文内容
         String title = null;        //图文标题
         String digest = null;       //图文描述
 
         //确定组织内微信用户
-        List<String> openidList = relationService.selectOpenidByOrganId(organId);
+//        List<String> openidList = relationService.selectOpenidByOrganId(organId);
         JSONArray openid = new JSONArray();
         openid.addAll(openidList);
 
@@ -85,7 +88,7 @@ public class MassTextUtil {
 
 
         //上传图文素材
-        String newsResponse = HttpUtils.sendPostBuffers(newsUrl, object.toJSONString());
+        String newsResponse = HttpUtils.sendPostBuffers(newsUrl, object.toString());
         String mediaid = net.sf.json.JSONObject.fromObject(newsResponse).getString("media_id");
         //将素材编号包装好
         JSONObject media_id = new JSONObject();

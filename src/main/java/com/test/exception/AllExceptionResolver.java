@@ -24,7 +24,7 @@ public class AllExceptionResolver implements HandlerExceptionResolver{
         LOGGER.log(Level.ERROR, "访问 {0} 发生错误, 错误信息: {1}", request.getRequestURI(), e.getMessage());
 
         //跳转到定制化的错误页面
-        ModelAndView view = new ModelAndView("/error.jsp");
+        ModelAndView view = new ModelAndView("error");
         view.addObject("myerror", "错误提示信息:"+e.getMessage());
         return view;
 

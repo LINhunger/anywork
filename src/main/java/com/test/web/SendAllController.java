@@ -9,7 +9,8 @@ import com.test.web.util.GlobalConstants;
 
 
 /**
- * Created by zggdczfr on 2016/11/1.
+ * 测试类
+ * Created by zggdczfr on 2016/11/12.
  */
 @Controller
 @RequestMapping(value = "/send")
@@ -30,7 +31,7 @@ public class SendAllController {
 
 
         JSONObject article = new JSONObject();
-        article.put("thumb_media_id", GlobalConstants.getInterfaceUrl("media_id"));
+        article.put("thumb_media_id", GlobalConstants.getInterfaceUrl("inform_id"));
         article.put("author", "fangrui");
         article.put("title", "群发图文接口测试~");
         article.put("content_source_url", "www.baidu.com");
@@ -64,6 +65,6 @@ public class SendAllController {
             System.out.println("群发消息请求错误！");
         }
 
-        return "/index.jsp";
+        return "/index";
     }
 }

@@ -5,6 +5,7 @@ import com.test.model.Organization;
 import com.test.model.Relation;
 import com.test.service.RelationService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ import java.util.List;
 @Service
 public class RelationServiceImpl implements RelationService {
 
-    @Resource
+    @Autowired
     private RelationDao relationDao;
 
     public void insertRelation(@Param("relation") Relation relation) { relationDao.insertRelation(relation);
@@ -50,7 +51,7 @@ public class RelationServiceImpl implements RelationService {
         return relationDao.updateRoleByRelation(relation);
     }
 
-    public int selectRoleByRelatio(@Param("userId") int userId, @Param("organId") int organId) {
+    public Integer selectRoleByRelatio(@Param("userId") int userId, @Param("organId") int organId) {
         return relationDao.selectRoleByRelation(userId, organId);
     }
 

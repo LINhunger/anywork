@@ -5,7 +5,8 @@
 <mapper namespace="com.test.dao.InformDao">
     <!--目的：为Dao接口方法提供SQL语句-->
     <!--插入公告对象-->
-    <insert id="insertInform">
+    <insert id="insertInform" useGeneratedKeys="true"
+            keyProperty="inform.informId">
         INSERT into inform(authorId,informTitle,mark,organId)
         VALUES(#{inform.author.userId},#{inform.informTitle},#{inform.mark},
         #{inform.organId})

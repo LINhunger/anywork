@@ -19,8 +19,8 @@
             <h1>成员列表页</h1>
         </div>
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="../${sessionScope.organId}/menbers">成员列表</a></li>
-            <li role="presentation"><a href="../${sessionScope.organId}/list">申请列表</a></li>
+            <li role="presentation"class="active"><a href="../${sessionScope.organId}/list">申请列表</a></li>
+            <li role="presentation"><a href="../${sessionScope.organId}/menbers">成员列表</a></li>
             <li role="presentation"><a href="#">更多</a></li>
         </ul>
         <div class="panel-body">
@@ -55,9 +55,9 @@
                         </c:choose>
                         </td>
                         <td><fmt:formatDate value="${relation.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-                        <c:if test="${relation.role!=1}">
+<%--                        <c:if test="${relation.role!=1 and sessionScope.role == 1}">
                             <td><a class="btn btn-info" href="../${relation.organId}/${relation.user.userId}/${relation.relationId}/${relation.role}/setting">link</a> </td>
-                        </c:if>
+                        </c:if>--%>
                     </tr>
                 </c:forEach>
                 </tbody>

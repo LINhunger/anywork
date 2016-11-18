@@ -1,4 +1,3 @@
-
 var options = {
 	template: `
 		<div id="options">

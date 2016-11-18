@@ -25,7 +25,7 @@ public interface CommentDao {
      * @param recomment
      * @return 成功为1，失败为0
      */
-    int insertRecomment(@Param("recomment")Recomment recomment);
+    int insertRecomment(@Param("recomment") Recomment recomment);
 
     /**
      * 根据类型和目标id,查找评论
@@ -33,13 +33,13 @@ public interface CommentDao {
      * @param targetId 作业或请求的id
      * @return 评论的集合
      */
-    List<Comment> selectCommentByAll(@Param("type")int type,@Param("targetId") int targetId);
+    List<Comment> selectCommentByAll(@Param("type") int type, @Param("targetId") int targetId);
 
     /**
      * 根据类型和目标id,查找评论
      * @param type 类型（作业或请求）
-     * @param commentId 评论id
+     * @param targetId 作业或请求的id
      * @return 回复集合
      */
-    List<Recomment> selectRecommentBy(@Param("type")int type,@Param("commentId") int commentId);
+    List<Recomment> selectRecommentBy(@Param("type") int type, @Param("targetId") int targetId);
 }

@@ -1,150 +1,150 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-	<meta charset="utf-8">
-	<title>HOMEPAGE</title>
+    <meta charset="utf-8">
+    <title>HOMEPAGE</title>
 </head>
 <link rel="stylesheet" type="text/css" href="../css/dialog1.css">
 <link rel="stylesheet" type="text/css" href="../css/homepage.css">
 <link rel="stylesheet" type="text/css" href="../css/jquery.Jcrop.css"/>
 <style type="text/css">
     .fade1-enter-active, .fade1-leave-active {
-      transition: opacity .5s
+        transition: opacity .5s
     }
     .fade1-enter, .fade1-leave-active {
-      opacity: 0
+        opacity: 0
     }
 </style>
 
 <body>
-	<!-- 提示框 -->
-	<div id="alert">
-		<transition name="fade">
-			<my-dialog v-on:close="close" :style="style" v-if="show">
-				<p v-html="info"></p>
-			</my-dialog>
-		</transition>
-	</div>
+<!-- 提示框 -->
+<div id="alert">
+    <transition name="fade">
+        <my-dialog v-on:close="close" :style="style" v-if="show">
+            <p v-html="info"></p>
+        </my-dialog>
+    </transition>
+</div>
 
-	<div class="menu-wrapper" id="menu-wrapper">
-        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="175"  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 45 600 148" id="menu" style="transform-origin: 50% 50% 0px; transform: translate3d(0px, 0px, 0px); touch-action: none; -webkit-user-select: none;">
-                    <style>
-                        #menu {
-                            display: block;
-                            margin: 0 auto;
-                            /*overflow: visible;*/ /* uncomment this if you are using bouncing animations*/
-                        }
+<div class="menu-wrapper" id="menu-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" width="400" height="175"  xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-20 45 600 148" id="menu" style="transform-origin: 50% 50% 0px; transform: translate3d(0px, 0px, 0px); touch-action: none; -webkit-user-select: none;">
+        <style>
+            #menu {
+                display: block;
+                margin: 0 auto;
+                /*overflow: visible;*/ /* uncomment this if you are using bouncing animations*/
+            }
 
-                        a { 
-                            cursor: pointer; /* SVG &lt;a&gt; elements don't get this by default, so you need to explicitly set it */
-                            outline: none;
-                        }
-                        
-                        /* You can change these default styles any way you want */
+            a {
+                cursor: pointer; /* SVG &lt;a&gt; elements don't get this by default, so you need to explicitly set it */
+                outline: none;
+            }
 
-                        .item .sector {
-                            transition: all .1s linear;
-                            fill: rgba(218, 231, 232, 0.11);
-                            stroke: #f8f8f8;
-                            stroke-width: 12px;
-                            stroke-linecap: square;
-                        }
-                        
-                        
-                        .item:hover .sector, .item:focus .sector {
-                            fill: #eee;
-                        }
+            /* You can change these default styles any way you want */
 
-                        .menu-trigger {
-                            pointer-events: auto; /* KEEP THIS to make sure it stays clickable even when SVG's pointer events is disabled */
-                            fill: rgba(33, 150, 243, 0.54);
-                        }
+            .item .sector {
+                transition: all .1s linear;
+                fill: rgba(218, 231, 232, 0.11);
+                stroke: #f8f8f8;
+                stroke-width: 12px;
+                stroke-linecap: square;
+            }
 
-                        .menu-trigger:hover, .menu-trigger:focus {
-                            cursor: pointer;
-                        }
-                        symbol {
-                            overflow: visible; /* KEEP THIS so that text will not get cut off it it is wider than the icon width */
-                        }
-                    </style>
 
-                    <g id="symbolsContainer">    
+            .item:hover .sector, .item:focus .sector {
+                fill: #eee;
+            }
 
-                        <symbol class="icon icon-user" id="icon-1" viewBox="0 0 20 28">
-                            <title>user</title>
-                            <path class="path1" d="M17.083 19.567c0 1.616-1.062 2.933-2.357 2.933h-9.452c-1.295 0-2.357-1.317-2.357-2.933 0-2.911 0.719-6.275 3.619-6.275 0.896 0.874 2.114 1.417 3.464 1.417s2.568-0.542 3.464-1.417c2.9 0 3.619 3.365 3.619 6.275zM14.25 9.75c0 2.346-1.904 4.25-4.25 4.25s-4.25-1.904-4.25-4.25 1.904-4.25 4.25-4.25 4.25 1.904 4.25 4.25z"></path>
-                        </symbol>
+            .menu-trigger {
+                pointer-events: auto; /* KEEP THIS to make sure it stays clickable even when SVG's pointer events is disabled */
+                fill: rgba(33, 150, 243, 0.54);
+            }
 
-                        <symbol class="icon icon-envelope" id="icon-2" viewBox="0 0 18 18">
-                            <title>envelope</title>
-                            <path class="path1" d="M14.688 4.125h-11.375c-0.449 0-0.813 0.364-0.813 0.813v8.125c0 0.449 0.364 0.813 0.813 0.813h11.375c0.449 0 0.813-0.364 0.813-0.813v-8.125c0-0.449-0.364-0.813-0.813-0.813zM13.565 5.75l-4.565 3.113-4.565-3.113h9.129zM13.875 11.844c0 0.224-0.182 0.406-0.406 0.406h-8.937c-0.225 0-0.406-0.182-0.406-0.406v-4.357l4.466 3.025c0.126 0.076 0.267 0.113 0.409 0.113s0.282-0.038 0.409-0.113l4.466-3.025v4.357z"></path>
-                        </symbol>
+            .menu-trigger:hover, .menu-trigger:focus {
+                cursor: pointer;
+            }
+            symbol {
+                overflow: visible; /* KEEP THIS so that text will not get cut off it it is wider than the icon width */
+            }
+        </style>
 
-                        <symbol class="icon icon-search" id="icon-3" viewBox="0 0 32 32">
-                           <title>search</title>
-                            <path class="path1" d="M5.633 23.758l5.236-4.453c0.541-0.487 1.12-0.711 1.588-0.689-1.236-1.448-1.983-3.326-1.983-5.379 0-4.578 3.711-8.289 8.289-8.289s8.289 3.711 8.289 8.289-3.711 8.289-8.289 8.289c-2.053 0-3.931-0.747-5.379-1.983 0.022 0.468-0.202 1.046-0.689 1.588l-4.453 5.236c-0.762 0.847-2.008 0.919-2.768 0.159s-0.688-2.005 0.159-2.768zM18.763 18.763c3.052 0 5.526-2.474 5.526-5.526s-2.474-5.526-5.526-5.526-5.526 2.474-5.526 5.526 2.474 5.526 5.526 5.526z"></path>
-                        </symbol>
+        <g id="symbolsContainer">
 
-                        <symbol class="icon icon-plus" id="icon-4" viewBox="0 0 18 18">
-                         <title>plus</title>
-                            <path class="path1" d="M9 3.25c-3.176 0-5.75 2.574-5.75 5.75s2.574 5.75 5.75 5.75 5.75-2.574 5.75-5.75-2.574-5.75-5.75-5.75zM9 13.312c-2.378 0-4.312-1.934-4.312-4.312s1.934-4.312 4.312-4.312 4.312 1.934 4.312 4.312-1.934 4.312-4.312 4.312z"></path>
-                            <path class="path2" d="M11.163 8.281h-1.445v-1.444c0-0.393-0.319-0.712-0.712-0.712h-0.014c-0.393 0-0.712 0.319-0.712 0.712v1.444h-1.444c-0.393 0-0.712 0.319-0.712 0.712v0.014c0 0.393 0.319 0.712 0.712 0.712h1.445v1.444c0 0.393 0.319 0.712 0.712 0.712h0.014c0.393 0 0.712-0.319 0.712-0.712v-1.445h1.445c0.393 0 0.712-0.319 0.712-0.712v-0.014c-0-0.393-0.319-0.712-0.712-0.712z"></path>
-                        </symbol>
+            <symbol class="icon icon-user" id="icon-1" viewBox="0 0 20 28">
+                <title>user</title>
+                <path class="path1" d="M17.083 19.567c0 1.616-1.062 2.933-2.357 2.933h-9.452c-1.295 0-2.357-1.317-2.357-2.933 0-2.911 0.719-6.275 3.619-6.275 0.896 0.874 2.114 1.417 3.464 1.417s2.568-0.542 3.464-1.417c2.9 0 3.619 3.365 3.619 6.275zM14.25 9.75c0 2.346-1.904 4.25-4.25 4.25s-4.25-1.904-4.25-4.25 1.904-4.25 4.25-4.25 4.25 1.904 4.25 4.25z"></path>
+            </symbol>
 
-                    </g>
+            <symbol class="icon icon-envelope" id="icon-2" viewBox="0 0 18 18">
+                <title>envelope</title>
+                <path class="path1" d="M14.688 4.125h-11.375c-0.449 0-0.813 0.364-0.813 0.813v8.125c0 0.449 0.364 0.813 0.813 0.813h11.375c0.449 0 0.813-0.364 0.813-0.813v-8.125c0-0.449-0.364-0.813-0.813-0.813zM13.565 5.75l-4.565 3.113-4.565-3.113h9.129zM13.875 11.844c0 0.224-0.182 0.406-0.406 0.406h-8.937c-0.225 0-0.406-0.182-0.406-0.406v-4.357l4.466 3.025c0.126 0.076 0.267 0.113 0.409 0.113s0.282-0.038 0.409-0.113l4.466-3.025v4.357z"></path>
+            </symbol>
 
-                    <g id="itemsContainer">        
-                        <a class="item" id="item-1" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(1,0,0,1,0,0)" data-svg-origin="250 250" style="">
-                             <!--   <image xlink:href="../images/myInfo.png" height="180px" width="180px" x="78" y="-515" style="transform: rotate(89deg)"/>-->
-                           <path class="sector" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" ></path>
-                            <use xlink:href="#icon-1" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use> 
-                        </a>
-                        <a class="item" id="item-2" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(0.68359,-0.72986,0.72986,0.68359,-103.36409368017672,261.56794266874107)" data-svg-origin="250 250" style="">
-                           <!--  <image xlink:href="../images/info.png" height="180px" width="180px" x="78" y="-515" style="transform: rotate(70deg)"/> -->
-                            <path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path>
-                           <use xlink:href="#icon-2" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use>
-                        </a>
-                        <a class="item" id="item-3" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(-0.0654,-0.99785,0.99785,-0.0654,16.886051497884864,515.8155131171866)" data-svg-origin="250 250" style=""><path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path><use xlink:href="#icon-3" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use></a>
-                        <a class="item" id="item-4" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(-0.77301,-0.63439,0.63439,-0.77301,284.65429229977286,601.8509343815956)" data-svg-origin="250 250" style=""><path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path><use xlink:href="#icon-4" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use></a>
-                    </g>
+            <symbol class="icon icon-search" id="icon-3" viewBox="0 0 32 32">
+                <title>search</title>
+                <path class="path1" d="M5.633 23.758l5.236-4.453c0.541-0.487 1.12-0.711 1.588-0.689-1.236-1.448-1.983-3.326-1.983-5.379 0-4.578 3.711-8.289 8.289-8.289s8.289 3.711 8.289 8.289-3.711 8.289-8.289 8.289c-2.053 0-3.931-0.747-5.379-1.983 0.022 0.468-0.202 1.046-0.689 1.588l-4.453 5.236c-0.762 0.847-2.008 0.919-2.768 0.159s-0.688-2.005 0.159-2.768zM18.763 18.763c3.052 0 5.526-2.474 5.526-5.526s-2.474-5.526-5.526-5.526-5.526 2.474-5.526 5.526 2.474 5.526 5.526 5.526z"></path>
+            </symbol>
 
-                     <g id="trigger" class="trigger menu-trigger" role="button">
-                        <circle cx="250" cy="250" r="75"></circle>
-                        <text id="label" text-anchor="middle" x="250" y="255" fill="#fff" font-size="1.5em">-</text>
-                    </g>
+            <symbol class="icon icon-plus" id="icon-4" viewBox="0 0 18 18">
+                <title>plus</title>
+                <path class="path1" d="M9 3.25c-3.176 0-5.75 2.574-5.75 5.75s2.574 5.75 5.75 5.75 5.75-2.574 5.75-5.75-2.574-5.75-5.75-5.75zM9 13.312c-2.378 0-4.312-1.934-4.312-4.312s1.934-4.312 4.312-4.312 4.312 1.934 4.312 4.312-1.934 4.312-4.312 4.312z"></path>
+                <path class="path2" d="M11.163 8.281h-1.445v-1.444c0-0.393-0.319-0.712-0.712-0.712h-0.014c-0.393 0-0.712 0.319-0.712 0.712v1.444h-1.444c-0.393 0-0.712 0.319-0.712 0.712v0.014c0 0.393 0.319 0.712 0.712 0.712h1.445v1.444c0 0.393 0.319 0.712 0.712 0.712h0.014c0.393 0 0.712-0.319 0.712-0.712v-1.445h1.445c0.393 0 0.712-0.319 0.712-0.712v-0.014c-0-0.393-0.319-0.712-0.712-0.712z"></path>
+            </symbol>
 
-        </svg>
+        </g>
+
+        <g id="itemsContainer">
+            <a class="item" id="item-1" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(1,0,0,1,0,0)" data-svg-origin="250 250" style="">
+                <!--   <image xlink:href="../images/myInfo.png" height="180px" width="180px" x="78" y="-515" style="transform: rotate(89deg)"/>-->
+                <path class="sector" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" ></path>
+                <use xlink:href="#icon-1" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use>
+            </a>
+            <a class="item" id="item-2" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(0.68359,-0.72986,0.72986,0.68359,-103.36409368017672,261.56794266874107)" data-svg-origin="250 250" style="">
+                <!--  <image xlink:href="../images/info.png" height="180px" width="180px" x="78" y="-515" style="transform: rotate(70deg)"/> -->
+                <path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path>
+                <use xlink:href="#icon-2" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use>
+            </a>
+            <a class="item" id="item-3" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(-0.0654,-0.99785,0.99785,-0.0654,16.886051497884864,515.8155131171866)" data-svg-origin="250 250" style=""><path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path><use xlink:href="#icon-3" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use></a>
+            <a class="item" id="item-4" role="link" tabindex="0" xlink:href=" " xlink:title=" " transform="matrix(-0.77301,-0.63439,0.63439,-0.77301,284.65429229977286,601.8509343815956)" data-svg-origin="250 250" style=""><path fill="none" stroke="#111" d="M370,250 l130,0 A250,250 0 0,0 443.2526133406842,91.40167895908863 l-100.49135893715578,82.47112694127392 A120,120 0 0,1 370,250" class="sector"></path><use xlink:href="#icon-4" width="69" height="69" x="400.0426330566406" y="149.46958923339844" transform="rotate(70.3125 434.5426330566406 183.96958923339844)"></use></a>
+        </g>
+
+        <g id="trigger" class="trigger menu-trigger" role="button">
+            <circle cx="250" cy="250" r="75"></circle>
+            <text id="label" text-anchor="middle" x="250" y="255" fill="#fff" font-size="1.5em">-</text>
+        </g>
+
+    </svg>
+</div>
+
+<div id="nav">
+    <my-nav :info="info"></my-nav>
+</div>
+
+<div id="frame">
+    <transition name="fade1">
+        <component :is="frame"></component>
+    </transition>
+</div>
+
+<div id="rotate">
+    <div id="center"><img src="/anywork/photo/default.jpg" alt="hange"></div>
+    <div id="square-one" class="run-1">
+        <div class="star run-1-a run-1-son" id="9"></div>
+        <div class="star run-1-b run-1-son" id="8"></div>
+        <div class="star run-1-c run-1-son" id="7"></div>
     </div>
-
-    <div id="nav">
-    	<my-nav></my-nav>
+    <div id="square-two" class="run-2">
+        <div class="star run-2-a run-2-son" id="6"></div>
+        <div class="star run-2-b run-2-son" id="5"></div>
+        <div class="star run-2-c run-2-son" id="4"></div>
     </div>
-
-	<div id="frame">
-        <transition name="fade1">
-		  <component :is="frame"></component>
-        </transition>
-	</div> 
-
-    <div id="rotate">
-        <div id="center"></div>
-        <div id="square-one" class="run-1">
-            <div class="star run-1-a run-1-son" id="9"></div>
-            <div class="star run-1-b run-1-son" id="8"></div>
-            <div class="star run-1-c run-1-son" id="7"></div>
-        </div>
-        <div id="square-two" class="run-2">
-            <div class="star run-2-a run-2-son" id="6"></div>
-            <div class="star run-2-b run-2-son" id="5"></div>
-            <div class="star run-2-c run-2-son" id="4"></div>
-        </div>
-        <div id="square-three" class="run-3">
-            <div class="star run-3-a run-3-son" id="3"></div>
-            <div class="star run-3-b run-3-son" id="2"></div>
-            <div class="star run-3-c run-3-son" id="1"></div>
-        </div>
+    <div id="square-three" class="run-3">
+        <div class="star run-3-a run-3-son" id="3"></div>
+        <div class="star run-3-b run-3-son" id="2"></div>
+        <div class="star run-3-c run-3-son" id="1"></div>
     </div>
-    
+</div>
+
 
 </body>
 <script src="../js/util.js"></script>
@@ -158,7 +158,7 @@
 <script src="../js/dialog1.js"></script>
 <script src="../js/homepage.js"></script>
 <script >
-	//my_alert('<h1 class="center">change</h1>')
+    //my_alert('<h1 class="center">change</h1>')
 
 </script>
 </html>
