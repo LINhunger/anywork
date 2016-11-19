@@ -63,7 +63,7 @@ public class UserService {
      * @param user 用户对象
      * @return 包含用户名的dto对象
      */
-    public RequestResult<String> register(User user) {
+    public RequestResult<User> register(User user) {
         if (user == null) {
             throw new RegisterEmptyUserException("空用户对象");
         }
@@ -77,7 +77,8 @@ public class UserService {
             //加密密码项
             user.setPassword(Encryption.getMD5(user.getPassword()));
             userDao.insertUser(user);
-            return new RequestResult<String>(StatEnum.REGISTER_SUCESS,user.getEmail());
+            User dbUser = userDao.selectOneByEmail(user.getEmail());
+            return new RequestResult<User>(StatEnum.REGISTER_SUCESS,dbUser);
         }
 
     }

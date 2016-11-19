@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.QuestionDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+
+    <!--插入请求对象-->
+    <insert id="insertQuestion">
+        INSERT into question(organId,questTitle,mark,authorId,
+        bestAId)
+        VALUES(#{question.organId},#{question.questTitle},#{question.mark},
+        #{question.author.userId},#{question.qAnswer.qAnswerId})
+    </insert>
+    <!--更新请求对象-->
+    <update id="updateQuestion">
+        UPDATE
+        question
+        <set>
+            <if test="question.questTitle != null and question.questTitle != ''">
+                questTitle = #{question.questTitle},
+            </if>
+            <if test="question.mark != null and question.mark != ''">
+                mark = #{question.mark},
+            </if>
+        </set>
+        WHERE questId = #{question.questId}
+    </update>
+    <!--根据请求id查找请求对象-->
+    <select id="selectOneById" resultMap="Question">
+        SELECT  q.questId AS q_questId,
+                       q.createTime AS q_createtime,
+                       q.questTitle AS q_questTitle,
+                       q.mark AS q_mark,
+                       q.organId AS q_organId,
+
+                       u.userId AS u_userId,
+                       u.userName AS u_userName,
+                       u.email AS u_email,
+                       u.school AS u_school,
+                       u.picture AS u_picture,
+
+                       a.qAnswerId AS a_qAnswerId,
+                       a.questId AS a_questId,
+                       a.mark AS a_mark,
+                       a.createTime AS a_createTime,
+
+                       u2.userId AS u2_userId,
+                       u2.userName AS u2_userName,
+                       u2.email AS u2_email,
+                       u2.school AS u2_school,
+                       u2.picture AS u2_picture
+        FROM question q
+        LEFT JOIN user u ON q.authorId = u.userId
+        LEFT JOIN (qanswer a LEFT JOIN user u2 ON a.authorId = u2.userId)
+        ON a.qAnswerId=q.bestAId
+        WHERE  q.questId = #{questId}
+    </select>
+
+    <!--根据柱子id查找请求对象集合-->
+    <select id="seclectAllByOrganId" resultMap="Question">
+        SELECT  q.questId AS q_questId,
+                       q.createTime AS q_createtime,
+                       q.questTitle AS q_questTitle,
+                       q.mark AS q_mark,
+                       q.organId AS q_organId,
+
+                       u.userId AS u_userId,
+                       u.userName AS u_userName,
+                       u.email AS u_email,
+                       u.school AS u_school,
+                        u.picture AS u_picture,
+
+                       a.qAnswerId AS a_qAnswerId,
+                       a.questId AS a_questId,
+                       a.mark AS a_mark,
+                       a.createTime AS a_createTime,
+
+                       u2.userId AS u2_userId,
+                       u2.userName AS u2_userName,
+                       u2.email AS u2_email,
+                       u2.school AS u2_school,
+                       u2.picture AS u2_picture
+        FROM question q
+        LEFT JOIN user u ON q.authorId = u.userId
+        LEFT JOIN (qanswer a LEFT JOIN user u2 ON a.authorId = u2.userId)
+        ON a.qAnswerId=q.bestAId
+        WHERE  q.organId = #{organId}
+        AND  DATE_ADD(#{time},INTERVAL 1 DAY )>q.createTime  AND q.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
+    </select>
+
+    <!--根据请求id删除请求-->
+    <delete id="deleteQuestionById">
+        DELETE  FROM question WHERE questId = #{questId}
+    </delete>
+
+    <!--更新Question对象的最佳答案-->
+    <update id="setBestAId">
+        UPDATE
+        question
+        <set>
+            bestAId = bestAId,
+            <if test="bestAId != null and bestAId != 0">
+                bestAId = #{bestAId},
+            </if>
+        </set>
+        WHERE questId = #{questId}
+    </update>
+    <!--映射实体对象-->
+    <resultMap id="Question" type="com.test.model.Question">
+        <id property="questId" column="q_questId" />
+        <result property="organId" column="q_organId" />
+        <result property="questTitle" column="q_questTitle" />
+        <result property="mark" column="q_mark" />
+        <result property="createTime" column="q_createtime" />
+
+        <association property="author" javaType="com.test.model.User">
+            <id property="userId" column="u_userId" />
+            <result property="email" column="u_email" />
+            <result property="userName" column="u_userName" />
+            <result property="school" column="u_school" />
+            <result property="picture" column="u_picture" />
+        </association>
+        <association property="qAnswer" javaType="com.test.model.QAnswer">
+            <id property="qAnswerId" column="a_qAnswerId" />
+            <result property="questId" column="a_questId" />
+            <result property="mark" column="a_mark" />
+            <result property="createTime" column="a_createTime" />
+            <association property="author" javaType="com.test.model.User">
+                <id property="userId" column="u2_userId" />
+                <result property="email" column="u2_email" />
+                <result property="userName" column="u2_userName" />
+                <result property="school" column="u2_school" />
+                <result property="picture" column="u2_picture" />
+            </association>
+        </association>
+    </resultMap>
+
+</mapper>

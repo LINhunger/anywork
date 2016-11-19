@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.HomeworkDao">
+    <!--目的：为Dao接口方法提供SQL语句-->
+
+    <!--插入作业对象-->
+    <insert id="insertHomework" useGeneratedKeys="true"
+            keyProperty="homework.homeworkId">
+      INSERT  into homework(organId,homeworkTitle,mark,authorId,
+      endingTime,status)
+    VALUES (#{homework.organId},#{homework.homeworkTitle},
+    #{homework.mark},#{homework.author.userId},#{homework.endingTime},
+    #{homework.status})
+</insert>
+
+    <!--更新作业对象-->
+    <update id="updateHomework">
+        UPDATE
+        homework
+        <set>
+            <if test="homework.homeworkTitle != null and homework.homeworkTitle != ''">
+                homeworkTitle = #{homework.homeworkTitle},
+            </if>
+            <if test="homework.mark != null and homework.mark != ''">
+                mark = #{homework.mark},
+            </if>
+            <if test="homework.endingTime != null">
+                endingTime = #{homework.endingTime},
+            </if>
+            <if test="homework.status != null and homework.status != ''">
+                status = #{homework.status},
+            </if>
+        </set>
+    WHERE homeworkId = #{homework.homeworkId}
+    </update>
+
+    <!--根据作业id查找作业对象-->
+    <select id="selectOneById" resultMap="Homework">
+        SELECT h.*,u.* FROM homework h,user u
+        WHERE
+        h.homeworkId = #{homeworkId} AND h.authorId = u.userId
+    </select>
+    <!--根据组织id查找作业对象集合-->
+    <select id="selectAllByOrganId" resultMap="Homework">
+        SELECT h.*,u.* FROM homework h,user u
+        WHERE
+        h.organId = #{organId} AND h.authorId = u.userId
+        AND  DATE_ADD(#{time},INTERVAL 1 DAY )>h.createTime  AND h.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
+    </select>
+
+    <!--根据作业id删除作业对象-->
+    <delete id="deleteHomeworkById">
+        DELETE  FROM homework WHERE homeworkId = #{homeworkId}
+  </delete>
+
+    <!--映射实体对象-->
+    <resultMap id="Homework" type="com.test.model.Homework">
+        <id property="homeworkId" column="homeworkId" />
+        <result property="organId" column="organId" />
+        <result property="homeworkTitle" column="homeworkTitle" />
+        <result property="mark" column="mark" />
+        <result property="createTime" column="createTime" />
+        <result property="endingTime" column="endingTime" />
+        <result property="submitCount" column="submitCount" />
+        <result property="status" column="status" />
+
+        <association property="author" javaType="com.test.model.User">
+            <id property="userId" column="userId" />
+            <result property="email" column="email" />
+            <result property="userName" column="userName" />
+            <result property="school" column="school" />
+            <result property="picture" column="picture"/>
+        </association>
+    </resultMap>
+</mapper>

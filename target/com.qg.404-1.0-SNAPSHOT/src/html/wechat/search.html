@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>search</title>
+</head>
+<style>
+	p{
+		margin: 0;
+	}
+	#search{
+	    margin: auto;
+	    font-size: 65px;
+	}
+
+	#search #title{
+	    margin: 0;
+	    margin-bottom: 50px;
+	    text-align: center;
+	    font-weight: bold;
+	    font-size: 75px;
+	    padding: 58px;
+	    background-color: #d9ebdd;
+	}
+	#search img{
+	    margin: 42px;
+	    width: 200px;
+	    height: 200px;
+	    border: 10px solid #92bfc5;
+	    border-radius: 20px;
+	}
+	#search #organList{
+		width: 93%;
+		margin: auto;
+	}
+	#search .list{
+	    position: relative;
+	    overflow: hidden;
+	    border: 8px solid #dbd3d3;
+	    margin-bottom: 60px;
+	    border-radius: 15px;
+	}
+	#organList .name{
+	    position: absolute;
+		top: 180px;
+		right: 204px;
+		font-weight: bold;
+	}
+	#organList .number{
+	    position: absolute;
+	    top: 20px;
+	    right: 50px;
+	    font-size: 46px;
+	}
+	#organList .describe{
+	   	border-top: 1px solid;
+	    width: 90%;
+	    margin: auto;
+	    padding-top: 20px;
+        text-indent: 38px;
+    	font-size: 52px;
+	}
+	#organList input{
+	    width: 20%;
+	    height: 80px;
+	    font-size: 60px;
+	    background-color: #f7d4d1;
+	    margin: 50px;
+	    float: right;
+        border-radius: 10px;
+	}
+</style>
+<body>
+	<div id="search">
+		<p id="title">您一共加入了{{organs.length}}个组织</p>
+		<div id="organList">
+			<organ v-for="item in organs" :item='item'></organ>
+		</div>
+	</div>
+</body>
+<script src="../../js/util.js"></script>
+<script src="../../js/vue.js"></script>
+<script src="../../js/jquery-3.1.0.js"></script>
+<script>
+	var ORGANS =  wetCharGetOrgans(getUrlInformation().openid)
+/*	JSON.parse(`[
+      {
+        "organId": 4,
+        "organName": "15软件四班",
+        "createTime": 1479208047000,
+        "description": "这是软软的四班",
+        "organCount": 1,
+        "users": null
+      },
+      {
+        "organId": 1,
+        "organName": "15网络一班",
+        "createTime": 1479208475000,
+        "description": "这是萌萌哒的一班",
+        "organCount": 33,
+        "users": null
+      },
+      {
+        "organId": 3,
+        "organName": "15计科三班",
+        "createTime": 1478404258000,
+        "description": "这是很饥渴的三班",
+        "organCount": 1,
+        "users": null
+      }
+    ]`);*/
+
+	var organ = {
+		template: `
+			<div class="list">
+				<img :src="headImg">
+				<span class="name">{{item.organName}}</span><span class="number">人数:{{item.organCount}}人</span>
+				<p class="describe">{{item.description}}</p>
+				<input type="button" value="退出" @click="out">
+			</div>`,
+		props:['item'],
+		computed: {
+			headImg: function(){
+				return "/anywork/photo/"+this.item.organId+".jpg";
+			}
+		},
+		methods: {
+			out: function(){
+				alert('退出')
+			}
+		}
+	}
+
+	var search = new Vue({
+		el: "#search",
+		data: {
+			organs: ORGANS,
+		},
+		components: {
+			organ: organ,
+		}
+	})
+
+</script>
+</html>

@@ -123,7 +123,7 @@ public class UserController {
      */
     @RequestMapping(value = "/{ciphertext}/register",method = RequestMethod.POST)
     @ResponseBody
-    public RequestResult<String> register(HttpServletRequest request,HttpServletResponse response,
+    public RequestResult<?> register(HttpServletRequest request,HttpServletResponse response,
                                           @RequestBody Map map,
                                           @PathVariable("ciphertext") String ciphertext) {
         //拿到表单提交数据
@@ -143,8 +143,8 @@ public class UserController {
 
         //注册用户
         try {
-            RequestResult<String> result = userService.register(user);
-            request.getSession().setAttribute("user",user);
+            RequestResult<User> result = userService.register(user);
+            request.getSession().setAttribute("user",result.getData());
             setCookie(response, user);
             return result;
         } catch (ValcodeWrongException e) {

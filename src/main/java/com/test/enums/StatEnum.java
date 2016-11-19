@@ -133,6 +133,12 @@ public enum StatEnum {
     APPLY_ALREADY_EXIST(153,"申请已经发送，请等待管理员验证"),
     APPLY_IS_PASS(153,"您已是组织成员"),
     NO_PERMISSION(153,"只有管理员和群主才具有该权限"),
+    SUBMIT_FILE_SUCCESS(153,"文件上传成功"),
+    SUBMIT_WRONG_FILE(154,"不予许的文件格式"),
+    SUBMIT_FILE_FAULT(155,"上传文件不能超过20M"),
+    FILE_SHOW_SUCCESS(156,"显示文件列表成功"),
+
+
 
 
 

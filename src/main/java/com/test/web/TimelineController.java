@@ -10,6 +10,7 @@ import com.test.service.TimelineService;
 import com.test.service.UserService;
 import com.test.util.Markdown;
 import com.test.util.MassTextUtil;
+import com.test.util.TravelFileUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by hunger on 2016/11/9.
@@ -333,19 +331,73 @@ public class TimelineController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/resource",method = RequestMethod.POST)
+    @RequestMapping(value = "/submit/{homeworkId}",method = RequestMethod.POST)
     @ResponseBody
-    public RequestResult<?> updateResources(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
-
-        //判断file数组不能为空并且长度大于0
-        if(files!=null&&files.length>0){
-            //循环获取file数组中得文件
-            for(int i = 0;i<files.length;i++){
-                MultipartFile file = files[i];
-                //保存文件
-//                saveFile(file);
+    public RequestResult<?> updateResources(
+            @PathVariable("homeworkId") Integer homeworkId,
+            @RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
+        try {
+            //判断file数组不能为空并且长度大于0
+            if(files!=null){
+                //获取组织id，用户id
+                Integer organId = (Integer) request.getSession().getAttribute("organId");
+                Integer userId = ((User) request.getSession().getAttribute("user")).getUserId();
+                //判断文件大小以及类型
+//                for(int i = 0;i<files.length;i++) {
+//                    MultipartFile file = files[i];
+//                    if( file.getSize()>0){
+//                        return new RequestResult<Object>(StatEnum.SUBMIT_FILE_FAULT);
+//                    }else if (!file.getContentType().equals("pdf")) {
+//                        return new RequestResult<Object>(StatEnum.SUBMIT_WRONG_FILE);
+//                    }
+//                }
+                //循环获取file数组中得文件
+                for(int i = 0;i<files.length;i++){
+                    MultipartFile file = files[i];
+                    //保存文件
+                    if (!file.isEmpty()) {
+                        logger.info("Process file:{}", file.getOriginalFilename());
+                        FileUtils.copyInputStreamToFile(file.getInputStream(),
+                                new File(request.getServletContext().getRealPath("/submit"+"/"+organId+"/"+homeworkId+"/"+userId)
+                                        ,   file.getOriginalFilename()));
+                    }
+                }
             }
+            return new RequestResult<Object>(StatEnum.SUBMIT_FILE_SUCCESS);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new RequestResult<Object>(StatEnum.DEFAULT_WRONG);
         }
-        return null;
     }
+
+    /**
+     * 显示文件路径
+     * @param homeworkId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/showPDF/{homeworkId}/{authorId}",method = RequestMethod.GET)
+    @ResponseBody
+    public RequestResult<?> showPdf(
+            @PathVariable("homeworkId") Integer homeworkId,
+            @PathVariable("authorId") Integer authorId,
+            HttpServletRequest request) {
+        try {
+            Integer organId = (Integer) request.getSession().getAttribute("organId");
+            String path = request.getServletContext().getRealPath("/submit" + "/" + organId + "/" + homeworkId + "/" + authorId);
+            List<String> fileNameList = TravelFileUtil.travelFile(path);
+            ArrayList<StringBuilder> pathList = new ArrayList<StringBuilder>();
+            for (String p:fileNameList) {
+                StringBuilder pa = new StringBuilder();
+                pa.append("/anywork/submit/" + organId + "/" + homeworkId + "/" + authorId+"/").append(p);
+                pathList.add(pa);
+            }
+
+            return new RequestResult<Object>(StatEnum.FILE_SHOW_SUCCESS, pathList);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new RequestResult<Object>(StatEnum.DEFAULT_WRONG);
+        }
+    }
+
 }

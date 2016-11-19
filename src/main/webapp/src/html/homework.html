@@ -9,6 +9,42 @@
 	<link rel="stylesheet" href="../css/frameworks.css">
 	<link rel="stylesheet" href="../css/github.css">
 </head>
+<style>
+	#upload_file{
+		position: absolute;
+		top: 373px;
+		right: 198px;
+		z-index: 5;
+		cursor: pointer;
+		font-size: 20px;
+	}
+	#markdown #file_list{
+		border: 1px solid black;
+		padding-bottom: 22px;
+		max-height: 150px;
+		overflow: auto;
+	}
+	#file_list .file_items{
+		border-bottom: 1px solid;
+		width: 93%;
+		margin: auto;
+	}
+	#file_list .file_items span{
+		font-size: 20px;
+		display: inline-block;
+		padding: 8px 0 8px 24px;
+	}
+	#input{
+		display: none;
+	}
+	#upload{
+		display: none;
+		position: absolute;
+		right: 300px;
+		top: 369px;
+		z-index: 6;
+	}
+</style>
 <body>
 <!-- 提示框 -->
 <div id="alert">
@@ -16,6 +52,13 @@
 		<my-dialog v-on:close="close" :style="style" v-if="show">
 			<p v-html="info"></p>
 		</my-dialog>
+	</transition>
+</div>
+<div id="alert2">
+	<transition name="fade">
+		<my-dialog2 v-on:close="close" :style="style" v-if="show">
+			<div id="pdf"><a href=""></a></div>
+		</my-dialog2>
 	</transition>
 </div>
 
@@ -274,6 +317,12 @@
 				</div>
 			</div>
 		</div>
+		<input type="file" id="input" multiple="multiple" accept="*.pdf,*.dot">
+		<a id="upload_file">上传附件</a>
+		<input type="button" value="上传" id="upload">
+		<div id="file_list">
+
+		</div>
 	</div>
 
 	<grade :answer="answer" ></grade>
@@ -295,15 +344,96 @@
 </body>
 <script src="../js/util.js"></script>
 <script src="../js/vue.js"></script>
+<script src="../js/pdfobject.js"></script>
 <script src="../js/jquery-3.1.0.js"></script>
 <script src="../js/dialog1.js"></script>
 <script src="../js/frameworks.js"></script>
 <script src="../js/github.js"></script>
 <script src="../js/homework.js"></script>
+<script src="../js/dialog2.js"></script>
 <script>
+	$(function(){
+
+		var array = new Array();
+		//通过链接模拟点击input file----------------------------------
+		$("#upload_file").click(function(e){
+			if($("#input")[0]){
+				$("#input").click();
+			}
+			e.preventDefault();
+		});
+
+		//显示上传按钮----------------------------------------------
+		$("#input").change(function(){
+			var fileList = this.files;
+			if(fileList.length>0){
+				$("#upload").show();
+			}
+		});
 
 
-	//8 dir
+		//点击上传按钮上传文件---------------------------------------------
+		$("#upload").click(function(){
+			var file = $("#input")[0].files[0];
+			var formData = new FormData();
+			formData.append("file",file);
+			$.ajax({
+				url:"/anywork/timeline/submit/"+URL_INFO.homeworkId,
+				type:"POST",
+				data:formData,
+				cache: false,
+				processData: false,
+				contentType: false,
+				success:function(data){
+					var state = data.state;
+					var stateInfo = data.stateInfo;
+					my_alert(stateInfo);
+				},
+				dataType:"json"
+			});
+		});
+	})
+
+	var URL_INFO = getUrlInformation();
+	var fileList = getFileList(URL_INFO.homeworkId,URL_INFO.authorId);
+
+
+	var str='';
+	for(var i=0;i<fileList.length;i++){
+		str += '<p class="file_items" v-for="item in sss"><span>'+fileList[i]+'</span><input type="button" value="预览" class="preview"  fileurl="'+fileList[i]+'"><input type="button" value="下载" class="down_load"></p>'
+		$("#file_list").html(str);
+	}
+
+	$(".preview").click(function(){
+		var url = $(this).attr('fileurl');
+		var success = new PDFObject({
+			url: url,
+			pdfOpenParams: {
+				scrollbars: '0',
+				toolbar: '0',
+				statusbar: '0'
+			}
+		}).embed("pdf");
+		my_alert2('',800,400);
+	})
+
+	function getFileList(homeworkId,authorId){
+		var files=[];
+		$.ajax({
+			type: "GET",
+			url: "/anywork/timeline/showPDF/"+homeworkId+"/"+authorId,
+			async: false,
+			success: function(data){
+				var state = data.state, //194公告，195作业, 196获取信息失败
+						stateInfo = data.stateInfo;
+				if(state==156){
+					files = data.data;
+				}
+			},
+			dataType: 'json',
+		})
+		return files;
+	}
 </script>
 </html>
 

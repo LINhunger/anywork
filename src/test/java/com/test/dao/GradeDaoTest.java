@@ -8,6 +8,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 /**
@@ -29,9 +31,6 @@ public class GradeDaoTest {
         gradeDao.insertGrade(grade);
     }
 
-    @Test
-    public void selectOneById() throws Exception {
-            System.out.println(gradeDao.selectOneById(1,2));
-    }
+
 
 }

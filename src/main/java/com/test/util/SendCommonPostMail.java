@@ -143,15 +143,15 @@ public class SendCommonPostMail {
                             "\t\t\t\t\t\t\t\t\t\t\t<tr>\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t<td align=\"center\" style=\"color:#666;line-height:1.5\" valign=\"top\">\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"width:360px;text-align:left;margin-top:50px;margin-bottom:80px;\">\n" +
-                            "\t\t\t\t\t\t\t\t\t\t\t\t<p>亲爱的"+userName+"您好：</p>\n" +
+                            "\t\t\t\t\t\t\t\t\t\t\t\t<p>亲爱的"+"用户"+"您好：</p>\n" +
                             "\n" +
-                            "\t\t\t\t\t\t\t\t\t\t\t\t<p style=\"text-indent:2em\">您在2016年11月09日 19:21:10申请重置密码<br />\n" +
+                            "\t\t\t\t\t\t\t\t\t\t\t\t<p style=\"text-indent:2em\">\n" +
                             "请点击下面的链接修改用户密码：<br />"+
                             "<h1>这是一个测试页面</h1><br/>"+
                             "<a href='http://localhost:80/anywork/"+"src/html/forget.html?email=" +email+"&ciphertext="+ciphertext+"'>点击修改密码</a></p>\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t</div>\n" +
                             "\n" +
-                            "\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"margin-bottom:40px;\"><a href=\"https://www.baidu.com\" style=\"display:inline-block;width:139px;height:38px;line-height:38px;color:#fff;font-size:14px;vertical-align:middle;background:url(http://7xi9bi.com1.z0.glb.clouddn.com/35069/2015/07/20/0edb116f982044ba85ecd313f20e881c.jpg);text-decoration:none\">开始注册</a></div>\n" +
+                            "\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"margin-bottom:40px;\"><a href=\"https://www.baidu.com\" style=\"display:inline-block;width:139px;height:38px;line-height:38px;color:#fff;font-size:14px;vertical-align:middle;background:url(http://7xi9bi.com1.z0.glb.clouddn.com/35069/2015/07/20/0edb116f982044ba85ecd313f20e881c.jpg);text-decoration:none\">修改密码</a></div>\n" +
                             "\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t<div style=\"border-top:1px dashed #ccc;margin:20px\">&nbsp;</div>\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t</td>\n" +

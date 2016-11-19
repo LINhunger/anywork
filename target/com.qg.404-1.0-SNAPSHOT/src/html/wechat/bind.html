@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<title>bind</title>
+</head>
+<style>
+	#bind{
+		position: relative;
+		margin: auto;
+		margin-top: 48%;
+	    width: 90%;
+		font-size: 83px;
+	}
+	#bind .text{
+        height: 85px;
+    	width: 100%;
+    	font-size: 60px;
+    	text-indent: 36px;
+	}
+	#bind span{
+	    display: inline-block;
+    	margin: 45px 0px 1px;
+	}
+	#bind input[type="button"]{
+	    display: block;
+	    margin: auto;
+	    margin-top: 100px;
+	    width: 50%;
+	    height: 187px;
+	    font-size: 87px;
+	    background-color: white;
+	    border: 5px solid #a2a0a0;
+	    background-color: #f6f6d8;
+	    border-radius: 25px;
+	}
+	#bind .link{
+		text-align: center;
+	}
+	#bind .link a{
+		color: black;
+		text-decoration: none;
+	    position: relative;
+	    bottom: -32px;
+	    font-size: 56px;
+	}
+</style>
+<body>
+	<form id="bind">
+		<fieldset>
+			<legend>绑定微信</legend>
+			<div><span>账号</span><input type="text" id="email" class="text"></div>
+			<div><span>密码</span><input type="password" id="passwor" class="text"></div>
+			<input type="button" value="提交">
+			<div class="link"><a  href="http://www.baidu.com">了解Anywork</a></div>
+		</fieldset>
+	</form>
+</body>
+<script type="text/javascript" src="../../js/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="../../js/util.js"></script>
+<script>
+$(function(){
+
+	$("#bind input[type=button]").click(function(){
+		var openid = getUrlInformation().openid;
+		var email = $("#email").val();
+		var password = $("#passwor").val();
+		bindWetChar(openid,email,password);
+	})
+})
+</script>
+</html>
