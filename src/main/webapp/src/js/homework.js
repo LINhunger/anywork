@@ -3,197 +3,6 @@ var URL_INFO = getUrlInformation();
 var USER =  getUserInfo();
 var O = getHomewrokById(URL_INFO.homeworkId,URL_INFO.authorId);
 
-/*var URL_INFO = {homeworkId: 1}
- var USER =  {userId: 1}
- var O =
- JSON.parse(`{
- "allAnswers": [
- {
- "hAnswerId": 2,
- "homeworkId": 1,
- "author": {
- "userId": 1,
- "userName": "zhesheng",
- "email": "466400960@qq.com",
- "password": null,
- "phone": null,
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": null,
- "organs": null,
- "picture": "1.jpg"
- },
- "mark": "抱歉我不会饿",
- "grade5": 1,
- "grade4": 0,
- "grade3": 0,
- "note": null,
- "createTime": 1479210086000,
- "status": 0
- },
- {
- "hAnswerId": 1,
- "homeworkId": 1,
- "author": {
- "userId": 2,
- "userName": "蔡泽胜",
- "email": "123456789@qq.com",
- "password": null,
- "phone": null,
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": null,
- "organs": null,
- "picture": "default.jpg"
- },
- "mark": "。。。。。",
- "grade5": 0,
- "grade4": 0,
- "grade3": 0,
- "note": null,
- "createTime": 1479209978000,
- "status": 0
- }
- ],
- "comments": [
- {
- "commentId": 1,
- "sender": {
- "userId": 4,
- "userName": "张国洪",
- "email": "666666@qq.com",
- "password": "b25c11129d72a31311a99ff0d68dd26a",
- "phone": "15626198155",
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": 1479136580000,
- "organs": null,
- "picture": null
- },
- "targetId": 1,
- "type": 0,
- "content": "厉害了，我的歌",
- "recomments": null,
- "createTime": 1479210788000
- },
- {
- "commentId": 2,
- "sender": {
- "userId": 4,
- "userName": "张国洪",
- "email": "666666@qq.com",
- "password": "b25c11129d72a31311a99ff0d68dd26a",
- "phone": "15626198155",
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": 1479136580000,
- "organs": null,
- "picture": null
- },
- "targetId": 1,
- "type": 0,
- "content": "厉害了，我的肾",
- "recomments": null,
- "createTime": 1479210881000
- },
- {
- "commentId": 3,
- "sender": {
- "userId": 4,
- "userName": "张国洪",
- "email": "666666@qq.com",
- "password": "b25c11129d72a31311a99ff0d68dd26a",
- "phone": "15626198155",
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": 1479136580000,
- "organs": null,
- "picture": null
- },
- "targetId": 1,
- "type": 0,
- "content": "大神好厉害",
- "recomments": null,
- "createTime": 1479210927000
- },
- {
- "commentId": 4,
- "sender": {
- "userId": 4,
- "userName": "张国洪",
- "email": "666666@qq.com",
- "password": "b25c11129d72a31311a99ff0d68dd26a",
- "phone": "15626198155",
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": 1479136580000,
- "organs": null,
- "picture": null
- },
- "targetId": 1,
- "type": 0,
- "content": "还是你厉害",
- "recomments": null,
- "createTime": 1479210948000
- }
- ],
- "homework": {
- "homeworkId": 1,
- "name": "homework",
- "organId": 1,
- "homeworkTitle": "离散数学",
- "mark": "设R和S是A上的任意关系，若R和S是传递的，则RUS是传递的。这个结论是否成立？",
- "author": {
- "userId": 2,
- "userName": "蔡泽胜",
- "email": "123456789@qq.com",
- "password": null,
- "phone": null,
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": null,
- "organs": null,
- "picture": "default.jpg"
- },
- "createTime": 1479122845000,
- "endingTime": 1479641231000,
- "submitCount": 0,
- "status": "&"
- },
- "myAnswer": {
- "hAnswerId": 2,
- "homeworkId": 1,
- "author": {
- "userId": 1,
- "userName": "zhesheng",
- "email": "466400960@qq.com",
- "password": null,
- "phone": null,
- "school": null,
- "isWeChat": 0,
- "openid": null,
- "createTime": null,
- "organs": null,
- "picture": "1.jpg"
- },
- "mark": "抱歉我不会饿",
- "grade5": 0,
- "grade4": 0,
- "grade3": 0,
- "note": null,
- "createTime": 1479210086000,
- "status": 0
- }
- }`);
- */
-
 var HOMEWORK = O.homework;
 var MY_ANSWER = O.myAnswer!=null?O.myAnswer:{
     grade5:0,
@@ -205,8 +14,9 @@ var MY_ANSWER = O.myAnswer!=null?O.myAnswer:{
 var COMMENTS = O.comments;
 var ALL_ANSWER = O.allAnswers;
 
-//如果第一次做作业后提交时显示grate
-
+/**
+ * 打开预处理
+ */
 $(function(){
 
     //显示星星数 预处理。
@@ -220,7 +30,11 @@ $(function(){
         $("#issue_body").text(MY_ANSWER.mark);
         setTimeout(function(){
             $("#preview-hg").click();
-        },100);
+        },200);
+    }else{
+        setTimeout(function(){
+            $("#issue_body")[0].value='';
+        },200)
     }
 
     //还没发布作业时不能评分
@@ -293,7 +107,7 @@ var question = {
     		<p class="qs_title">{{homeworkTitle}}</p>
     		<p class="qs_time">{{timeSpan}}</p>
     		<input type="button" value="返回时间轴" class="return_tree" @click="returnTree">
-    		<textarea readonly class="qs_mark">{{homeworkMark}}</textarea>
+    		<div readonly class="qs_mark" v-html="homeworkMark"></div>
     	</div>`,
     data: function(){
         return{
@@ -417,11 +231,17 @@ var write = {
     methods: {
         sends: function(){
             var r = sendComment(1,HOMEWORK.homeworkId,this.comment);
-            if(r){
-                O = getHomewrokById(URL_INFO.homeworkId);
-                COMMENTS = O.comments;
-            }
-        }
+            /*            if(r){
+             var o = {
+             content: this.comment,
+             recomment:[],
+             sender:{
+             userName: MY_ANSWER.author.userName,
+             },
+             }
+             this.$emit('sendcomment',o);
+             }
+             */        }
 
     },
     computed: {
@@ -439,12 +259,12 @@ var oneComment = {
     template: `
             <div class="one_comment">
                 <div class="remark">
-                    <p><img src="../images/close.png"><span>{{item.sender.userName}}</span>
-                    <p class="ct">{{item.content}}</p>
+                    <p><img src="../images/close.png"><span>{{authorName}}</span>
+                    <p class="ct">{{content}}</p>
                 </div>
                 <div class="replay">
                     <div class="item" v-for="item in recomments">
-                        <span>{{item.sender.userName}}</span> 回复 <span>{{item.receiver.userName}}</span> : {{item.content}}
+                        <rpd :item="item"  :pCommentId="item.aCommentId"></rpd>
                     </div>
                 </div>
                 <textarea class="write_back" placeholder="回复:" v-model="recomment"></textarea>
@@ -454,16 +274,51 @@ var oneComment = {
     data: function(){
         return {
             recomment: '',
+            authorName: this.item.sender.userName,
+            content: this.item.content,
         }
     },
     methods: {
         send: function(){
             sendResponse(this.item.sender.userId,HOMEWORK.homeworkId,3,this.recomment,this.item.commentId);
-        },
+        }
     },
     computed: {
         recomments: function(){
             return  this.item.recomments;
+        }
+    },
+    components:{
+        rpd: {
+            template: `
+                <div class="item"><span>{{sender.userName}}</span> 回复 <span>{{receiver.userName}}</span>{{item.content}}
+                <input type="button" value="回复" class="rp" @click="toshow" v-show="sb">
+                <div v-if="show">
+                    <textarea placeholder="回复:" class="write_back" v-model="recomment"></textarea> 
+                    <input type="button" value="回复" @click="sendrp">
+                <div>
+            </div>`,
+            props:['item','pCommentId'],
+            data: function(){
+                return {
+                    show: false,
+                    sb: true,
+                    sender: this.item.sender,
+                    receiver: this.item.receiver,
+                    recomment: '',
+                }
+            },
+            methods: {
+                toshow: function(){
+                    this.show = true;
+                    this.sb = false;
+                },
+                sendrp: function(){
+                    this.show= false;
+                    this.sb = true;
+                    sendResponse(this.item.sender.userId,HOMEWORK.homeworkId,3,this.recomment,this.pCommentId);
+                }
+            }
         }
     }
 }
@@ -487,9 +342,9 @@ var answer = {
 var homework = new Vue({
     el: "#homework",
     data: {
-        comments: COMMENTS,
         answers: ALL_ANSWER,
         answer: MY_ANSWER,
+        comments: O.comments
     },
     components: {
         question : question,
@@ -497,7 +352,7 @@ var homework = new Vue({
         myWrite: write,
         oneComment: oneComment,
         myAnswer: answer,
-    },
+    }
 })
 
 
@@ -526,7 +381,6 @@ function setRating(number){
 
 
 function sendComment(type, targetId, content){
-    var result = false;
     var info = {
         type: type,
         targetId: targetId,
@@ -543,17 +397,16 @@ function sendComment(type, targetId, content){
             var state = data.state;
             var stateInfo = data.stateInfo;
             if(state==162){
-                result = true;
+                location.reload()
+            }else{
+                my_alert(stateInfo);
             }
-            my_alert(stateInfo);
         },
         dataType: "json"
     })
-    return result;
 }
 
 function sendResponse(receiverId,targetId,type,content,commentId){
-    var result = false;
     info = {
         receiverId: receiverId,
         targetId: targetId,
@@ -572,13 +425,13 @@ function sendResponse(receiverId,targetId,type,content,commentId){
             var state = data.state;
             var stateInfo = data.stateInfo;
             if(state==163){
-                result = true;
+                location.reload()
+            }else{
+                my_alert(stateInfo);
             }
-            my_alert(stateInfo);
         },
         dataType: "json"
     })
-    return result;
 }
 
 function getAllComments(type,id){
@@ -751,6 +604,66 @@ $(function(){
 
 
 })
+/**
+ * pdf预览
+ */
+$(function(){
 
-//6-9
-//705
+    var array = new Array();
+    //通过链接模拟点击input file----------------------------------
+    $("#upload_file").click(function(e){
+        if($("#input")[0]){
+            $("#input").click();
+        }
+        e.preventDefault();
+    });
+
+    //显示上传按钮----------------------------------------------
+    $("#input").change(function(){
+        var fileList = this.files;
+        if(fileList.length>0){
+            $("#upload").show();
+        }
+    });
+
+
+    //点击上传按钮上传文件---------------------------------------------
+    $("#upload").click(function(){
+        var file = $("#input")[0].files[0];
+        var formData = new FormData();
+        formData.append("file",file);
+        $.ajax({
+            url:"/anywork/timeline/submit/"+URL_INFO.homeworkId,
+            type:"POST",
+            data:formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success:function(data){
+                var state = data.state;
+                var stateInfo = data.stateInfo;
+                if(state==153){
+                    location.reload();
+                }
+                my_alert(stateInfo);
+            },
+            dataType:"json"
+        });
+    });
+})
+
+var fileList = getFileList(URL_INFO.homeworkId,URL_INFO.authorId);
+
+var str='';
+for(var i=0;i<fileList.length;i++){
+    str += '<p class="file_items" v-for="item in sss"><span>'+fileList[i]+'</span><input type="button" value="预览" class="preview"  fileurl="'+fileList[i]+'"><input type="button" value="下载" class="down_load"></p>'
+    $("#file_list").html(str);
+}
+
+$(".preview").click(function(){
+    var url = $(this).attr('fileurl');
+    my_alert2('',1000,600);
+    setTimeout(function(){
+        var success = new PDFObject({url: url}).embed("pdf");
+    }, 100)
+})

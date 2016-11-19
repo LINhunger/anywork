@@ -193,6 +193,25 @@ function wetCharClick(markid,type){
 	return infos;
 }
 
+//获取pdf文件夹列表
+function getFileList(homeworkId,authorId){
+	var files=[];
+	$.ajax({
+		type: "GET",
+		url: "/anywork/timeline/showPDF/"+homeworkId+"/"+authorId,
+		async: false,
+		success: function(data){
+			var state = data.state, //194公告，195作业, 196获取信息失败
+				stateInfo = data.stateInfo;
+			if(state==156){
+				files = data.data;
+			}
+		},
+		dataType: 'json',
+	})
+	return files;
+}
+
 
 /**
  * 其他函数

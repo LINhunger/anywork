@@ -94,7 +94,6 @@ public class UserController {
             //将用户存到session中
             User user = result.getData();
             request.getSession().setAttribute("user",user);
-            setCookie(response, user);
             return result;
         }catch (ValcodeWrongException e) {
             logger.warn("valcode is wrong.\t"+email);
@@ -145,7 +144,16 @@ public class UserController {
         try {
             RequestResult<User> result = userService.register(user);
             request.getSession().setAttribute("user",result.getData());
-            setCookie(response, user);
+            //上传图片
+            FileUtils.copyInputStreamToFile(new FileInputStream(
+                            request.getServletContext().getRealPath("/picture")+"/default.jpg"
+                    ),
+                    new File(request.getServletContext().getRealPath("/picture")
+                            ,  result.getData().getUserId()+".jpg"));
+            user.setPicture(result.getData().getUserId()+".jpg");
+            user.setUserId(result.getData().getUserId());
+            userService.updateSelfPortait(user);
+            //上传图片
             return result;
         } catch (ValcodeWrongException e) {
             logger.warn("valcode is wrong.\t"+user.getEmail());

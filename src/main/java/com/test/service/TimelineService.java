@@ -9,6 +9,7 @@ import com.test.exception.timeline.QanswerFormatterWrongException;
 import com.test.exception.timeline.SubmitFormatterWrongException;
 import com.test.exception.timeline.SubmitTimeOutException;
 import com.test.model.*;
+import com.test.util.Markdown;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,6 +116,7 @@ public class TimelineService {
     public RequestResult<Map> showHomework(int homeworkId, int userId,int authorId) {
         //获取作业对象
         Homework homework = homeworkDao.selectOneById(homeworkId);
+        homework.setMark(Markdown.pegDown(homework.getMark()));// TODO: 2016/11/19
         //获取我的答案
         HAnswer myAnswer = null;
         //获取作业的全部答案
