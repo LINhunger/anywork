@@ -29,7 +29,7 @@ li{
 }
 #nav{
     position: fixed;
-    z-index: 5;
+    z-index: 999;
     width: 100%;
     margin-top: -19px;
     height: 58px;
@@ -72,6 +72,7 @@ li{
     border-radius: 50%;
 }
 #nav .username{
+	display: inline-block;
     position: relative;
     margin-right: -11px;
     bottom: 15px;
@@ -80,12 +81,13 @@ li{
 }
 #nav .at{
     position: relative;
-    top: 1px;
+    top: 4px;
+    height: 49px;
 }
 
 #nav .border-left{
     background: url(../images/border-left2.png) no-repeat center left;
-    background-size: 5px;
+    background-size: 2px;
 }
 
 /**
@@ -136,7 +138,6 @@ li{
     display: block;
     margin: auto;
     width: 95%;
-    height: 250px;
     font-family: "SimHei","MicroYahei",sans-serif;
     resize: none;
     text-indent: 14px;
@@ -446,20 +447,20 @@ li{
     font-size: 20px;
 }
 #markdown #file_list{
-    border: 1px solid black;
+    border: 1px solid darkgrey;
     padding-bottom: 22px;
     max-height: 150px;
     overflow: auto;
 }
 #file_list .file_items{
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ababab;
     width: 93%;
     margin: auto;
 }
 #file_list .file_items span{
     font-size: 20px;
     display: inline-block;
-    padding: 8px 50% 8px 24px;;
+    padding: 8px 3% 8px 24px;
 }
 #input{
     display: none;

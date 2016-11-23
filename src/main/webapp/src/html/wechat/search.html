@@ -2,6 +2,8 @@
 <html lang="zh-cmn-Hans">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name=”renderer” content=”webkit”>
 	<title>search</title>
 </head>
 <style>
@@ -83,41 +85,15 @@
 <script src="../../js/jquery-3.1.0.js"></script>
 <script>
 	var ORGANS =  wetCharGetOrgans(getUrlInformation().openid)
-/*	JSON.parse(`[
-      {
-        "organId": 4,
-        "organName": "15软件四班",
-        "createTime": 1479208047000,
-        "description": "这是软软的四班",
-        "organCount": 1,
-        "users": null
-      },
-      {
-        "organId": 1,
-        "organName": "15网络一班",
-        "createTime": 1479208475000,
-        "description": "这是萌萌哒的一班",
-        "organCount": 33,
-        "users": null
-      },
-      {
-        "organId": 3,
-        "organName": "15计科三班",
-        "createTime": 1478404258000,
-        "description": "这是很饥渴的三班",
-        "organCount": 1,
-        "users": null
-      }
-    ]`);*/
 
 	var organ = {
-		template: `
-			<div class="list">
-				<img :src="headImg">
-				<span class="name">{{item.organName}}</span><span class="number">人数:{{item.organCount}}人</span>
-				<p class="describe">{{item.description}}</p>
-				<input type="button" value="退出" @click="out">
-			</div>`,
+		template:
+			'<div class="list">\
+   				<img :src="headImg">\
+				<span class="name">{{item.organName}}</span><span class="number">人数:{{item.organCount}}人</span>\
+				<p class="describe">{{item.description}}</p>\
+				<input type="button" value="退出" @click="out">\
+			</div>',
 		props:['item'],
 		computed: {
 			headImg: function(){

@@ -30,6 +30,7 @@ public class ImageUtil {
         throws Exception{
         FileInputStream fileInPut = null;
         ImageInputStream imageInPut = null;
+
         try {
             //读取图片
             fileInPut = new FileInputStream(imagePath);
@@ -39,9 +40,10 @@ public class ImageUtil {
             int realHeight = buff.getHeight();
             //转换高度
             x = (int) (x * (realWidth * 1.0 / 600));
-            y = (int) (y * (realHeight * 1.0 / 600));
+            y = (int) (y * (realWidth * 1.0 / 600));
             width = (int) (width * (realWidth * 1.0 / 600));
-            height = (int) (height * (realHeight * 1.0 / 600));
+            height = (int) (height * (realWidth * 1.0 / 600));
+
 
             Iterator<ImageReader> iterator = ImageIO.getImageReadersByFormatName("jpg");
             ImageReader reader = iterator.next();
@@ -54,7 +56,7 @@ public class ImageUtil {
             //描述如何对流进行解码的类
             ImageReadParam param = reader.getDefaultReadParam();
             //图片裁剪
-            Rectangle rectangle = new Rectangle(x, y, width, width);
+            Rectangle rectangle = new Rectangle(x, y, width, height);
             //提供一个 BufferedImage，将其用作解码像素数据的目标
             param.setSourceRegion(rectangle);
 

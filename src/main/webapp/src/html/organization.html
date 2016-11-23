@@ -2,6 +2,8 @@
 <html lang="zh-cmn-Hans">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name=”renderer” content=”webkit”>
 	<title>organization</title>
 	<link rel="stylesheet" href="../css/frameworks.css">
 	<link rel="stylesheet" href="../css/github.css">
@@ -25,7 +27,7 @@
     <div id="tree">
     	<tree v-for="(item,index) in day" :time = "item"> 
     		<one-day :time="item.time"></one-day>
-    		<component v-for="item in item.message" :is="item.name" :item="item" >
+    		<component v-for="item in item.message" :is="item.name" :item="item" ></component>
     	</tree>
 	</div>
 

@@ -4,11 +4,13 @@ import com.test.aop.Authority;
 import com.test.aop.AuthorityType;
 import com.test.dto.RequestResult;
 import com.test.enums.StatEnum;
+import com.test.model.Inform;
 import com.test.model.Organization;
 import com.test.model.Relation;
 import com.test.model.User;
 import com.test.service.OrganService;
 import com.test.service.RelationService;
+import com.test.service.TimelineService;
 import com.test.util.ImageUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,9 @@ public class OrganizationController {
 
     @Resource
     private RelationService relationService;
+
+    @Resource
+    private TimelineService timelineService;
 
     /**
      * 创建组织，同时设置组织负责人
@@ -73,6 +78,13 @@ public class OrganizationController {
         Relation relation = new Relation();
         organService.insertOrgan(organ);
         int organId = organ.getOrganId();
+        // TODO: 2016/11/20
+        Inform inform = new Inform();
+        inform.setAuthor(user);
+        inform.setMark("欢迎加入："+organ.getOrganName());
+        inform.setInformTitle("系统通知");
+        inform.setOrganId(organId);
+        timelineService.releaseInform(inform);
         if(0 == organId){
             //创建失败
             return new RequestResult<Object>(StatEnum.ORGAN_CREATE_FAIL);

@@ -55,6 +55,13 @@
         DELETE  FROM homework WHERE homeworkId = #{homeworkId}
   </delete>
 
+    <!--根据组织id查找作业对象集合-->
+    <select id="selectHomeworkListByOrganId" resultMap="Homework">
+        SELECT h.*,u.* FROM homework h,user u
+        WHERE
+        h.organId = #{organId} AND h.authorId = u.userId
+        ORDER BY h.createTime DESC
+    </select>
     <!--映射实体对象-->
     <resultMap id="Homework" type="com.test.model.Homework">
         <id property="homeworkId" column="homeworkId" />

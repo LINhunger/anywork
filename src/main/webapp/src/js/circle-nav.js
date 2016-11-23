@@ -1,4 +1,4 @@
-window.onload=function(){
+$(function(){
 
     var svg = document.getElementById('menu'),
         menu_wrapper = document.getElementById('menu-wrapper'),
@@ -32,7 +32,7 @@ window.onload=function(){
     trigger.addEventListener('click', toggleMenu, false);
 
     function toggleMenu(event) {
-        $(items).show()
+        $(items).show();
         if (!event)
             var event = window.event;
         event.stopPropagation();
@@ -137,4 +137,4 @@ window.onload=function(){
             return false;
         }
     })
-}
+})

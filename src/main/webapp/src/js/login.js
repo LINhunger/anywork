@@ -1,8 +1,8 @@
 var options = {
-	template: `
-		<div id="options">
-			<span class="option" v-bind:class="{'select': isLogin}" @click="login">登录</span><span class="option" v-bind:class="{'select': !isLogin}" @click="register">注册</span>
-		</div>`,
+	template:
+		'<div id="options">\
+			<span class="option" v-bind:class="{select: isLogin}" @click="login">登录</span><span class="option" v-bind:class="{select: !isLogin}" @click="register">注册</span>\
+		</div>',
 	data: function(){
 		return {
 			isLogin: true,
@@ -21,31 +21,31 @@ var options = {
 };
 
 var login = {
-	template: `
-		<div id="login">
-			<div class="left-angle"></div>
-			<div class="right-angle"></div>
-			<div class="margin-top">
-				<i class="email-logo"></i><span class="logo-i">邮箱</span>
-				<input v-model="email" type="text" class="input-one">
-				<span v-html="emailInfo"></span>
-			</div>
-			<div class="relative">
-				<i class="lock-logo"></i><span class="logo-i">密码</span>
-				<input type="password" v-model="password" class="input-one">
-				<span v-html="pwInfo"></span>
-			</div>
-			<div class="margin-bottom">
-				<i class="barcode-logo"></i></i><span class="logo-i">验证码</span>
-				<input v-model="barcode" type="text" class="input-two">
-				<img v-bind:src="barcodeUrl" class="barkcode-img" @click="getBarcode">
-				<span v-html="barcodeInfo"></span>
-			</div>
-			<div class="whiteness">
-				<span class="forget-password" @click="forgetPw">忘记密码</span>
-				<input type="button" class="button" value="登录" @click="login">
-			</div>
-		</div>`,
+	template:
+		'<div id="login">\
+			<div class="left-angle"></div>\
+			<div class="right-angle"></div>\
+			<div class="margin-top">\
+				<i class="email-logo"></i><span class="logo-i">邮箱</span>\
+				<input v-model="email" type="text" class="input-one" @keyup.enter="login">\
+				<span v-html="emailInfo"></span>\
+			</div>\
+			<div class="relative">\
+				<i class="lock-logo"></i><span class="logo-i">密码</span>\
+				<input type="password" v-model="password" class="input-one" @keyup.enter="login">\
+				<span v-html="pwInfo"></span>\
+			</div>\
+			<div class="margin-bottom">\
+				<i class="barcode-logo"></i></i><span class="logo-i">验证码</span>\
+				<input v-model="barcode" type="text" class="input-two"  @keyup.enter="login">\
+				<img v-bind:src="barcodeUrl" class="barkcode-img" @click="getBarcode">\
+				<span v-html="barcodeInfo"></span>\
+			</div>\
+			<div class="whiteness">\
+				<span class="forget-password" @click="forgetPw">忘记密码</span>\
+				<input type="button" class="button" value="登录" @click="login">\
+			</div>\
+		</div>',
 	data: function(){
 		return {
 			barcodeUrl:'/anywork/verification',
@@ -149,29 +149,29 @@ var login = {
 };
 
 var register = {
-	template: `<div id="register">
-			<div class="left-angle"></div>
-			<div class="right-angle"></div>
-			<div class="margin-top">
-				<i class="user-logo"></i><span class="logo-i">昵称</span>
-				<input v-model="username" type="text" class="input-one">
-				<span v-html="usernameInfo"></span>
-			</div>
-			<div class="relative">
-				<i class="email-logo"></i><span class="logo-i">邮箱</span>
-				<input v-model="email" type="text" class="input-one">
-				<span v-html="emailInfo"></span>
-			</div>
-			<div class="margin-bottom">
-				<i class="barcode-logo"></i><span class="logo-i">验证码</span>
-				<input v-model="barcode" type="text" class="input-two">
-				<img v-bind:src="barcodeUrl" class="barkcode-img" @click="getBarcode">
-				<span v-html="barcodeInfo"></span>
-			</div>
-			<div class="whiteness">
-				<input type="button" class="button" @click="register" value="验证">
-			</div>
-		</div>`,
+	template: '<div id="register">\
+			<div class="left-angle"></div>\
+			<div class="right-angle"></div>\
+			<div class="margin-top">\
+				<i class="user-logo"></i><span class="logo-i">昵称</span>\
+				<input v-model="username" type="text" class="input-one" @keyup.enter="register">\
+				<span v-html="usernameInfo"></span>\
+			</div>\
+			<div class="relative">\
+				<i class="email-logo"></i><span class="logo-i">邮箱</span>\
+				<input v-model="email" type="text" class="input-one" @keyup.enter="register">\
+				<span v-html="emailInfo"></span>\
+			</div>\
+			<div class="margin-bottom">\
+				<i class="barcode-logo"></i><span class="logo-i">验证码</span>\
+				<input v-model="barcode" type="text" class="input-two" @keyup.enter="register">\
+				<img v-bind:src="barcodeUrl" class="barkcode-img" @click="getBarcode" >\
+				<span v-html="barcodeInfo"></span>\
+			</div>\
+			<div class="whiteness">\
+				<input type="button" class="button" @click="register" value="验证">\
+			</div>\
+		</div>',
 		data: function(){
 			return {
 				barcodeUrl:'/anywork/verification',

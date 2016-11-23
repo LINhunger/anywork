@@ -143,7 +143,6 @@ public class UserController {
         //注册用户
         try {
             RequestResult<User> result = userService.register(user);
-            request.getSession().setAttribute("user",result.getData());
             //上传图片
             FileUtils.copyInputStreamToFile(new FileInputStream(
                             request.getServletContext().getRealPath("/picture")+"/default.jpg"
@@ -154,6 +153,7 @@ public class UserController {
             user.setUserId(result.getData().getUserId());
             userService.updateSelfPortait(user);
             //上传图片
+            request.getSession().setAttribute("user",result.getData());
             return result;
         } catch (ValcodeWrongException e) {
             logger.warn("valcode is wrong.\t"+user.getEmail());
@@ -238,10 +238,10 @@ public class UserController {
             User user = (User)request.getSession().getAttribute("user");
             user.setUserName(userName);
             user.setPhone(phone);
+            user.setPicture(((User)request.getSession().getAttribute("user")).getUserId()+".jpg");
             RequestResult<User> result = userService.updateUser(user);
             //更新session中的数据
             request.getSession().setAttribute("user",result.getData());
-            setCookie(response,result.getData());
             //TODO
 
             //更改图片名，保证唯一

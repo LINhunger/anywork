@@ -1,5 +1,6 @@
 package com.test.dao;
 
+import com.test.model.Apply;
 import com.test.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,16 +19,20 @@ import static org.junit.Assert.*;
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class UserDaoTest {
     @Resource
+    private ApplyDao applyDao;
+    @Resource
     private UserDao userDao;
     @Test
     public void insertUser() throws Exception {
+        for(int i = 5087;i<=5126;i++){
+            Apply apply = new Apply();
+            apply.setOrganId(36);
+            User user = new User();
+            user.setUserId(i);
+            apply.setSender(user);
+            applyDao.insertApply(apply);
+        }
 
-        User user = new User();
-        user.setUserName("方锐");
-        user.setPassword("123456");
-        user.setEmail("987654321@qq.com");
-        user.setIsWeChat(1);
-        System.out.println(userDao.insertUser(user));
     }
 
     @Test

@@ -6,16 +6,16 @@ var ORGAN =  getOrganById(URL_INFO.organId)
  * 导航栏的
  */
 var my_nav = {
-	template: `
-		<div @click="stopP">
-			<span class="page-logo" @click='toHomePage'></span>
-			<ul>
-				<li class="border-left"><i class="bell-logo logo"></i></li>
-				<li class="border-left at"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>
-				<li ><i class="close-logo logo" @click="close"></i></li>
-				<li class="border-left"><i class="back-logo logo" @click="goBack"></i></li>
-			</ul>
-		</div>`,
+	template:
+		'<div @click="stopP">\
+			<span class="page-logo" @click="toHomePage"></span>\
+			<ul>\
+				<li class="border-left"><i class="bell-logo logo"></i></li>\
+				<li class="border-left at"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>\
+				<li ><i class="close-logo logo" @click="close"></i></li>\
+				<li class="border-left"><i class="back-logo logo" @click="goBack"></i></li>\
+			</ul>\
+		</div>',
 	data: function(){
 		return {
 			userName: USER.userName,
@@ -52,15 +52,15 @@ var nav = new Vue({
  *
  */
 var homework = {
-	template:`
-<div class="home_work" v-on:click="doHomework" :class=[itStyle]>
-	<span class="home_title"> {{homeworkTitle}}</span>
-	<span class="number">已交:{{item.submitCount}}</span>
-	<p class="time">{{timeSpan}}<i></i></p>
-	<p class="info"> {{markInfo}} </p>
-	<div class="lietTop"></div>
-	<div class="rightBottom"></div>
-</div>`,
+	template:
+		'<div class="home_work" v-on:click="doHomework" :class=[itStyle]>\
+			<span class="home_title"> {{homeworkTitle}}</span>\
+			<span class="number">已交:{{item.submitCount}}</span>\
+			<p class="time">{{timeSpan}}<i></i></p>\
+			<p class="info"> {{markInfo}} </p>\
+			<div class="lietTop"></div>\
+			<div class="rightBottom"></div>\
+		</div>',
 	props: ['item'],
 	data: function(){
 		return {
@@ -100,10 +100,7 @@ var inform = {
 
 	methods: {
 		say: function(){
-			my_alert(
-				`<h2>`+this.item.informTitle+`</h2>
-			<p>`+this.item.mark+`</p>`
-			);
+			my_alert('<h2>'+this.item.informTitle+'</h2><p>'+this.item.mark+'</p>');
 		}
 	},
 	computed: {
@@ -118,10 +115,10 @@ var inform = {
 
 var one_day = {
 	template: '\
-<div class="day" v-on:click="nextDay">\
-	<p class="month">{{month}}</p>\
-	<p class="dayTime">{{day}}</p>\
-</div>',
+		<div class="day" v-on:click="nextDay">\
+			<p class="month">{{month}}</p>\
+			<p class="dayTime">{{day}}</p>\
+		</div>',
 	props: ['time'],
 	methods: {
 		nextDay: function(event){
@@ -224,14 +221,15 @@ function getTimeLine(time,organId){
 		var message = list[d].message;
 		var j,t;
 		for(var i=0; i<message.length-1; i++){
-			for(j=i;j<message.length-1; j++){
-				if(message[j].createTiem<message[j+1].createTime){
+			for(j=0;j<message.length-i-1; j++){
+				if(message[j].createTime<message[j+1].createTime){
 					t = message[j];
 					message[j] = message[j+1];
 					message[j+1] = t;
 				}
 			}
 		}
+		list[d].message = message;
 	}
 	tree.day.push(list.day03);
 	tree.day.push(list.day02);
@@ -264,6 +262,19 @@ $(window).scroll(function(){
 	}
 })
 
+/**
+ * 树长度处理
+ */
+	$(function(){
+		var th = $("#tree").height();
+		var wh = $(window).height();
+		while(th<wh){
+			TreeTime -= 86400000*3 ;
+			TreeTime = getTimeLine(TreeTime, URL_INFO.organId);
+			th +=300;
+		}
+})
+
 
 /**
  * 回到顶部
@@ -277,16 +288,16 @@ $("#goTop").click(function(){
  * 选项卡的
  */
 var mySelect = {
-	template: `<div>
-	<p class="organ_name">{{organName}}</p>
-	<p class="organ_describe">{{description}}</p>
-	<ul @click="select">
-		<li id="tree_option"><i class="tree_logo"></i><span>时间轴</span></li>
-		<li id="quest_option"><i class="quest_logo"></i><span>我的求助</span></li>
-		<li id="send_option"><i class="send_logo"></i><span>发出公告/题目</span></li>
-		<li id="manage_option"><i class="manage_logo"></i><span>组织管理</span></li>
-	</ul>
-	</div>`,
+	template: '<div>\
+	<p class="organ_name">{{organName}}</p>\
+	<p class="organ_describe">{{description}}</p>\
+	<ul @click="select">\
+		<li id="tree_option"><i class="tree_logo"></i><span>时间轴</span></li>\
+		<li id="quest_option"><i class="quest_logo"></i><span>我的求助</span></li>\
+		<li id="send_option"><i class="send_logo"></i><span>发出公告/题目</span></li>\
+		<li id="manage_option"><i class="manage_logo"></i><span>组织管理</span></li>\
+	</ul>\
+	</div>',
 	data: function(){
 		return {
 			organName: ORGAN.organName,
@@ -297,7 +308,7 @@ var mySelect = {
 		select: function(e){
 			var target = $(e.target).closest('Li');
 			target.css("background-color","#248edb").
-			siblings().css("background-color","rgba(173, 173, 173, 0)")
+			siblings().css("background-color","rgba(173, 173, 173, 0)");
 			if(target.attr("id") === "tree_option" ){
 				$("#tree").fadeIn(2000);
 				$("#sendInfo").hide();
@@ -306,10 +317,10 @@ var mySelect = {
 				$("#sendInfo").fadeIn(2000);
 				$("#issue_title").val('');
 				$("#issue_body")[0].value='';
-
 			}else if(target.attr("id") === "manage_option" ){
 				var url = "/anywork/admin/"+ORGAN.organId+"/list";
-				window.open (url)
+				window.open (url);
+				$("#tree_option").click();
 			}else{
 				$("#tree").show(1500);
 				$("#sendInfo").hide();
@@ -331,10 +342,10 @@ var option = new Vue({
  */
 var isInform = true;
 var options = {
-	template: `
-	<div id="options">
-		<span class="option" v-bind:class="{'select': isInform}" @click="inform">公告</span><span class="option" v-bind:class="{'select': !isInform}" @click="homework">作业</span>
-	</div>`,
+	template:
+		'<div id="options">\
+			<span class="option" v-bind:class="{select: isInform}" @click="inform">公告</span><span class="option" v-bind:class="{select: !isInform}" @click="homework">作业</span>\
+		</div>',
 	data: function(){
 		return {
 			isInform: true,
@@ -373,7 +384,7 @@ function getYearSelect(){
 	var year = now.getFullYear();
 	var str = "<option selected value='0'></option>";
 	//用一个方法循环输出年份;
-	for(i=year-100; i<=year; i++){
+	for(i=year; i<=year+100; i++){
 		str +="<option value="+i+">"+i+"</option>";
 	}
 
@@ -541,9 +552,9 @@ $(function(){
 					// 插入的数据
 					var text = document.querySelector("#issue_body").value;
 					if(text.trim()===''){
-						text = "!["+file.name+"](https://localhost:80/anywork/upload/"+filename+")";
+						text = "!["+file.name+"](/anywork/upload/"+filename+")";
 					}else{
-						text = "\n!["+file.name+"](https://localhost:80/anywork/upload/"+filename+")";
+						text = "\n!["+file.name+"](/anywork/upload/"+filename+")";
 					}
 
 					// 从光标位置插入数据

@@ -60,16 +60,16 @@ $(function(){
  * 导航栏的
  */
 var my_nav = {
-    template: `
-        <div @click="stopP">
-            <span class="page-logo" @click='toHomePage'></span>
-            <ul>
-                <li class="border-left"><i class="bell-logo logo"></i></li>
-                <li class="border-left at"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>
-                <li ><i class="close-logo logo" @click="close"></i></li>
-                <li class="border-left"><i class="back-logo logo" @click="goBack"></i></li>
-            </ul>
-        </div>`,
+    template:
+        '<div @click="stopP">\
+            <span class="page-logo" @click="toHomePage"></span>\
+            <ul>\
+                <li class="border-left"><i class="bell-logo logo"></i></li>\
+                <li class="border-left at"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>\
+                <li ><i class="close-logo logo" @click="close"></i></li>\
+                <li class="border-left"><i class="back-logo logo" @click="goBack"></i></li>\
+            </ul>\
+        </div>',
     data: function(){
         return {
             userName: USER.userName,
@@ -102,13 +102,13 @@ var nav = new Vue({
 })
 
 var question = {
-    template: `
- 		<div id="question">
-    		<p class="qs_title">{{homeworkTitle}}</p>
-    		<p class="qs_time">{{timeSpan}}</p>
-    		<input type="button" value="返回时间轴" class="return_tree" @click="returnTree">
-    		<div readonly class="qs_mark" v-html="homeworkMark"></div>
-    	</div>`,
+    template:
+ 		'<div id="question">\
+    		<p class="qs_title">{{homeworkTitle}}</p>\
+    		<p class="qs_time">{{timeSpan}}</p>\
+    		<input type="button" value="返回时间轴" class="return_tree" @click="returnTree">\
+    		<div readonly class="qs_mark" v-html="homeworkMark"></div>\
+    	</div>',
     data: function(){
         return{
             homeworkTitle: HOMEWORK.homeworkTitle,
@@ -130,27 +130,27 @@ var question = {
 }
 
 var grade = {
-    template: `
- 		<div id="grade">
-	    	<div id="score"><i class="fa fa-star"></i><p>{{score}}</p></div>
-    		<div id="twig">
-    			<div class="mg"><span class="tip">五星</span><span class="border"><span class="percent" v-bind:style="percent5"></span></span></div>
-	    		<div class="mg"><span class="tip">四星</span><span class="border"><span class="percent" v-bind:style="percent4"></span></span></div>
-	    		<div class="mg"><span class="tip">三星以下</span><span class="border"><span class="percent" v-bind:style="percent3"></span></span></div>
-	    	</div>
-	    	<div id="star">
-	    		<p>评价该同学的作业吧</p>
-				<div id="wrap">
-					<div id="rating">
-						<i class="fa fa-star-o fa-2x" number="5"  @click="toGrade"></i>
-						<i class="fa fa-star-o fa-2x" number="4"  @click="toGrade"></i>
-						<i class="fa fa-star-o fa-2x" number="3"  @click="toGrade"></i>
-						<i class="fa fa-star-o fa-2x" number="2"  @click="toGrade"></i>
-						<i class="fa fa-star-o fa-2x" number="1"  @click="toGrade"></i>
-					</div>
-				</div>
-	    	</div>
-    	</div>`,
+    template:
+        '<div id="grade">\
+	    	<div id="score"><i class="fa fa-star"></i><p>{{score}}</p></div>\
+    		<div id="twig">\
+    			<div class="mg"><span class="tip">五星</span><span class="border"><span class="percent" v-bind:style="percent5"></span></span></div>\
+	    		<div class="mg"><span class="tip">四星</span><span class="border"><span class="percent" v-bind:style="percent4"></span></span></div>\
+	    		<div class="mg"><span class="tip">三星以下</span><span class="border"><span class="percent" v-bind:style="percent3"></span></span></div>\
+	    	</div>\
+	    	<div id="star">\
+	    		<p>评价该同学的作业吧</p>\
+				<div id="wrap">\
+					<div id="rating">\
+						<i class="fa fa-star-o fa-2x" number="5"  @click="toGrade"></i>\
+						<i class="fa fa-star-o fa-2x" number="4"  @click="toGrade"></i>\
+						<i class="fa fa-star-o fa-2x" number="3"  @click="toGrade"></i>\
+						<i class="fa fa-star-o fa-2x" number="2"  @click="toGrade"></i>\
+						<i class="fa fa-star-o fa-2x" number="1"  @click="toGrade"></i>\
+					</div>\
+				</div>\
+	    	</div>\
+    	</div>',
     props: ['answer'],
     data: function(){
         return {
@@ -203,6 +203,7 @@ var grade = {
         toGrade: function(e){
             var target = e.target;
             light(target);
+            this.$off('click');
             var num = $(target).attr("number");
             if (this.answer.status!=0) {
                 return ;
@@ -217,12 +218,12 @@ var grade = {
 }
 
 var write = {
-    template: `
-            <div id="write">
-                <textarea placeholder="回复:" v-model="comment"></textarea>
-                <span>{{number}}/120</span>
-                <input  type="button" value="发布" @click="sends">
-            </div>`,
+    template:
+          '<div id="write">\
+                <textarea placeholder="回复:" v-model="comment"></textarea>\
+                <span>{{number}}/120</span>\
+                <input  type="button" value="发布" @click="sends">\
+            </div>',
     data: function(){
         return {
             comment: '',
@@ -256,20 +257,20 @@ var write = {
 }
 
 var oneComment = {
-    template: `
-            <div class="one_comment">
-                <div class="remark">
-                    <p><img src="../images/close.png"><span>{{authorName}}</span>
-                    <p class="ct">{{content}}</p>
-                </div>
-                <div class="replay">
-                    <div class="item" v-for="item in recomments">
-                        <rpd :item="item"  :pCommentId="item.aCommentId"></rpd>
-                    </div>
-                </div>
-                <textarea class="write_back" placeholder="回复:" v-model="recomment"></textarea>
-                <input type="button" value="回复" @click="send">
-            </div>`,
+    template:
+            '<div class="one_comment">\
+                <div class="remark">\
+                    <p><img src="../images/close.png"><span>{{authorName}}</span>\
+                    <p class="ct">{{content}}</p>\
+                </div>\
+                <div class="replay">\
+                    <div class="item" v-for="item in recomments">\
+                        <rpd :item="item"  :pCommentId="item.aCommentId"></rpd>\
+                    </div>\
+                </div>\
+                <textarea class="write_back" placeholder="回复:" v-model="recomment"></textarea>\
+                <input type="button" value="回复" @click="send">\
+            </div>',
     props:['item'],
     data: function(){
         return {
@@ -290,14 +291,14 @@ var oneComment = {
     },
     components:{
         rpd: {
-            template: `
-                <div class="item"><span>{{sender.userName}}</span> 回复 <span>{{receiver.userName}}</span>{{item.content}}
-                <input type="button" value="回复" class="rp" @click="toshow" v-show="sb">
-                <div v-if="show">
-                    <textarea placeholder="回复:" class="write_back" v-model="recomment"></textarea> 
-                    <input type="button" value="回复" @click="sendrp">
-                <div>
-            </div>`,
+            template:
+                '<div class="item"><span>{{sender.userName}}</span> 回复 <span>{{receiver.userName}}</span>{{item.content}}\
+                <input type="button" value="回复" class="rp" @click="toshow" v-show="sb">\
+                <div v-if="show">\
+                    <textarea placeholder="回复:" class="write_back" v-model="recomment"></textarea> \
+                    <input type="button" value="回复" @click="sendrp">\
+                <div>\
+            </div>',
             props:['item','pCommentId'],
             data: function(){
                 return {
@@ -533,9 +534,9 @@ $(function(){
                     // 插入的数据
                     var text = document.querySelector("#issue_body").value;
                     if(text.trim()===''){
-                        text = "!["+file.name+"](https://localhost:80/anywork/upload/"+filename+")";
+                        text = "!["+file.name+"](/anywork/upload/"+filename+")";
                     }else{
-                        text = "\n!["+file.name+"](https://localhost:80/anywork/upload/"+filename+")";
+                        text = "\n!["+file.name+"](/anywork/upload/"+filename+")";
                     }
 
                     // 从光标位置插入数据

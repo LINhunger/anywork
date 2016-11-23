@@ -230,7 +230,7 @@ public class TimelineController {
             RequestResult<?> result = timelineService.releaseHomework(homework);
             //获取openid集合
             List<String> openidList = relationService.selectOpenidByOrganId(organId);
-            MassTextUtil.wetchatSend(openidList,1,(Integer) result.getData(),user.getUserName());
+//            MassTextUtil.wetchatSend(openidList,1,(Integer) result.getData(),user.getUserName());
             return  result;
         } catch (Exception e) {
             logger.warn("default exception.\t");
@@ -261,7 +261,7 @@ public class TimelineController {
             RequestResult<?> result = timelineService.releaseInform(inform);
             //获取openid集合
             List<String> openidList = relationService.selectOpenidByOrganId(organId);
-            MassTextUtil.wetchatSend(openidList,0,(Integer) result.getData(),user.getUserName());
+//            MassTextUtil.wetchatSend(openidList,0,(Integer) result.getData(),user.getUserName());
             return  result;
         } catch (Exception e) {
             logger.warn("default exception.\t");

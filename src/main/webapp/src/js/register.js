@@ -1,36 +1,36 @@
 var register_info = {
-	template: `<div id="register-info">
-			<div class="left-angle"></div>
-			<div class="right-angle"></div>
-			<div class="relative margin-first">
-				<i class="fa fa-user fa-fw" style="font-size:22px; color: #404040"></i><span class="logo-i">昵称</span>
-				<input v-model="username" type="text" readonly class="input-three">
-				<i class="fa fa-check-circle fa-fw fa-2x" style="color:white; position:absolute; top:-1px;"></i>
-			</div>
-			<div class="relative margin">
-				<i class="email-logo"></i><span class="logo-i">邮箱</span>
-				<input v-model="email" type="text" readonly class="input-three">
-				<i class="fa fa-check-circle fa-fw fa-2x" style="color:white; position:absolute; top:-1px;"></i>
-			</div>
-			<div class="relative margin">
-				<i class="fa fa-phone fa-fw fa-flip-vertical" style="font-size:22px; color: #404040"></i><span class="logo-i">手机号码</span>
-				<input v-model="phone" type="text" class="input-four">
-				<span v-html="phoneInfo"></span>
-			</div>
-			<div class="relative margin">
-				<i class="lock-logo"></i><span class="logo-i">密码</span>
-				<input type="password" v-model="password" class="input-three">
-				<span v-html="pwInfo"></span>
-			</div>
-			<div class="relative margin">
-				<i class="lock2-logo"></i><span class="logo-i">确认密码</span>
-				<input type="password" v-model="repassword" class="input-four">
-				<span v-html="repwInfo"></span>
-			</div>
-			<div class="whiteness margin">
-				<input type="button" class="button" value="注册" @click="register">
-			</div>
-		</div>`,
+	template: '<div id="register-info">\
+			<div class="left-angle"></div>\
+			<div class="right-angle"></div>\
+			<div class="relative margin-first">\
+				<i class="fa fa-user fa-fw" style="font-size:22px; color: #404040"></i><span class="logo-i">昵称</span>\
+				<input v-model="username" type="text" readonly class="input-three">\
+				<i class="fa fa-check-circle fa-fw fa-2x" style="color:white; position:absolute; top:-1px;"></i>\
+			</div>\
+			<div class="relative margin">\
+				<i class="email-logo"></i><span class="logo-i">邮箱</span>\
+				<input v-model="email" type="text" readonly class="input-three" >\
+				<i class="fa fa-check-circle fa-fw fa-2x" style="color:white; position:absolute; top:-1px;"></i>\
+			</div>\
+			<div class="relative margin">\
+				<i class="fa fa-phone fa-fw fa-flip-vertical" style="font-size:22px; color: #404040"></i><span class="logo-i">手机号码</span>\
+				<input v-model="phone" type="text" class="input-four"  @keyup.enter="register">\
+				<span v-html="phoneInfo"></span>\
+			</div>\
+			<div class="relative margin">\
+				<i class="lock-logo"></i><span class="logo-i">密码</span>\
+				<input type="password" v-model="password" class="input-three"  @keyup.enter="register">\
+				<span v-html="pwInfo"></span>\
+			</div>\
+			<div class="relative margin">\
+				<i class="lock2-logo"></i><span class="logo-i">确认密码</span>\
+				<input type="password" v-model="repassword" class="input-four"  @keyup.enter="register">\
+				<span v-html="repwInfo"></span>\
+			</div>\
+			<div class="whiteness margin">\
+				<input type="button" class="button" value="注册" @click="register">\
+			</div>\
+		</div>',
 		data: function(){
 			var list = getUrlInformation();
 			return {

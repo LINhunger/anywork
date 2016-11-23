@@ -3,22 +3,35 @@ package com.test.web;
 import com.test.aop.Authority;
 import com.test.aop.AuthorityType;
 import com.test.model.Apply;
+import com.test.model.Homework;
 import com.test.model.Relation;
 import com.test.model.User;
 import com.test.service.AdminService;
 import com.test.service.ApplyService;
 import com.test.service.RelationService;
+import com.test.util.TravelFileUtil;
+import com.test.util.ZipUtils;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,5 +154,49 @@ public class AdminController {
         logger.info("setting  invoke:");
         return  "redirect:/admin/"+organId+"/menbers";
     }
+
+
+    /**
+     * 查看作业列表
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/{organId}/homework",method = RequestMethod.GET)
+    public String fileList(@PathVariable("organId") Integer organId,
+                                        HttpServletRequest request,Model model){
+        String path = request.getServletContext().getRealPath("/submit" + "/" + organId);
+        List<Homework> homeworks = adminService.selectHomeworkListByOrganId(organId);
+        model.addAttribute("homeworks",homeworks);
+        logger.info("files  invoke:");
+        return  "homeworklist";
+    }
+
+
+
+    @RequestMapping(value = "/{organId}/{homeworkId}/download",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<byte[]> download(HttpServletRequest request,HttpServletResponse response,
+                                                            @PathVariable("organId")Integer organId,
+                                                            @PathVariable("homeworkId")Integer homeworkId) throws IOException {
+        System.out.println("需要批量下载的作业文件id：homeworkId:"+homeworkId);
+        String path = request.getServletContext().getRealPath("/submit" + "/" + organId + "/" + homeworkId);
+        ZipUtils.createZip(path,path+".zip");
+        try {
+            // 流拷贝
+            OutputStream out = response.getOutputStream();
+            InputStream in = new BufferedInputStream(new FileInputStream(
+                    path+".zip"));
+            int temp;
+            while ((temp = in.read()) != -1) {
+                out.write(temp);
+            }
+            in.close();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

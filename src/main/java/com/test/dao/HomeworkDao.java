@@ -48,4 +48,11 @@ public interface HomeworkDao {
      * @return 成功为1，失败为0
      */
     int deleteHomeworkById(@Param("homeworkId")int homeworkId);
+
+    /**
+     * 根据组织id查找作业对象集合
+     * @param organId 组织id
+     * @return 作业对象集合
+     */
+    List<Homework> selectHomeworkListByOrganId(@Param("organId") int organId);
 }

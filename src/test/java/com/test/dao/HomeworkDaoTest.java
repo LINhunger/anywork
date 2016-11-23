@@ -57,12 +57,12 @@ public class HomeworkDaoTest {
 
     @Test
     public void selectOneById() throws Exception {
-            System.out.println(homeworkDao.selectOneById(1));
+            System.out.println(homeworkDao.selectAllByOrganId(34,new Date()));
     }
 
     @Test
     public void selectAllByOrganId() throws Exception {
-        System.out.println(homeworkDao.selectAllByOrganId(1,new Date()));
+        System.out.println(homeworkDao.selectHomeworkListByOrganId(34));
     }
 
     @Test

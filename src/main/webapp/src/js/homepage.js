@@ -36,15 +36,15 @@ $(function(){
  * nav
  */
 var my_nav = {
-	template: `
-		<div @click="stopP">
-			<span class="page-logo" @click='toHomePage'></span>
-	    	<ul>
-	    		<li class="border-left"><i class="bell-logo logo"></i></li>
-	    		<li class="border-left"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>
-	    		<li class="border-left"><i class="close-logo logo" @click="close"></i></li>
-	    	</ul>
-		</div>`,
+	template:
+			'<div @click="stopP">\
+					<span class="page-logo" @click="toHomePage"></span>\
+					<ul>\
+						<li class="border-left"><i class="bell-logo logo" @click="bind"></i></li>\
+						<li class="border-left"><img class="head_img logo" v-bind:src="headImg"><span class="username">{{userName}}</span></li>\
+						<li class="border-left"><i class="close-logo logo" @click="close"></i></li>\
+					</ul>\
+			</div>',
 	props:['info'],
 	data: function(){
 		return {
@@ -53,6 +53,9 @@ var my_nav = {
 		}
 	},
 	methods: {
+		bind: function(){
+			 my_alert('该功能尚未完成!')
+		},
 		close: function(){
 			$.get("/anywork/user/signout",function(data){
 				window.location.href="login.html";
@@ -86,33 +89,33 @@ var nav = new Vue({
  * tree
  */
 var my_info = {
-	template: `
-		<div id="my_info" @click="stopP">
-			<div class="head"><i class="my_info_icon"></i>我的信息</div>
-			<div class="head_img" @click="toChange">
-				<input type = "file" id="input_file" accept="image/*" @change="fileChange">
-				<img :src="headImg">
-				<p>点击图片更换头像</p>
-				<div id="preview-pane">
-				    <div class="preview-container">
-				       <img src="../images/day.png" class="jcrop-preview" alt="Preview" />
-				    </div>
-			  	</div>
-			</div>
-			<div class="info">
-				<div class="info_space"><span class="name_1">昵称</span><input type="text" v-model="username"></div>
-				<div class="info_space"><span class="name_1">邮箱</span><span class="info_email">{{email}}</span></div>
-				<div class="info_space"><span class="name_1">电话</span><input type="text" v-model="phone"></div>
-				<div id="weichar">
-					<span class="name_1">绑定微信</span>
-					<div v-if="isLink" class="is_weichar_bg"></div>
-					<div v-else class="no_weichar_bg"></div>
-				</div>
-			</div>
-			<div class="button">
-				<input type="button" value="保存" @click="save">
-			</div>
-		</div>`,
+	template:
+		'<div id="my_info" @click="stopP">\
+			<div class="head"><i class="my_info_icon"></i>我的信息</div>\
+			<div class="head_img" @click="toChange">\
+				<input type = "file" id="input_file" accept="image/*" @change="fileChange">\
+				<img :src="headImg">\
+				<p>点击图片更换头像</p>\
+				<div id="preview-pane">\
+				    <div class="preview-container">\
+				       <img src="../images/day.png" class="jcrop-preview" alt="Preview" />\
+				    </div>\
+			  	</div>\
+			</div>\
+			<div class="info">\
+				<div class="info_space"><span class="name_1">昵称</span><input type="text" v-model="username"></div>\
+				<div class="info_space"><span class="name_1">邮箱</span><span class="info_email">{{email}}</span></div>\
+				<div class="info_space"><span class="name_1">电话</span><input type="text" v-model="phone"></div>\
+				<div id="weichar">\
+					<span class="name_1">绑定微信</span>\
+					<div v-if="isLink" class="is_weichar_bg"></div>\
+					<div v-else class="no_weichar_bg"></div>\
+				</div>\
+			</div>\
+			<div class="button">\
+				<input type="button" value="保存" @click="save">\
+			</div>\
+		</div>',
 
 	data: function(){
 		var email = user.email,
@@ -198,7 +201,6 @@ var my_info = {
 						this.phone=user.phone;
 						this.email=user.email;
 						this.headImg= user.picture;
-						return;
 					}
 				},
 			})
@@ -210,27 +212,27 @@ var my_info = {
 }
 
 var create_team = {
-	template : `
-			<div id="create_team" @click="stopP">
-				<div class="head"><i class="create_team_icon"></i>创建组织</div>
-				<div class="head_img" @click="toChange">
-					<input type = "file" id="input_file" accept="image/*" @change="fileChange">
-					<img :src="teamImg">
-					<p>点击图片上传组织logo</p>
-					<div id="preview-pane">
-					    <div class="preview-container">
-					       <img src="../images/day.png" class="jcrop-preview" alt="Preview" />
-					    </div>
-				  	</div>
-				</div>	
-				<div class="info">
-					<div class="info_space"><span class="name_1">名字</span><input type="text" v-model="teamname"></div>
-					<div class="info_space"><span class="name_1 pt2">描述</span><textarea v-model="describe"></textarea></div>
-				</div>
-				<div class="button">
-					<input type="button" value="创建" @click="create">
-				</div>
-			</div>`,
+	template :
+			'<div id="create_team" @click="stopP">\
+				<div class="head"><i class="create_team_icon"></i>创建组织</div>\
+				<div class="head_img" @click="toChange">\
+					<input type = "file" id="input_file" accept="image/*" @change="fileChange">\
+					<img :src="teamImg">\
+					<p>点击图片上传组织logo</p>\
+					<div id="preview-pane">\
+					    <div class="preview-container">\
+					       <img src="../images/day.png" class="jcrop-preview" alt="Preview" />\
+					    </div>\
+				  	</div>\
+				</div>	\
+				<div class="info">\
+					<div class="info_space"><span class="name_1">名字</span><input type="text" v-model="teamname"></div>\
+					<div class="info_space"><span class="name_1 pt2">描述</span><textarea v-model="describe"></textarea></div>\
+				</div>\
+				<div class="button">\
+					<input type="button" value="创建" @click="create">\
+				</div>\
+			</div>',
 	data: function(){
 		teamImg = '/anywork/photo/default.jpg';
 		return {
@@ -283,26 +285,25 @@ var create_team = {
 }
 
 var search = {
-	template: `
-			<div id="search" @click="stopP">   
-				<div class="head"><i class="search_icon"></i>搜索</div>
-				<div id="find_input">
-					<span class="pay_list_c1 on">
-						<input type="radio" name="foundTeam" value="atID" id="atID" class="radioclass" checked="checked" @click="isCheck">
-					</span>
-					<label for="atID">按ID</label>
-					<span class="pay_list_c1">
-						<input type="radio" name="foundTeam" value="atName" id="atName" class="radioclass" @click="isCheck">
-					</span>
-					<label for="atName">按名字</label>
-					<input type="text" v-model="searchInfo">
-					<i class="find_icon" @click="search"></i>
-				</div>
-				<ul id="find_result">
-					<organ v-for="item in organs" :item="item"></organ>
-	            </ul>
-			</div>`,
-
+	template:
+			'<div id="search" @click="stopP">\
+				<div class="head"><i class="search_icon"></i>搜索</div>\
+				<div id="find_input">\
+					<span class="pay_list_c1 on">\
+						<input type="radio" name="foundTeam" value="atID" id="atID" class="radioclass" checked="checked" @click="isCheck">\
+					</span>\
+					<label for="atID">按ID</label>\
+					<span class="pay_list_c1">\
+						<input type="radio" name="foundTeam" value="atName" id="atName" class="radioclass" @click="isCheck">\
+					</span>\
+					<label for="atName">按名字</label>\
+					<input type="text" v-model="searchInfo" @keyup.enter="search">\
+					<i class="find_icon" @click="search"></i>\
+				</div>\
+				<ul id="find_result">\
+					<organ v-for="item in organs" :item="item"></organ>\
+	            </ul>\
+			</div>',
 	data: function(){
 		return {
 			isID: true,
@@ -329,14 +330,14 @@ var search = {
 	},
 	components: {
 		organ: {
-			template: `
-					<li :item="item">
-		                <img :src="headImg" alt="头像" class="head_img"><span class="name">{{item.organName}}</span>
-		                <div class="button">
-		                    <input type="button" v-if="isJoin" class="isJoin" value="已加入">
-		                    <input type="button" v-else class="Join" value="加入" @click="join">
-		                </div>
-		            </li>`,
+			template:
+					'<li :item="item">\
+		                <img :src="headImg" alt="头像" class="head_img"><span class="name">{{item.organName}}</span>\
+		                <div class="button">\
+		                    <input type="button" v-if="isJoin" class="isJoin" value="已加入">\
+		                    <input type="button" v-else class="Join" value="加入" @click="join">\
+		                </div>\
+		            </li>',
 			props:['item'],
 			data: function(){
 				return  {                //需要比较有没有加入了。

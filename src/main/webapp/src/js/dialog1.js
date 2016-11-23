@@ -1,16 +1,17 @@
 Vue.component('myDialog',
 	{
-		template: `<div id="dialog" @click="stopP" v-bind:style="theStyle">
-							<div id="dialog-title" 
-							@mousedown="mousedown" 
-							>
-								<i @click="close">X</i>{{style}}
-							</div>
-							<div id="dialog-content">
-								<slot></slot>
-								<input type="button" value="确定" @click="close">
-							</div>
-						</div>`,
+		template:
+				'<div id="dialog" @click="stopP" v-bind:style="theStyle">\
+							<div id="dialog-title" \
+							@mousedown="mousedown" \
+							>\
+								<i @click="close">X</i>{{style}}\
+							</div>\
+							<div id="dialog-content">\
+								<slot></slot>\
+								<input type="button" value="确定" @click="close">\
+							</div>\
+						</div>',
 		props:['style'],
 		data: function(){
 			return {

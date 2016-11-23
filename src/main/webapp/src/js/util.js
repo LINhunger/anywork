@@ -172,7 +172,7 @@ function wetCharGetOrgans(openid){
 	return organs;
 }
 
-function wetCharClick(markid,type){
+function wetCharNews(markid,type){
 	var infos=null;
 	$.ajax({
 		type: "POST",

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>管理员页面</title>
+    <title>作业列表</title>
     <%@include file="common/head.jsp"%>
     <%@include file="common/tag.jsp"%>
 </head>
@@ -16,36 +16,35 @@
 <div class="container" id="hunger">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h1>申请列表页</h1>
+            <h1>作业列表</h1>
         </div>
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"class="active"><a href="../${sessionScope.organId}/list">申请列表</a></li>
+            <li role="presentation"><a href="../${sessionScope.organId}/list">申请列表</a></li>
             <li role="presentation"><a href="../${sessionScope.organId}/menbers">成员列表</a></li>
-            <li role="presentation"><a href="../${sessionScope.organId}/homework">作业列表</a></li>
+            <li role="presentation"class="active"><a href="../${sessionScope.organId}/homework">作业列表</a></li>
         </ul>
         <div class="panel-body">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>头像</th>
-                    <th>名称</th>
-                    <th>邮箱号</th>
-                    <th>申请时间</th>
+                    <th>作者</th>
+                    <th>作业名</th>
+                    <th>发布日期</th>
+                    <th>截止日期</th>
                     <th>处理</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:if test="${empty applys}">
-                    <h2>没有申请信息！</h2>
+                <c:if test="${empty homeworks}">
+                    <h2>还没有作业信息！</h2>
                 </c:if>
-                <c:forEach var="apply" items="${applys}">
+                <c:forEach var="homework" items="${homeworks}">
                     <tr>
-                        <td>${apply.sender.picture}</td>
-                        <td>${apply.sender.userName}</td>
-                        <td>${apply.sender.email}</td>
-                        <td><fmt:formatDate value="${apply.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-                        <td><a class="btn btn-success" href="../${apply.organId}/${apply.sender.userId}/${apply.applyId}/1/execution">同意</a>
-                        <a class="btn btn-danger" href="../${apply.organId}/${apply.sender.userId}/${apply.applyId}/2/execution">拒绝</a> </td>
+                        <td>${homework.author.userName}</td>
+                        <td>${homework.homeworkTitle}</td>
+                        <td><fmt:formatDate value="${homework.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+                        <td><fmt:formatDate value="${homework.endingTime}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+                        <td><a class="btn btn-success" href="../${homework.organId}/${homework.homeworkId}/download">下载</a>
                     </tr>
                 </c:forEach>
                 </tbody>
