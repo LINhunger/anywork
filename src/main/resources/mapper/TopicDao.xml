@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.TopicDao">
+
+    <select id="selectAll" resultType="Topic">
+        SELECT * FROM topic WHERE  textpaperId = #{textpaperId}
+    </select>
+
+    <!--插入作业对象-->
+    <insert id="insertTopic">
+        INSERT  into topic(topicId,`type`,A,B,`C`,D,isTrue,content,`key`,score,
+        textpaperId)
+        VALUES (#{topic.topicId},#{topic.type},#{topic.A},
+        #{topic.B},#{topic.C},#{topic.D},#{topic.isTrue},
+        #{topic.content},#{topic.key},#{topic.score},#{topic.textpaperId})
+    </insert>
+
+    <delete id="deleteTopic">
+        DELETE  FROM topic WHERE  textpaperId = #{textpaperId}
+    </delete>
+</mapper>

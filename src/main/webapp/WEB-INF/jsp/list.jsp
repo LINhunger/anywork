@@ -22,6 +22,7 @@
             <li role="presentation"class="active"><a href="../${sessionScope.organId}/list">申请列表</a></li>
             <li role="presentation"><a href="../${sessionScope.organId}/menbers">成员列表</a></li>
             <li role="presentation"><a href="../${sessionScope.organId}/homework">作业列表</a></li>
+            <li role="presentation"><a href="/anywork/src/html/createHomework.html">发布试卷</a></li>
         </ul>
         <div class="panel-body">
             <table class="table table-hover">

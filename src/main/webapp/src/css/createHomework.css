@@ -1,0 +1,429 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+body{
+    font-family: "SimHei","MicroYahei",sans-serif;
+    background: url(../images/homepage-background.jpg) no-repeat; 
+    background-size: cover;
+    background-attachment:fixed;
+    padding: 0.1px;
+}
+html{
+	font-size: 12px;
+}
+img {
+	vertical-align: inherit;
+}
+.glyphicon{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-arrow-right::before{
+    content: "\f061";
+}
+.icon-arrow-left::before{
+    content: "\f060";
+}
+#wrap textarea{
+	display: block;
+	padding: 1rem;
+	margin: auto;
+    width: 98%;
+	text-indent: 2rem;
+	letter-spacing: 1px;
+	font-size: 2.5rem;
+    resize: none;
+}
+input[type="text"]{
+	padding-left: 1rem;
+    font-size: 2rem;
+}
+/**
+ * setInfo
+ */
+	#wrap{
+		position: relative;
+		width: 65%;
+	    margin: auto;
+	    margin-top: 7rem;
+	    padding-bottom: 9rem;
+		background-color: white;
+		overflow: hidden;
+	}
+	#set_info{
+		overflow: hidden;
+	}
+	#wrap .paper_type{
+		float: none;
+		margin: 0;
+	    text-align: center;
+	    color: #2283c8;
+	    font-weight: bold;
+		border-bottom: 1px solid black;
+	}
+	#wrap .type2{
+		margin-bottom: 3rem;
+	    color: white;
+	    background-color: #2283c8;
+	}
+	#wrap .type1 li{
+	    font-size: 3rem;
+        margin: 0 15% 0 0;
+        padding: 1.5rem 0;
+	}
+	#wrap .type2 li{
+	    margin: 0 11% 0 0;
+	    padding: 1rem 1.5rem;
+	    font-size: 3rem;
+	    cursor: pointer;
+	}
+	#wrap .type2 .select{
+		background-color: #0160a2;
+	}
+	#wrap .paper_type li.margin-right-0{
+		margin-right: 0;
+	}
+	.readonly{
+	    color: #868686;
+	}
+    .pay_list_c1 {
+        display: inline-block;
+        width: 24px;
+        height: 18px;
+        cursor: pointer;
+        line-height: 16px;
+        text-align: center;
+        margin-right: -5px;
+        background-image: url(../images/inputradio.png);
+        background-repeat: no-repeat;
+        background-position: -21px 0;
+    }
+    .radioclass {
+		width: 2rem;
+		height: 1.8rem;
+        opacity: 0;
+        cursor: pointer;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+    }
+    .paper_type .on {
+        background-position: 3px 0;
+    }
+    .paper_type label{
+        cursor: pointer;
+    }
+    #left_info{
+		width: 50%;
+		float: left;
+		border-right: 1px solid black;
+		padding-bottom: 1rem;
+    }
+    #left_info input[type='text']{
+	    width: 22rem;
+	    height: 2.6rem;
+	    border-radius: 5px;
+	    border: 2px solid #3dcbf9;
+	    font-size: 2rem;
+	    padding: 1rem;
+    }
+    #left_info span{
+		color: #2283c8;
+	    font-size: 2.5rem;
+	    font-weight: bold;
+	    line-height: 4.5rem;
+	    display: inline-block;
+	    width: 13rem;
+	    padding-left: 2rem;
+    }
+    #left_info .form_datetime{
+		cursor: pointer;
+    }
+
+	#right_info{
+		position: relative;
+	    width: 50%;
+	    float: left;
+	}
+	#right_info span{
+		color: #2283c8;
+	    font-size: 2.5rem;
+	    font-weight: bold;
+	    line-height: 4.5rem;
+	    display: inline-block;
+	    width: 11rem;
+	    padding-left: 2rem;
+	}
+	 #right_info input[type='text']{
+	    padding: 1rem;
+	    width: 6rem;
+	    height: 2.6rem;
+	    font-size: 2rem;
+	    border-radius: 5px;
+	    border: 2px solid #3dcbf9;
+	}
+	#right_info input[type='button']{
+		position: absolute;
+	    color: white;
+	    font-weight: bold;
+	}
+	#right_info .b1{
+	    top: 23%;
+	    right: 3rem;
+	  	width: 6rem;
+	    height: 3rem;
+		background-color: #e74600;
+	    border: 1px solid #e74600;
+	}
+	#right_info .b2{
+		top: 40%;
+	    right: 3rem;
+	    width: 6rem;
+	    height: 3rem;
+		background-color: #e74600;
+	    border: 1px solid #e74600;
+	}
+    #right_info .submit_Template{
+		display: none;
+		top: 40%;
+		right: 10rem;
+		width: 4rem;
+		height: 3rem;
+		background-color: #2283c8;
+		border: 1px solid #fffdfd;
+	}
+	#right_info .b3{
+		top: 70%;
+	    right: 3rem;
+	    width: 11rem;
+	    height: 5rem;
+	    font-size: 2.5rem;
+		background-color: #2d7acd;
+	    border: 1px solid #0a54fb;
+	}
+	#wrap .setScore{
+	    color: #2283c8;
+	    font-size: 2.5rem;
+	    font-weight: bold;
+	    line-height: 4.5rem;
+	    display: inline-block;
+	    width: 13rem;
+	    padding-left: 2rem;
+	}
+	#wrap .setScoreInput{
+		padding: 1rem;
+	    width: 6rem;
+	    height: 2.6rem;
+	    font-size: 2rem;
+	    border-radius: 5px;
+	    border: 2px solid #3dcbf9;
+	}
+	/**
+	 * rating
+	 */
+    #rating_wrap{
+        position: relative;
+        top: -2rem;
+    	left: -2rem;
+        display: inline-block;
+        width: 211px;
+    }
+    #rating{
+        display: inline-block;
+        position: absolute;
+        left: 12px;
+        top: -0.5px;
+        z-index: 1;
+    }
+    #rating i{
+        float: right;
+        padding: 0 5px;
+        cursor: pointer;
+        color: #bbbbb6;
+    }
+    #rating .light{
+        color: #ffef19;
+    }
+    #test{
+        display: inline-block;
+    }
+    #rating i{
+        color: #2c7bcd;
+    }
+
+    /**
+     * 选择
+     */
+    #wrap .answer_tip{
+		float: left;
+	    display: inline-block;
+        padding-left: 2rem;
+	    width: 11rem;
+	    font-size: 2.2rem;
+	    font-weight: bold;
+	    color: #2283c8;
+	    line-height: 6rem;
+	}
+	.title-number{
+		padding: 0.1rem;
+		margin-bottom: 1rem;
+		text-align: center;
+		color: white;
+		font-size: 2rem;
+		background-color: #2283c8; 
+	}
+	.question_wrap{
+		width: 96%;
+		margin: auto;
+		padding-bottom: 1rem;
+		border: 1px solid #2283c8;
+	    clear: both;
+        overflow: hidden;
+	}
+	.choose textarea{
+	    height: 10rem;
+	}
+	#wrap .option{
+	    width: 3rem;
+	    padding-left: 2rem;
+	    font-size: 3rem;
+	    color: #2283c8;
+	    line-height: 4rem;
+	}
+	#wrap .chooseInput{
+	    width: 50%;
+    	height: 3rem;
+	}
+	#wrap .choose input[type="radio"]{
+		display: none;
+	}
+	#wrap .choose .on{
+		background-color: #2283c8;
+		color: white;
+	}
+	#wrap .choose label{
+	    padding: 0 2rem;
+	    margin: 1rem 0.5rem;
+	    font-size: 2.5rem;
+	    color: #2283c8;
+        cursor: pointer;
+	    border: 2px solid #2283c8;
+	}
+	/**
+	 * 填空
+	 */
+	.fill_pad textarea{
+	    height: 15rem;
+	}
+	.fill_pad input[type="text"]{
+		margin: 0.3rem 0;
+		width: 12rem;
+		border: 1px solid #2283c8;
+		border-radius: 3px;
+	}
+	#add_pad{
+		display: inline-block;
+		margin-right: 2rem;
+		padding-right: 2.5rem;
+		float: right;
+		font-size: 3rem;
+		color: #606061;
+		font-weight: bold;
+		background: url(../images/add-pad.png) no-repeat;
+		background-position: right 0.8rem;
+		background-size: 32px;
+		cursor: pointer;
+	}
+	.pads{
+        display: inline-block;
+	    width: 16rem;
+	    margin: 1.7rem 0 0 1rem;
+	}
+	.fill_pad .delete_pad{
+		cursor: pointer;
+	}
+	/**
+	 * 判断
+	 */
+		.judge textarea{
+		height: 10rem;
+	}
+	.judge .yes{
+	    margin-top: 1rem;
+	    width: 5rem;
+	    height: 5rem;
+	    background-image: url(../images/yes.png);
+	    background-repeat: no-repeat;
+	    background-position: -4rem 0;
+        background-size: 8.3rem;
+	}
+	.judge .no{
+	    margin-top: 1rem;
+		width: 5rem;
+	    height: 5rem;
+        background-image: url(../images/no.png);
+     	background-repeat: no-repeat;
+	    background-position: -4rem 0;
+        background-size: 8.3rem;
+	}
+	.judge .on{
+		background-position: 0.5rem 0;
+	}
+	/**
+	 * 简答
+	 */
+	.issue textarea{
+		height: 20rem;
+	}
+	#wrap .issue .question_answer{
+	    width: 88%;
+	    margin-top: 2rem;
+	    height: 15rem;
+	}
+	.b4{
+		display: none;
+	    position: absolute;
+	    color: white;
+	    font-weight: bold;
+	    bottom: 3rem;
+	    right: 17rem;
+	    width: 11rem;
+	    height: 5rem;
+	    font-size: 2.5rem;
+	    background-color: #2d7acd;
+	    border: 1px solid #0a54fb;
+	}
+	.b5{
+	    position: absolute;
+	    color: white;
+	    font-weight: bold;
+	    bottom: 3rem;
+	    right: 3rem;
+	    width: 11rem;
+	    height: 5rem;
+	    font-size: 2.5rem;
+	    background-color: #2d7acd;
+	    border: 1px solid #0a54fb;
+	}
+	.myhide{
+		display: none;
+	}
+	#submitTemplate{
+		display: none;
+	}
+/**
+ *	对nav-2.0.css里面样式的修改
+ */
+	#nav {
+		height: 6.8rem;
+	}
+	#nav ul{
+		margin-top: 0.5rem;
+	}

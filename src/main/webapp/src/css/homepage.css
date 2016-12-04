@@ -15,34 +15,36 @@ body{
     background-size: cover;
     background-attachment:fixed;
 }
+html {
+    font-size: 16px;
+}
 .menu-wrapper{
     position: absolute;
-    right: -110px;
-    top: 41%;
+    top: 70%;
+    right: -6.5rem;
     transform: rotate(-90deg);
     display: inline-block;
 }
-#frame{
+#frame {
     position: relative;
-    width: 580px;
+    width: 54rem;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 22%;
 }
-
 #frame .head{
     position: relative;
-    margin-bottom: 22px;
+    margin-bottom: 2.2rem;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 3rem;
     text-align: center;
     color: white;
 }
 #frame .head i{
     display: inline-block;
     position: relative;
-    top: 3px;
-    width: 32px;
-    height: 32px;
+    top: 0.3rem;
+    width: 3.2rem;
+    height: 3.2rem;
 }
 #frame .my_info_icon{
     background: url(../images/user.png) no-repeat center bottom;
@@ -51,26 +53,26 @@ body{
     background: url(../images/create_team.png) no-repeat center bottom;
 }
 #frame input[type='text']{
-    margin-bottom: 10px;
-    height: 25px;
-    width: 200px;
-    text-indent: 7px;
-    font-size: 15px;
+    margin-bottom: 1rem;
+    height: 2.5rem;
+    width: 20rem;
+    text-indent: 0.7rem;
+    font-size: 1.5rem;
     font-family: "SimHei","MicroYahei",sans-serif;
 }
 #my_info,#create_team, #search{
-    padding: 13px 20px 0 31px;
+    padding: 1.3rem 2rem 0 3.1rem;
     background-color: rgba(253, 253, 253, 0.45);
     overflow: hidden;
 }
 #frame .head_img{
     position: relative;
     float: left;
-    margin: 0 10px;
-    width: 130px;
-    height: 130px;
+    margin: 0 1rem;
+    width: 13rem;
+    height: 13rem;
     text-align: center;
-    border: 3px solid #51b9f8;
+    border: 0.3rem solid #51b9f8;
     cursor: pointer;
 }
 #frame .head_img img{
@@ -78,77 +80,77 @@ body{
 }
 #frame .head_img p{
     position: absolute;
-    top: 135px;
-    left: 15px;
-    font-size: 12px;
+    top: 13.5rem;
+    left: 1.5rem;
+    font-size: 1.2rem;
     color: white;
     cursor: pointer;
 }
 #my_info .info{
-    margin-left: 160px;
+    margin-left: 16rem;
 }
 #my_info .info .info_email{
     display: inline-block;
-    margin: 0 0 12px 7px;
-    font-size: 16px;
+    margin: 0 0 1.2rem 0.7rem;
+    font-size: 1.6rem;
     color: #989b9e;
 }
 .button{
     clear: both;
-    border-radius: 0 0 10px 10px
+    border-radius: 0 0 1rem 1rem
 }
 .name_1{
     display: inline-block;
-    width: 120px;
-    font-size: 22px;
+    width: 12rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: white;;
 }
 #my_info .info_space{
-    margin-left: 8px;
-    width: 324px;
+    margin-left: 0.8rem;
+    width: 32.4rem;
     position: relative;
     padding: 0.1px;
-    margin-top: 5px;
+    margin-top: 0.5rem;
     border-bottom: 1px solid white;
 }
 #weichar{
     position: relative;
-    margin: 43px 0 43px 8px;
+    margin: 4.3rem 0 4.3rem 0.8rem;
 }
 .button{
     position: relative;
-    height: 60px;
+    height: 6rem;
 }
 .button input{
     position: absolute;
-    bottom: 15px;
-    right: 26px;
-    width: 58px;
-    height: 28px;
-    font-size: 17px;
+    bottom: 1.5rem;
+    right: 2.6rem;
+    width: 5.8rem;
+    height: 2.8rem;
+    font-size: 1.7rem;
     font-weight: bold;
     color: white;
     background-color: #e74600;
-    border: 2px solid rgba(236, 236, 236, 0);
+    border: 0.2rem solid rgba(236, 236, 236, 0);
     outline: medium;
     cursor: pointer;
 }
 #weichar .is_weichar_bg{
     position: absolute;
-    top: -10px;
-    right: 177px;
-    width: 100px;
-    height: 50px;
+    top: -1rem;
+    right: 17.7rem;
+    width: 10rem;
+    height: 5rem;
     background: url(../images/is_weichar.png) no-repeat top left;
     background-size: contain;
 }
 #weichar .no_weichar_bg{
     position: absolute;
-    top: -34px;
-    right: 40px;
-    width: 200px;
-    height: 100px;
+    top: -3.4rem;
+    right: 0;
+    width: 20rem;
+    height: 10rem;
     background: url(../images/no_weichar.png) no-repeat top left;
     background-size: contain;
 }
@@ -161,26 +163,26 @@ body{
     float: right;
 }
 #create_team .name_1{
-    width: 60px;
+    width: 6rem;
 }
 #create_team textarea {
-    margin: 7px 0 10px;
-    width: 293px;
-    height: 167px;
-    text-indent: 7px;
-    font-size: 15px;
+    margin: 0.7rem 0 1rem;
+    width: 25.9rem;
+    height: 16.7rem;
+    text-indent: 0.7rem;
+    font-size: 1.5rem;
     font-family: "SimHei","MicroYahei",sans-serif;
     resize: none;
-    line-height: 24px;
-    padding: 5px;
+    line-height: 2.4rem;
+    padding: 0.5rem;
 }
 
 #create_team .pt2{
     position: relative;
-    bottom: 167px;
+    bottom: 16.7rem;
 }
 #create_team input[type='text']{
-    width: 300px;
+    width: 26.8rem;
 }
 
 /**
@@ -188,14 +190,14 @@ body{
  */
 #find_input .pay_list_c1 {
     display: inline-block;
-    width: 24px;
-    height: 18px;
+    width: 1.5rem;
+    height: 1.8rem;
     cursor: pointer;
     text-align: center;
-    margin-right: -5px;
+    margin-right: -0.5rem;
     background-image: url(../images/inputradio.png);
     background-repeat: no-repeat;
-    background-position: -21px 0;
+    background-position:-1.5rem 0;
 }
 #find_input .radioclass {
     opacity: 0;
@@ -204,7 +206,7 @@ body{
     filter: alpha(opacity=0);
 }
 #find_input .on {
-    background-position: 3px 0;
+    background-position: 0rem 0;
 }
 #find_input label{
     cursor: pointer;
@@ -213,29 +215,29 @@ body{
     background: url(../images/search.png) no-repeat center bottom;
 }
 #search{
-    padding: 13px 23px 0 23px;
-    height: 350px;
+    padding: 1.3rem 2.3rem 0 2.3rem;
+    height: 35rem;
 }
 
 #search #find_input{
     position: relative;
-    padding: 16px 15px 4px;
-    margin-top: -15px;
-    border: 2px hsl(0, 17%, 82%);
+    padding: 1.6rem 1.5rem 0.4rem;
+    margin-top: -1.5rem;
+    border: 0.2rem hsl(0, 17%, 82%);
     border-style: double double none double;
     background-color: white;
 }
 
 #search input[type='text']{
-    height: 25px;
-    width: 331px;
-    text-indent: 7px;
-    font-size: 15px;
-    border: 2px solid #05c8ff;
+    height: 2.5rem;
+    width: 33.1rem;
+    text-indent: 0.7rem;
+    font-size: 1.5rem;
+    border: 0.2rem solid #05c8ff;
 }
 #search #find_result{
-    max-height: 228px;
-    border: 2px hsl(0, 17%, 82%);
+    max-height: 22.8rem;
+    border: 0.2rem hsl(0, 17%, 82%);
     border-style: double;
     background-color: white;
 }
@@ -249,42 +251,42 @@ body{
     position: relative;
     width: 90%;
     margin: auto;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     float: none;
     border-bottom: 1px solid black;
     overflow: hidden;
 }
 #find_result .head_img{
-    margin: 0 0 4px;
+    margin: 0 0 0.4rem;
 }
 #find_result .head_img{
-    width: 70px;
-    height: 70px;
+    width: 7rem;
+    height: 7rem;
     cursor: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
 }
 #find_result .name{
     position: absolute;
-    bottom: 7px;
-    left: 81px;
-    font-size: 18px;
+    bottom: 0.7rem;
+    left: 8.1rem;
+    font-size: 1.8rem;
 }
 #find_input .find_icon{
     display: block;
     position: absolute;
-    right: 39px;
-    bottom: 16px;
-    width: 23px;
-    height: 28px;
+    right: 5.8rem;
+    bottom: 1.6rem;
+    width: 2.3rem;
+    height: 2.8rem;
     background: url(../images/find-white.png) no-repeat center bottom;
     background-size: contain;
     cursor: inherit;
 }
 #find_result .button{
     position: absolute;
-    bottom: -9px;
-    right: -25px;
+    bottom: -0.9rem;
+    right: -2.5rem;
 }
 
 /**
@@ -293,7 +295,7 @@ body{
 ul{
     list-style-type: none;
     float: right;
-    margin-top: 5px
+    margin-top: 0.5rem
 }
 li{
     text-align: center;
@@ -308,14 +310,14 @@ li{
 }
 #nav .logo{
     display: inline-block;
-    margin: 10px 10px 7px 16px;
-    width: 27px;
-    height: 27px;
+    margin: 1rem 1rem 0.7rem 1.6rem;
+    width: 2.7rem;
+    height: 2.7rem;
 }
 #nav .page-logo{
     display: inline-block;
-    width: 260px;
-    height: 52px;
+    width: 26rem;
+    height: 5.2rem;
     background: url(../images/page.png) no-repeat;
     background-size: contain;
     cursor: pointer;
@@ -333,14 +335,14 @@ li{
 #nav .head_img{
     position: relative;
     bottom: 0px;
-    border: 2px solid #6c9aa8;
+    border: 0.2rem solid #6c9aa8;
     border-radius: 50%;
-    margin: 10px 10px 7px 16px;
+    margin: 1rem 1rem 0.7rem 1.6rem;
 }
 #nav .username{
     position: relative;
-    bottom: 11px;
-    font-size: 26px;
+    bottom: 1.1rem;
+    font-size: 2.6rem;
     color: #6c9aa8;
 }
 
@@ -362,8 +364,8 @@ li{
 }
 
 #preview-pane .preview-container {
-    width: 130px;
-    height: 130px;
+    width: 13rem;
+    height: 13rem;
     overflow: hidden;
 }
 
@@ -376,10 +378,11 @@ li{
  */
 #rotate{
     position: absolute;
-    top: 10%;
-    left: 33%;
-    width: 550px;
-    height: 550px;
+    top: 12%;
+    left: 50%;
+    margin-left: -27.5rem;
+    width: 55rem;
+    height: 55rem;
 }
 #center{
     position: absolute;
@@ -394,7 +397,7 @@ li{
 #center img{
     width: 100%;
     height: 100%;
-    border: 3px solid white;
+    border: 0.3rem solid white;
     border-radius: 50%;
 }
 #square-one{
@@ -437,7 +440,7 @@ li{
 .star{
     display: none;
     cursor: pointer;
-    border: 3px solid white;
+    border: 0.3rem solid white;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -527,4 +530,37 @@ li{
     0% {transform: rotate(0deg);}
     50% {transform: rotate(180deg);}
     100% {transform: rotate(360deg);}
+}
+
+@media only screen and (min-width: 1000px){
+    html{
+        font-size: 12px;
+    }
+    #rotate {
+        position: absolute;
+        top: 12%;
+        left: 50%;
+        margin-left: -27.5rem;
+        width: 55rem;
+        height: 55rem;
+    }
+    #frame {
+        position: relative;
+        width: 54rem;
+        margin: auto;
+        margin-top: 9%;
+    }
+    .menu-wrapper{
+        position: absolute;
+        right: -9rem;
+        top: 41%;
+        transform: rotate(-90deg);
+        display: inline-block;
+    }
+    #find_input .pay_list_c1 {
+        background-position: -1.9rem 0;
+    }
+    #find_input .on {
+        background-position: 0rem 0;
+    }
 }

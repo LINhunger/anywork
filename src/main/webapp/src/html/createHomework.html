@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+	<title>createHomework</title>
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/dialog1.css">
+	<link rel="stylesheet" type="text/css" href="../css/nav-2.0.css">
+	<link rel="stylesheet" type="text/css" href="../css/createHomework.css">
+</head>
+<style>
+</style>
+<body>
+	<!-- 提示框 -->
+	<div id="alert">
+		<transition name="fade">
+			<my-dialog v-on:close="close" :style="style" v-if="show">
+				<p v-html="info"></p>
+			</my-dialog>
+		</transition>
+	</div>
+
+	<div id="nav">
+    	<my-nav></my-nav>
+    </div>
+
+    <div id="wrap">
+		<set-info @setinfo="setInfo"></set-info>
+    	<ul class="paper_type type2">
+    		<li class="select" number='0' @click="selectIt">选择题{{chooseNumber}}</li>
+    		<li number='1' @click="selectIt">填空题{{padNumber}}</li>
+    		<li number='2' @click="selectIt">判断题{{judgeNumber}}</li>
+    		<li class="margin-right-0" number='3' @click="selectIt">简答题{{issueNumber}}</li>
+    	</ul>
+		<div id="choose_wrap" v-show='show[0]'>
+			<choose v-for="(item, index) in chooseNumber" :index=index @chooseitem="addChooseItem"></choose>
+		</div>
+		<div id="pad_wrap" v-show='show[1]'>
+			<pad v-for="(item, index) in padNumber" :index=index @paditem="addPadItem"></pad>
+		</div>
+		<div id="judge_wrap" v-show='show[2]'>
+			<judge v-for="(item, index) in judgeNumber" :index=index @judgeitem="addJudgeItem"></judge>
+		</div>
+		<div id="issue_wrap" v-show='show[3]'>
+			<issue v-for="(item, index) in issueNumber" :index=index @issueitem="addIssueItem"></issue>
+		</div>
+		<input type="button" value="查看试卷" class="b4" id="checkPaper" @click="checkPaper">
+		<input type="button" value="查看模板" class="b4" id="checkTemplate" @click="checkTemplate">
+		<input type="button" value="提交试卷" class="b5" id="submitPaper" @click="createPaper">
+		<input type="button" value="确定模板" class="b5" id="submitTemplate" @click="submitTemplate">
+		<input type="button" value="修改试卷" class="b5 myhide" id="changePaper" @click="changePaper">
+    </div>
+</body>
+
+<script src="../js/jquery-3.1.0.js"></script>
+<script src="../js/vue.js"></script>
+<script src="../js/dialog1.js"></script>
+<script src="../js/util.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.min.js"></script>  
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.fr.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../js/createHomework.js"></script>
+<script type="text/javascript">  
+
+</script>
+</html>

@@ -19,6 +19,15 @@ public class RequestResult<T> {
         this.stateInfo = statEnum.getStateInfo();
     }
 
+    public RequestResult(int state,String  stateInfo) {
+        this.state = state;
+        this.stateInfo = stateInfo;
+    }
+    public RequestResult(int state,String  stateInfo,T data) {
+        this.state = state;
+        this.stateInfo = stateInfo;
+        this.data = data;
+    }
     public int getState() {
         return state;
     }

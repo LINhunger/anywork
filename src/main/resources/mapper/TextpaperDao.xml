@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.TextpaperDao">
+
+    <!--插入作业对象-->
+    <insert id="insertTextpaper" useGeneratedKeys="true"
+            keyProperty="textpaper.textpaperId">
+        INSERT  into textpaper(textpaperTitle,authorId,createTime,
+        endingTime,textpaperScore,textpaperType,textpaperTime,difficulty)
+
+        VALUES (#{textpaper.textpaperTitle},
+        #{textpaper.authorId},#{textpaper.createTime},#{textpaper.endingTime},
+        #{textpaper.textpaperScore},#{textpaper.textpaperType},#{textpaper.textpaperTime},#{textpaper.difficulty}
+        )
+    </insert>
+
+    <!--根据试卷id查找试卷对象集合-->
+    <select id="selectOne" resultType="Textpaper">
+        SELECT t.*,u.userName FROM textpaper t ,user u
+        WHERE  textpaperId = #{textpaperId} AND t.authorId = u.userId
+    </select>
+
+    <!--查找试卷对象集合-->
+    <select id="selectAllByOrganId" resultType="Textpaper">
+        SELECT t.*,u.userName FROM textpaper t,user u
+        WHERE
+        t.authorId = u.userId
+        AND  DATE_ADD(#{time},INTERVAL 1 DAY )>t.createTime  AND t.createTime >  DATE_SUB(#{time},INTERVAL 2 DAY )
+    </select>
+    <!--删除试卷对象-->
+    <delete id="deleteTextpaper">
+        DELETE  FROM textpaper WHERE  textpaperId = #{textpaperId}
+    </delete>
+
+</mapper>

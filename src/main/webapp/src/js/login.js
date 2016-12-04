@@ -88,7 +88,7 @@ var login = {
 		},
 		forgetPw: function(){
 			if(this.email===''){
-				this.emailInfo = this.error + "请填写您的邮箱账号</span>";
+				this.emailInfo = this.error + "请填写邮箱账号</span>";
 			}else if(document.querySelector('.margin-top .fa-check-circle')!==null){
 				var info = {
 					valcode: this.barcode,
@@ -263,4 +263,4 @@ var form = new Vue({
 			this.show = false;
 		}
 	}
-})
+});

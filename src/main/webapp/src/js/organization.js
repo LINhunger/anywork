@@ -1,7 +1,19 @@
 var URL_INFO = getUrlInformation();
 var USER =  getUserInfo();
-var ORGAN =  getOrganById(URL_INFO.organId)
+var ORGAN =  getOrganById(URL_INFO.organId);
 
+/*var URL_INFO ={organId: 2}
+var USER = {userId: 2} 
+var ORGAN = {   
+	organName:"和环境很快就会",
+	description: "和环境很快就会和环境很快就会",
+}*/
+var right = UserRight();
+$(function(){
+	if(right==1||right==2){
+		$("#manage_option").show();
+	}
+})
 /**
  * 导航栏的
  */
@@ -179,6 +191,84 @@ var day_tree = {
 	}
 }
 
+var practise = {
+	template: 
+		'<div class="paper practise" @click="doPaper">\
+			<p class="time"><span>开始时间:</span>{{starTime}}<br/><span>结束时间:</span>{{endTime}}</p>\
+			<p class="title">{{textpaperTitle}}</p>\
+			<div class="logo"></div>\
+		</div>',
+	props: ['item'],
+	methods: {
+		doPaper: function(){
+			window.location.href="doHomework.html?textpaperId="+this.item.textpaperId;
+		}
+	},
+	computed: {
+		starTime: function(){
+			return formatTime(this.item.createTime,'ymdhi');
+		},
+		endTime: function(){
+			return formatTime(this.item.endingTime,'ymdhi');
+		},
+		textpaperTitle: function(){
+			return my_slice(this.item.textpaperTitle,11);
+		},
+	}
+}
+
+var prepare = {
+	template: 
+		'<div class="paper prepare" @click="doPaper">\
+			<p class="time"><span>开始时间:</span>{{starTime}}<br/><span>结束时间:</span>{{endTime}}</p>\
+			<p class="title">{{textpaperTitle}}</p>\
+			<div class="logo"></div>\
+		</div>',
+	props: ['item'],
+	methods: {
+		doPaper: function(){
+			window.location.href="doHomework.html?textpaperId="+this.item.textpaperId;
+		}
+	},
+	computed: {
+		starTime: function(){
+			return formatTime(this.item.createTime,'ymdhi');
+		},
+		endTime: function(){
+			return formatTime(this.item.endingTime,'ymdhi');
+		},
+		textpaperTitle: function(){
+			return my_slice(this.item.textpaperTitle,11);
+		},
+	}
+}
+
+var test = {
+	template: 
+		'<div class="paper test" @click="doPaper">\
+			<p class="time"><span>开始时间:</span>{{starTime}}<br/><span>结束时间:</span>{{endTime}}</p>\
+			<p class="title">{{textpaperTitle}}</p>\
+			<div class="logo"></div>\
+		</div>',
+	props: ['item'],
+	methods: {
+		doPaper: function(){
+			window.location.href="doHomework.html?textpaperId="+this.item.textpaperId;
+		}
+	},
+	computed: {
+		starTime: function(){
+			return formatTime(this.item.createTime,'ymdhi');
+		},
+		endTime: function(){
+			return formatTime(this.item.endingTime,'ymdhi');
+		},
+		textpaperTitle: function(){
+			return my_slice(this.item.textpaperTitle,11);
+		},
+	}
+}
+
 var tree = new Vue({
 	el: "#tree",
 	components: {
@@ -186,7 +276,10 @@ var tree = new Vue({
 		homework: homework,
 		inform: inform,
 		question: question,
-		tree: day_tree
+		practise: practise,
+		prepare: prepare,
+		test: test,
+		tree: day_tree,
 	},
 	data: {
 		day: [],
@@ -255,8 +348,13 @@ $(window).scroll(function(){
 	var docHeight = $(document).height();          //所以内容的总高度
 	var winHeight  = $(window).height();             //浏览器窗口的高度
 	var scrollHeight = $(window).scrollTop();       //下拉条距离顶部的高度
-
-	if(scrollHeight+winHeight>=docHeight-30){
+	var bt;
+	if(document.documentElement.clientWidth>1000){
+		bt = 30;
+	}else{
+		bt = 1200;
+	}
+	if(scrollHeight+winHeight>=docHeight-bt){
 		TreeTime -= 86400000*3 ;
 		TreeTime = getTimeLine(TreeTime, URL_INFO.organId)
 	}
@@ -362,7 +460,7 @@ var options = {
 			this.isInform = false;
 			isInform = false;
 			$("#deadline").show();
-			$(".discussion-topic-header").css("margin-bottom","60px");
+			$(".discussion-topic-header").css("margin-bottom","6rem");
 		}
 	}
 };
@@ -525,7 +623,7 @@ $(function(){
 	})
 })
 
-
+//文件上传部分
 $(function(){
 
 	$("#selectIt").change(function(){
@@ -602,4 +700,6 @@ $(function(){
 		})
 
 	})
+
 })
+

@@ -53,7 +53,6 @@ public class TimelineController {
         try {
             //将当前组织id写进session
             request.getSession().setAttribute("organId",organId);
-
             RequestResult<Map> result = timelineService.showTimeline(organId,new Date(time),organId);
             return result;
         }catch (Exception e) {

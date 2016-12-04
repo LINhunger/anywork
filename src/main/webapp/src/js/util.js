@@ -212,6 +212,20 @@ function getFileList(homeworkId,authorId){
 	return files;
 }
 
+function UserRight(){
+	var info=0;
+	$.ajax({
+		type: "POST",
+		url: "/anywork/apply/check",
+		async: false,
+		success: function(data){
+			var state = data.state; //194公告，195作业, 196获取信息失败
+			info = state;
+		},
+		dataType: 'json',
+	})
+	return info;
+}
 
 /**
  * 其他函数
@@ -227,9 +241,10 @@ function formatTime(time,t){
 	var h = time.getHours();
 	var mm = time.getMinutes();
 	var s = time.getSeconds();
-	if(t=='md') return add0(m)+'.'+add0(d);
-	if(t=='m') return m;
-	if(t=='d') return d;
+	if(t==='md') return add0(m)+'.'+add0(d);
+	if(t==='m') return m;
+	if(t==='d') return d;
+	if(t==='ymdhi') return y+"-"+add0(m)+"-"+add0(d)+" "+add0(h)+":"+add0(mm);
 	function add0(m){return m<10?'0'+m:m }
 }
 

@@ -37,6 +37,10 @@ public class TimelineService {
     private GradeDao gradeDao;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private TextpaperDao textpaperDao;
+    @Autowired
+    private TopicDao topicDao;
 
 
 
@@ -53,6 +57,7 @@ public class TimelineService {
         List<Question> questions = questionDao.seclectAllByOrganId(organId, time);
         List<Inform> informs = informDao.selectAllByOrganId(organId, time);
         List<Homework> homeworks = homeworkDao.selectAllByOrganId(organId, time);
+        List<Textpaper> textpapers = textpaperDao.selectAllByOrganId(organId,time);
         //添加作业状态 十位数：是否过期，个位数：是否提交
 
         for (Homework h : homeworks) {
@@ -64,7 +69,6 @@ public class TimelineService {
                 h.setStatus("00");//未过期未提交
             }
         }
-
         //组装时间轴
         List<Set> everyDayLIst =new ArrayList<Set>();
         Set[] sets = new HashSet[3];
@@ -86,6 +90,13 @@ public class TimelineService {
                         if (question.getCreateTime().after(new Date(time.getTime()-86400000*(i)))&&
                                 question.getCreateTime().before(new Date(time.getTime()-86400000*(i-1)))) {
                             sets[i].add(question);
+                        }
+                    }
+                    for (Textpaper textpaper : textpapers) {
+                        if (textpaper.getCreateTime().after(new Date(time.getTime()-86400000*(i)))&&
+                                textpaper.getCreateTime().before(new Date(time.getTime()-86400000*(i-1)))) {
+                            textpaper.setTopics(null);
+                            sets[i].add(textpaper);
                         }
                     }
             }

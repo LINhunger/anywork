@@ -11,10 +11,7 @@ import com.test.service.ApplyService;
 import com.test.service.RelationService;
 import com.test.util.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -133,5 +130,18 @@ public class ApplyController {
         }
         //没有相应的权限
         return new RequestResult<List<Apply>>(StatEnum.WITHOUT_POWER);
+    }
+
+    @RequestMapping(value = "/check",method = RequestMethod.POST)
+    @ResponseBody
+    public RequestResult<?> checkRole(HttpServletRequest request){
+        try {
+            User user = (User) request.getSession().getAttribute("user");
+            int organId = (Integer) request.getSession().getAttribute("organId");
+            int role = relationService.selectRoleByRelatio(user.getUserId(), organId);
+                return  new RequestResult<Object>(role,"");
+        }catch (Exception e) {
+            return  new RequestResult<Object>(3,"");
+        }
     }
 }

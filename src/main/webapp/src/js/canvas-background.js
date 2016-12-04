@@ -46,3 +46,18 @@
 	  /* Retina Display Support : 视网膜显示支持 ?*/
 	  retina_detect: true
 	});
+
+(function (doc, win){
+  	var docEl = doc.documentElement,   
+   	resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	recalc = function () {
+  		var clientWidth = docEl.clientWidth;
+  		if (!clientWidth) return;
+  		if(clientWidth<1000){
+  			$("#particles-js").remove()
+      	}
+ 	};
+ 	if (!doc.addEventListener) return;
+  	win.addEventListener(resizeEvt, recalc, false);
+  	doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);

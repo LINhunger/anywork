@@ -9,89 +9,95 @@ a{
 	text-decoration: none;
 }
 body{
-	font-family: "SimHei","MicroYahei",sans-serif;
-	background: url(../images/login-background.jpg) no-repeat;
+    font-family: "SimHei","MicroYahei",sans-serif;
+    background: url(../images/login-background.jpg) no-repeat;
     background-size: cover;
-	background-attachment:fixed;
+    background-attachment:fixed;
+}
+html{
+    font-size: 18px;
+}
+#form .fa-check-circle{
+    font-size: 3rem;
 }
 #form .email-logo{
     display: inline-block;
     position: relative;
-    top: 2px;
-    width: 29px;
-    height: 18px;
+    top: 0.2rem;
+    width: 2.9rem;
+    height: 1.8rem;
     background: url(../images/email.png) no-repeat center center;
     background-size: contain;
 }
 #form .user-logo{
     display: inline-block;
     position: relative;
-    top: 2px;
-    width: 29px;
-    height: 18px;
+    top: 0.2rem;
+    width: 2.9rem;
+    height: 1.8rem;
     background: url(../images/user.png) no-repeat center center;
     background-size: contain;
 }
 #form .barcode-logo{
     display: inline-block;
     position: relative;
-    top: 2px;
-    width: 29px;
-    height: 18px;
+    top: 0.2rem;
+    width: 2.9rem;
+    height: 1.8rem;
     background: url(../images/barcode.png) no-repeat center center;
     background-size: contain;
 }
 #form .left-angle{
-    width: 200px;
-    height: 306px;
+    width: 20rem;
+    height: 30.6rem;
     position: absolute;
-    top: -25px;
-    left: -34px;
+    top: -2.5rem;
+    left: -3.4rem;
     background: url(../images/left-angle.png) no-repeat center center;
     background-size: contain;
 }
 #form .right-angle{
-    width: 200px;
-    height: 306px;
+    width: 20rem;
+    height: 30.6rem;
     position: absolute;
-    bottom: -22px;
-    right: -32px;
+    bottom: -2.2rem;
+    right: -3.2rem;
     background: url(../images/right-angle.png) no-repeat center center;
     background-size: contain;
 }
 #form .little-left-angle {
-    width: 99px;
-    height: 85px;
+    width: 9.9rem;
+    height: 8.5rem;
     position: absolute;
-    top: -25px;
-    left: -30px;
+    top: -2.5rem;
+    left: -3rem;
     background: url(../images/little-left-angle.png) no-repeat center center;
     background-size: contain;
 }
 #form .little-right-angle {
-    width: 99px;
-    height: 85px;
+    width: 9.9rem;
+    height: 8.5rem;
     position: absolute;
-    bottom: -25px;
-    right: -30px;
+    bottom: -2.5rem;
+    right: -3rem;
     background: url(../images/little-right-angle.png) no-repeat center center;
     background-size: contain;
 }
 #form .lock-logo{
     display: inline-block;
     position: relative;
-    top: 3px;
-    width: 29px;
-    height: 22px;
+    top: 0.3rem;
+    width: 2.9rem;
+    height: 2.2rem;
     background: url(../images/lock.png) no-repeat center center;
     background-size: contain;
 }
 #form .lock2-logo{
     display: inline-block;
     position: relative;
-    top: 3px;
-    width: 29px;
-    height: 22px;
+    top: 0.3rem;
+    width: 2.9rem;
+    height: 2.2rem;
     background: url(../images/lock2.png) no-repeat center center;
     background-size: contain;
 }
@@ -100,95 +106,95 @@ body{
 }
 #options{
     position: absolute;
-    right: 30px;
-    top: 5%;
+    right: 1rem;
+    top: 22%;
 }
 .option{
-    margin-right: 30px;
-    font-size: 23px;
+    margin-right: 3rem;
+    font-size: 3.3rem;
     font-weight: bold;
     color: #c4cdd4;
     cursor: pointer;
 }
 .select{
-    font-size: 30px;
+    font-size: 4rem;
 }
 #form input[type="text"]:focus, #form input[type="password"]:focus{
-    border: 2px solid #5f5fe8;
+    border: 0.2rem solid #5f5fe8;
 }
 #form .button{
-    width: 78px;
-    height: 36px;
-    font-size: 20px;
+    width: 7.8rem;
+    height: 3.6rem;
+    font-size: 2rem;
     font-weight: bold;
     color: white;
     background-color: #e74600;
 }
 #form{
-    width: 578px;
+    width: 49.8rem;
     margin: auto;
-    margin-top: 14%;
+    margin-top: 51%;
 }
 #form input{
-    width: 210px;
-	height: 27px;
-    font-size: 21px;
+    width: 21rem;
+	height: 2.7rem;
+    font-size: 2.1rem;
     font-weight: bolder;
     color: #404040;
 }
 #form .margin-top{
     position: relative;
-	margin: 60px 0 25px;
+	margin: 6rem 0 2.5rem;
 }
 #form .margin-bottom{
 	position: relative;
-	margin: 25px 0 55px;
+	margin: 2.5rem 0 5.5rem;
 }
 #form .input-one{
-    margin-left: 29px;
-    padding: 0px 0 0 8px;
-    width: 210px;
-    font-size: 19px;
-    border: 2px solid white;
+    margin-left: 2.9rem;
+    padding: 0px 0 0 0.8rem;
+    width: 18.3rem;
+    font-size: 1.9rem;
+    border: 0.2rem solid white;
     outline: medium;
 }
 #form .input-two{
-	padding: 0px 0 0 6px;
-    margin-left: 9px;
-    width: 100px;
-    font-size: 19px;
-    border: 2px solid white;
+    padding: 0px 0 0 0.6rem;
+    margin-left: 0.8rem;
+    width: 8.8rem;
+    font-size: 1.9rem;
+    border: 0.2rem solid white;
     outline: medium;
 }
 .logo-i{
-    font-size: 21px;
+    font-size: 2.1rem;
     font-weight: bolder;
     color: white;
 }
 #login{
     position: relative;
-    padding: 0.1px 0.1px 0.1px 38px;
+    padding: 0.1px 0.1px 0.1px 3.8rem;
     background-color: rgba(169, 178, 183, 0.57);
 }
 #form .barkcode-img{
     display: inline-block;
     position: relative;
     top: 1px;
-    margin: -8px 0 -9px 0;
-    width: 101px;
-    height: 29px;
+    margin: -0.8rem 0 -0.9rem 0;
+    width: 9rem;
+    height: 2.9rem;
     cursor: pointer;
     border: 1px solid white;
 }
 .whiteness{
 	position: relative;
-    margin-left: -38px;
-    height: 68px;
+    margin-left: -3.8rem;
+    height: 6.8rem;
 }
 #form .whiteness input{
     position: absolute;
-    bottom: 14px;
-    right: 28px;
+    bottom: 1.4rem;
+    right: 2.8rem;
     outline: medium;
     border: 1px;
     cursor: pointer;
@@ -198,9 +204,9 @@ body{
 }
 .forget-password{
     position: absolute;
-    bottom: 20px;
-    left: 50px;
-    font-size: 16px;
+    bottom: 2rem;
+    left: 5rem;
+    font-size: 2rem;
     font-weight: bold;
     cursor: pointer;
     color: #ffffff;
@@ -210,41 +216,54 @@ body{
 }
 .error-info{
     font-family: "MicroYahei";
-    padding: 9px;
-    font-size: 11px;
+    padding: 0.6rem;
+    font-size: 1.6rem;
     background-color: white;
 }
 
 #register{
     position: relative;
-    padding: 0.1px 0.1px 0.1px 38px;
+    padding: 0.1px 0.1px 0.1px 3.8rem;
     background-color: rgba(169, 178, 183, 0.57);
 }
 
 #register-info{
     position: relative;
-    padding: 0.1px 0.1px 0.1px 38px;
+    padding: 0.1px 0.1px 0.1px 3.8rem;
     background-color: rgba(169, 178, 183, 0.57);
 }
 #register-info .margin-first{
-    margin-top: 30px;
+    margin-top: 3rem;
 }
 
 #register-info .margin{
-    margin-top: 25px;
+    margin-top: 2.5rem;
 }
 
 #register-info .input-three{
-    margin-left: 42px;
-    font-size: 19px;
-    padding: 0px 0 0 8px;
-    border: 2px solid white;
+    margin-left: 4.2rem;
+    font-size: 1.9rem;
+    padding: 0px 0 0 0.8rem;
+    border: 0.2rem solid white;
     outline: medium;
 }
 
 #register-info .input-four{
-    font-size: 19px;
-    padding: 0px 0 0 8px;
-    border: 2px solid white;
+    font-size: 1.9rem;
+    padding: 0px 0 0 0.8rem;
+    border: 0.2rem solid white;
     outline: medium;
+}
+
+@media only screen and (min-width: 1000px){
+    html{
+        font-size: 12px;
+    }
+    #form{
+        margin-top: 14%;
+    }
+    #options{
+        right: 3rem;
+        top: 5%;
+    }
 }

@@ -138,6 +138,14 @@ public enum StatEnum {
     SUBMIT_FILE_FAULT(155,"上传文件不能超过20M"),
     FILE_SHOW_SUCCESS(156,"显示文件列表成功"),
 
+    /**
+     * 新增测验
+     */
+    TEXTPAPER_GET_SUCCESS(401,"查看试卷成功"),
+    TEXTPAPER_OUT_OF_DATE(402,"测验时间已过"),
+    TEXTPAPER_UPLOAD_SUCCESS(411,"上传试卷成功"),
+    TEXTPAPER_SUBMIT_SUCCESS(421,"发布试卷成功"),
+    TEXTPAPER_SEARCH_SUCCESS(431,"查找试卷成功"),
 
 
 

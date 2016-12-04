@@ -82,9 +82,11 @@ $(function(){
         closeMenu();
         $('#frame').fadeOut();
         $('#rotate').animate({
-            width: "550px",
-            height: "550px",
-            left: "33%"
+            width: "55rem",
+            height: "55rem",
+            left: "50%",
+            top: "12%",
+            marginLeft : "-27.5rem",
         },1500);
     };
 
@@ -112,9 +114,10 @@ $(function(){
     $('#itemsContainer').click(function(e){
         $('#frame').fadeIn();
         $('#rotate').animate({
-            width: "200px",
-            height: "200px",
-            left: "50px"
+            width: "10rem",
+            height: "10rem",
+            left: "30rem",
+            top: "8%",
         },1500);
         var tg = e.target;
         if(tg.nodeName.toUpperCase()!='A'){
